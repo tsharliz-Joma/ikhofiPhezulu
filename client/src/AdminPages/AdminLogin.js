@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken'
 const loginAdminUrl = "http://localhost:1969/api/adminLogin"
 
 const AdminLogin = () => {
-
+    
     const navigate = useNavigate();
 
     const [ name, setName ] = useState("");
@@ -27,10 +27,8 @@ const AdminLogin = () => {
             pwd: password
         }
 
-        console.log(currentAdmin)
         const response = await axios.post(loginAdminUrl, currentAdmin)
         const data = response.data
-        console.log(data)
 
         if(data.user){
             localStorage.setItem("token", data.user)

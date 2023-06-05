@@ -23,29 +23,6 @@ const AdminSignUp = () => {
         // /* Test: */ console.log('Password: ' + e.target.value);
     };
 
-
-    // LOGIN ADMINSTRATOR
-    // const loginAdmin = async(e) => {
-    //     e.preventDefault();
-
-    //     const currentAdmin = {
-    //         user: name,
-    //         pwd: pwd
-    //     }
-
-    //     const response = await axios.post( currentAdmin )
-
-    //     const data = response.data
-
-    //     if(data.user){
-    //         localStorage.setItem('token', data.user )
-    //         alert("Welcome")
-    //         navigate("/dashboard")
-    //     } else {
-    //         alert("Double check your login credentials")
-    //     }
-    // }
-
     // REGISTER ADMINISTRATOR
     const registerAdmin = async(e) => {
         e.preventDefault();
@@ -63,9 +40,9 @@ const AdminSignUp = () => {
 
         const data = await response.json();
 
-        if(data.status === "ok"){
+        if(data.status){
            alert("Registration Successful")
-           navigate("/admin")
+           navigate("/dashboard")
         } else {
             console.error('error')
         }
@@ -75,7 +52,6 @@ const AdminSignUp = () => {
     return(
         <div>
             <h1>welcome</h1>
-
             <form onSubmit={registerAdmin}>
                 <div>
                    <div className="input-box">

@@ -91,8 +91,6 @@ const Order = () => {
         e.preventDefault();
         // I need to send an object back to the database , containing the information on the form
         const extrasArray = [ phoneNumber, ""]
-        
-        console.log(Array(extras));
 
         const newCoffee = {
             name: employeeName,

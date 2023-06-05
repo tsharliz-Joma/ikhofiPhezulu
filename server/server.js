@@ -29,7 +29,7 @@ app.get("/api/view-orders", async(req, res) => {
     const token = req.headers["x-access-token"];
     try{
         const orders = await CoffeeModel.find({});
-        // console.log(orders)
+        console.log(orders)
         return res.json({ status: 'ok', orders: orders })
     }catch(error){
         return res.json({ status: 'error', error: "No Coffee Orders"})
@@ -56,7 +56,6 @@ app.post('/api/coffee', async(req, res) => {
 
         try {
             await coffee.save();
-            console.log(coffee)
             return res.json({ status: "ok" })
         } catch(error) {
             return error;
@@ -65,15 +64,23 @@ app.post('/api/coffee', async(req, res) => {
 
 // DELETE COFFEE FROM DATABASE ROUTE
 app.post('/api/sendCoffee', async(req, res) => {
-    /* TEST */console.log(req.body);
+    // /* TEST */console.log(req.body);
     try {
-        await CoffeeModel.deleteOne({ 
+        const coffee = { 
+            name: req.body.name,
+            coffeeName: req.body.coffeeName,
+            coffeeSize: req.body.coffeeSize,
+            coffeeMilk: req.body.coffeeMilk
+        }
+        console.log(coffee)
+       return await CoffeeModel.deleteOne({ 
             name: req.body.name,
             coffeeName: req.body.coffeeName,
             coffeeSize: req.body.coffeeSize,
             coffeeMilk: req.body.coffeeMilk
         });
 
+        // console.log(`DELETED`)
     } catch(error) {
         console.log(error);
     }
@@ -82,7 +89,7 @@ app.post('/api/sendCoffee', async(req, res) => {
 
 // REGISTER ROUTE
 app.post('/api/register', async(req, res) => {
-    /* TEST */console.log(req.body)
+    // /* TEST */console.log(req.body)
     try {
         const bcryptPassword = await bcrypt.hash(req.body.password, 10);
         await User.create({
@@ -111,6 +118,7 @@ app.post("/api/login", async(req, res) => {
         }
 
         const passwordValid = await bcrypt.compare(req.body.password, userFound.password)
+
         if(passwordValid) {
             const token = jwt.sign({
                 name: userFound.name,
@@ -130,7 +138,6 @@ app.post("/api/login", async(req, res) => {
 
 app.get("/api/user-data", async(req, res) =>{
     const token = req.headers["x-access-token"];
-
     try {
         const decoded = jwt.verify(token, process.env.SUPASECRET );
         const email = decoded.email;

@@ -29,22 +29,24 @@ const Login = (e) => {
 
 
     const LoginUser = async(e) => {
+      
         e.preventDefault();
 
         const currentUser = {
             email: email,
             password: password
         }
+
         
         const response =  await axios.post(backEndUserLogin, currentUser)
 
-        const data = response.data
        
-            console.log(data)
+        const data = response.data
+        console.log(data)
             
           if(data.user){
             localStorage.setItem('token', data.user)
-            alert("Login Succesful")
+            alert("Login Successful")
             navigate("/order-coffee")
           } else {
             alert("Please Check your username and password")
