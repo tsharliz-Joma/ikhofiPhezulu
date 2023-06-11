@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
-
 
 const backEndUserRegister = `http://localhost:1969/api/register`;
 
@@ -15,22 +13,18 @@ const SignUp = () => {
  
     const handleName = (e) => {
         setName(e.target.value);
-        // /* Test: */ console.log('name: ' + e.target.value);
     }
 
     const handleEmail = (e) => {
         setEmail(e.target.value);
-        // /* Test: */ console.log('email: ' + e.target.value);
     }
 
     const handlePassword = (e) => {
         setPassword(e.target.value);
-        // /* Test: */ console.log('Password: ' + e.target.value);
     }
 
     const handleNumber = (e) => {
         setMobileNumber(e.target.value);
-        // /* Test: */ console.log('Mobile: ' + e.target.value);
     }
 
     const registerUser = async(e) => {

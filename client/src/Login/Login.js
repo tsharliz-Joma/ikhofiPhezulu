@@ -2,13 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate , Link } from "react-router-dom";
 
-
-
-
-
 const backEndUserLogin = "http://localhost:1969/api/login";
-
-
 
 const Login = (e) => {
     const navigate = useNavigate();

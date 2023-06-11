@@ -25,35 +25,24 @@ const Order = () => {
 
     const navigate = useNavigate();
 
-
-    // const handleNumber = (e) => {
-    //     setNumberOfCoffee(e.target.id)
-    // };
-
     const handleName = (e) => {
         setEmployeeName(e.target.value);
-
-    //    /* TEST */ console.log(e.target.value);
     };
 
     const handleSizeSelect = (e) => {
         setCoffeeSize(e.target.value);
-        // /* TEST */ console.log(e.target.value);
     };
 
     const handleMilkSelect = (e) => {
         setCoffeeMilk(e.target.value);
-    //    /* TEST */ console.log(e.target.value);
     };
 
     const handleCoffeeSelect = (e) => {
         setCoffeeName(e.target.value);
-        // /* TEST */console.log(e.target.value);
     };
 
     const handlePhone = (e) => {
         setPhoneNumber(e.target.value);
-    //    /* TEST */ console.log(e.target.value);
     }
 
     // const checkButtonStatus = () => {
@@ -160,20 +149,15 @@ const Order = () => {
 
     return(
         <div className="form-body">
-
             <div className="b-center">
-
                 <div className="h-text-center">
-                    
                         <div>
                             <h1 className="kanit">Good Morning <span>{employeeName}!!</span></h1>     
                         </div>
                         <div>
                             <span className="fs-1 kanit ">Enter Your Coffee Order Below</span>
                         </div>
-                    
                 </div>
-                
                 <div className="form-container">
 
                     <form onSubmit={ handleCoffeeSubmit }>
