@@ -1,4 +1,4 @@
-import { match } from "assert";
+// import { match } from "assert";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 
@@ -64,7 +64,7 @@ const Dashboard = () => {
   }
 
   function sliceOrderPerson(string){
-    var matchedName;
+    let matchedName;
     const name = string.match(/([^\s])+/);
     console.log(name)
     if(name){
@@ -76,7 +76,7 @@ const Dashboard = () => {
   }
 
   function sliceCoffeeSize(string){
-    var matchedSize;
+    let matchedSize;
     const glass = string.match(/Glass(?=\s)/)
     const cup = string.match(/Cup(?=\s)/)
     const mug = string.match(/Large(?=\s)/)
@@ -92,7 +92,7 @@ const Dashboard = () => {
   }
 
   function sliceCoffeeMilk(string){
-    var matchedMilk;
+    let matchedMilk;
     const almondmilk = string.match(/Almond*\sMilk/);
     const fullcreamMilk = string.match(/Full*\scream*\sMilk/);
     const skimMilk = string.match(/Skim*\sMilk/);
