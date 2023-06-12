@@ -70,14 +70,15 @@ app.post('/api/sendCoffee', async(req, res) => {
             name: req.body.name,
             coffeeName: req.body.coffeeName,
             coffeeSize: req.body.coffeeSize,
-            coffeeMilk: req.body.coffeeMilk
+            // coffeeMilk: req.body.coffeeMilk
         }
-        console.log(coffee)
+        console.log(`Deleting ${coffee.coffeeName}`)
+        
        return await CoffeeModel.deleteOne({ 
             name: req.body.name,
             coffeeName: req.body.coffeeName,
             coffeeSize: req.body.coffeeSize,
-            coffeeMilk: req.body.coffeeMilk
+            // coffeeMilk: req.body.coffeeMilk
         });
 
         // console.log(`DELETED`)

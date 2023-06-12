@@ -7,14 +7,12 @@ const deleteOrderUrl = "http://localhost:1969/api/sendCoffee";
 
 const Dashboard = () => {
   const [orders, setOrders] = useState([]);
-  const [selectedName, setSelName] = useState("");
   const [selected, setSelected] = useState(false);
   const [selectedCoffee, setSelectedCoffee] = useState("");
   const [selCoffSize, setSelCoffSize] = useState("");
   const [selCoffMilk, setSelCoffMilk] = useState("");
   const [selCoffPerson, setSelCoffPerson] = useState("");
   const [selCoffName, setSelCoffName] = useState("")
-  const [orderExtras, setOrderExtras] = useState([]);
 
   // this function is where i will have to use an api, to send a text message or slack message
   const displayOptions = (e) => {
@@ -30,8 +28,8 @@ const Dashboard = () => {
 
   function sliceCoffeeName(string){
     var matchedName;
-    const latte = string.match(/Latte(?=\s)/);
-    const cappuccino = string.match(/Cappuccino(?=\s)/);
+    const latte = string.match(/Latte/);
+    const cappuccino = string.match(/Cappuccino/);
     const flatWhite = string.match(/Flat\sWhite/);
     const espresso = string.match(/Espresso/);
     const doubleEspresso = string.match(/Double\sEspresso/);
@@ -40,16 +38,15 @@ const Dashboard = () => {
     const longBlack = string.match(/Long\sBlack/);
 
     if(latte){
-        console.log(matchedName)
         matchedName = latte
     } else if (cappuccino){
         matchedName = cappuccino
     } else if (flatWhite) {
         matchedName = flatWhite
-    } else if (espresso){
-        matchedName = espresso
-    } else if (doubleEspresso) {
+    } else if (doubleEspresso){
         matchedName = doubleEspresso
+    } else if (espresso) {
+        matchedName = espresso
     } else if (shortMacchiato) {
         matchedName = shortMacchiato
     } else if (longMacchiato) {
@@ -59,16 +56,19 @@ const Dashboard = () => {
     } else {
         matchedName = ''
     }
-
     return setSelCoffName(matchedName)
   }
 
   function sliceOrderPerson(string){
     let matchedName;
-    const name = string.match(/([^\s])+/);
-    console.log(name)
-    if(name){
-        matchedName = name
+    const name = string.match(/(?<name>[^-]+)/);
+    const groupsName = name.groups.name
+    const splitReverse = groupsName.split('').reverse();
+    const nameShift = splitReverse.shift();
+    const nameBack = splitReverse.reverse().join('');
+
+    if(nameBack){
+        matchedName = nameBack
     } else {
         return matchedName = "offWhite"
     }

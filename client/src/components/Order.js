@@ -45,37 +45,12 @@ const Order = () => {
         setPhoneNumber(e.target.value);
     }
 
-    // const checkButtonStatus = () => {
-    //     if(buttonDisabled === false && clicks < 2){
-    //         setButtonDisabled(false)
-    //         checkClicks();
-    //     } else {
-    //         setButtonDisabled(true)
-    //         checkClicks();
-    //     }
-    // };
-
     const handleSugar = (e) => {
         setCoffeeSugar(e.target.value);
         // console.log(e.target.value);
     }
 
-    // const checkClicks = () => {
-    //     if(!buttonDisabled && clicks === 1){
-    //         setClicks(clicks+1)
-    //         // setButtonDisabled(false)
-    //     } else {
-    //         // clicks=0;
-    //         // setButtonDisabled(true)
-    //     }
-    // };
-
-    // const handleSelect = (e) => {
-    //     setNumberOfCoffee(e.target.value)
-    // };
-
     // ======== HANDLE COFFEE ORDER HERE, MAKE THE POST REQUEST WITH COFFEE DETAILS HERE
-
     const handleCoffeeSubmit = (e) => {
         e.preventDefault();
         // I need to send an object back to the database , containing the information on the form
@@ -111,7 +86,6 @@ const Order = () => {
     };
 
     //=================VERIFY USER LOGGED IN=======================//
-
     const updateUserName = async() => {
         const req = await axios.get("http://localhost:1969/api/user-data", {
             headers: {
