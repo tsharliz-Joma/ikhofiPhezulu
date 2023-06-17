@@ -2,6 +2,7 @@ import React, { useState, useEffect }from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import jwt from 'jsonwebtoken'
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -13,14 +14,12 @@ function App() {
   const [ loggedIn, setLoggedIn ] = useState(<button className='btn btn-outline-success'>Logout</button>);
 
   const LogoutUser = () => {
-
     if(localStorage.getItem("token")){
       localStorage.removeItem("token");
       window.location.reload();
       console.log("Logged out")
     }
   }
-
 
   useEffect(() => {
 
@@ -40,7 +39,6 @@ function App() {
             return;
           }
       }
-
   }, [])
 
 

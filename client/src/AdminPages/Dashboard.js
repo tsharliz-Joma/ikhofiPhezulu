@@ -1,4 +1,4 @@
-// import { match } from "assert";
+
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 
@@ -12,21 +12,25 @@ const Dashboard = () => {
   const [selCoffSize, setSelCoffSize] = useState("");
   const [selCoffMilk, setSelCoffMilk] = useState("");
   const [selCoffPerson, setSelCoffPerson] = useState("");
-  const [selCoffName, setSelCoffName] = useState("")
+  const [selCoffName, setSelCoffName] = useState("");
 
-  // this function is where i will have to use an api, to send a text message or slack message
-  const displayOptions = (e) => {
-    e.preventDefault();
-    setSelected(true);
-    setSelectedCoffee(e.target.textContent);
-
-    sliceCoffeeName(selectedCoffee)
+  // This is a callback function
+  async function setStates(e) {
+    sliceCoffeeName(selectedCoffee);
     sliceOrderPerson(selectedCoffee);
     sliceCoffeeSize(selectedCoffee);
     sliceCoffeeMilk(selectedCoffee);
-  };
+  }
+  // this function is where i will have to use an api, to send a text message or slack message
+  function displayOptions(e) {
+    e.preventDefault(); // Preventing the default refresh on button click
+    setSelected(true); // setting this state to true ( this triggers the overlay)
+    setSelectedCoffee(e.target.textContent); // set the selectedCoffee to the text content of the button clicked
 
-  function sliceCoffeeName(string){
+    setStates();
+  }
+
+  function sliceCoffeeName(string) {
     var matchedName;
     const latte = string.match(/Latte/);
     const cappuccino = string.match(/Cappuccino/);
@@ -37,61 +41,61 @@ const Dashboard = () => {
     const longMacchiato = string.match(/Long\sMacchiato/);
     const longBlack = string.match(/Long\sBlack/);
 
-    if(latte){
-        matchedName = latte
-    } else if (cappuccino){
-        matchedName = cappuccino
+    if (latte) {
+      matchedName = latte;
+    } else if (cappuccino) {
+      matchedName = cappuccino;
     } else if (flatWhite) {
-        matchedName = flatWhite
-    } else if (doubleEspresso){
-        matchedName = doubleEspresso
+      matchedName = flatWhite;
+    } else if (doubleEspresso) {
+      matchedName = doubleEspresso;
     } else if (espresso) {
-        matchedName = espresso
+      matchedName = espresso;
     } else if (shortMacchiato) {
-        matchedName = shortMacchiato
+      matchedName = shortMacchiato;
     } else if (longMacchiato) {
-        matchedName = longMacchiato
+      matchedName = longMacchiato;
     } else if (longBlack) {
-        matchedName = longBlack
+      matchedName = longBlack;
     } else {
-        matchedName = ''
+      matchedName = "";
     }
-    return setSelCoffName(matchedName)
+    return setSelCoffName(matchedName);
   }
 
-  function sliceOrderPerson(string){
+  function sliceOrderPerson(string) {
     let matchedName;
     const name = string.match(/(?<name>[^-]+)/);
-    const groupsName = name.groups.name
-    const splitReverse = groupsName.split('').reverse();
+    const groupsName = name.groups.name;
+    const splitReverse = groupsName.split("").reverse();
     const nameShift = splitReverse.shift();
-    const nameBack = splitReverse.reverse().join('');
+    const nameBack = splitReverse.reverse().join("");
 
-    if(nameBack){
-        matchedName = nameBack
+    if (nameBack) {
+      matchedName = nameBack;
     } else {
-        return matchedName = "offWhite"
+      return (matchedName = "offWhite");
     }
-    return setSelCoffPerson(matchedName)
+    return setSelCoffPerson(matchedName);
   }
 
-  function sliceCoffeeSize(string){
+  function sliceCoffeeSize(string) {
     let matchedSize;
-    const glass = string.match(/Glass(?=\s)/)
-    const cup = string.match(/Cup(?=\s)/)
-    const mug = string.match(/Large(?=\s)/)
+    const glass = string.match(/Glass(?=\s)/);
+    const cup = string.match(/Cup(?=\s)/);
+    const mug = string.match(/Large(?=\s)/);
 
-    if(glass){
-        matchedSize = glass
-    } else if(cup){
-        matchedSize = cup 
-    } else if(mug){
-        matchedSize = mug
+    if (glass) {
+      matchedSize = glass;
+    } else if (cup) {
+      matchedSize = cup;
+    } else if (mug) {
+      matchedSize = mug;
     }
-    return setSelCoffSize(matchedSize)
+    return setSelCoffSize(matchedSize);
   }
 
-  function sliceCoffeeMilk(string){
+  function sliceCoffeeMilk(string) {
     let matchedMilk;
     const almondmilk = string.match(/Almond*\sMilk/);
     const fullcreamMilk = string.match(/Full*\scream*\sMilk/);
@@ -99,46 +103,46 @@ const Dashboard = () => {
     const soyMilk = string.match(/Soy*\sMilk/);
     const oatMilk = string.match(/Oat/);
 
-    if(almondmilk){
-        matchedMilk = almondmilk
+    if (almondmilk) {
+      matchedMilk = almondmilk;
     } else if (fullcreamMilk) {
-        matchedMilk = fullcreamMilk
+      matchedMilk = fullcreamMilk;
     } else if (skimMilk) {
-        matchedMilk = skimMilk
+      matchedMilk = skimMilk;
     } else if (soyMilk) {
-        matchedMilk = soyMilk
-    } else if (oatMilk){
-        matchedMilk = oatMilk
+      matchedMilk = soyMilk;
+    } else if (oatMilk) {
+      matchedMilk = oatMilk;
     } else {
-        matchedMilk = 'Full Cream'
+      matchedMilk = "Full Cream";
     }
 
-    return setSelCoffMilk(matchedMilk)
+    return setSelCoffMilk(matchedMilk);
   }
 
-  const send = (e) => {
+  function send(e) {
     e.preventDefault();
 
-    let defaultMilk = 'Full cream'
-    let defaultName = 'George'
+    let defaultMilk = "Full cream";
+    let defaultName = "George";
 
-    function updateMilk(){
-        setSelCoffMilk(defaultMilk)
+    function updateMilk() {
+      setSelCoffMilk(defaultMilk);
     }
-    function updateName(){
-        setSelCoffPerson(defaultName)
+    function updateName() {
+      setSelCoffPerson(defaultName);
     }
-    if(selCoffMilk === ''){
-        updateMilk()
+    if (selCoffMilk === "") {
+      updateMilk();
     }
-    if(selCoffName === ''){
-        updateName()
+    if (selCoffName === "") {
+      updateName();
     }
     const deleteCoffee = {
-        name: selCoffPerson,
-        coffeeName: selCoffName,
-        coffeeSize: selCoffSize,
-        coffeeMilk: selCoffMilk,
+      name: selCoffPerson,
+      coffeeName: selCoffName,
+      coffeeSize: selCoffSize,
+      coffeeMilk: selCoffMilk,
     };
 
     try {
@@ -150,27 +154,28 @@ const Dashboard = () => {
     setSelected(false);
     // do this last after you have sent the api notification and also removed the coffee
     // from the database
-  };
+  }
 
-  const cancel = (e) => {
+  function cancel(e) {
     e.preventDefault();
     setSelected(false);
-  };
+  }
 
   useEffect(() => {
     const getOrders = async () => {
       try {
         const response = await axios.get(viewOrderUrl);
         const coffeeOrders = response.data.orders;
-        setOrders(coffeeOrders);
+        setOrders(coffeeOrders); // set 'orders' create duplicate of that array, but i want to wait for the a
       } catch (error) {
         console.log(error);
       }
     };
+
     getOrders();
   }, []);
 
-//   console.log(orders.length);
+  //   console.log(orders.length);
 
   return (
     <div>
@@ -200,23 +205,20 @@ const Dashboard = () => {
                 </div>
               )}
               {orders.map((order) => (
-                <div className="order-display-div">
+                <div key={order.id} className="order-display-div">
                   <div className="order-inner-div">
-                    <p
+                    <button
                       onClick={displayOptions}
-                      className="btn fs-5 order-button"
-                      key={order.id}>
+                      className="btn fs-5 order-button">
                       {order.name} - {order.coffeeSize} {order.coffeeMilk}{" "}
                       {order.coffeeName}
-                    </p>
+                    </button>
                   </div>
                 </div>
               ))}
-              ;
             </ul>
           </div>
         )}
-        ;
       </div>
     </div>
   );
