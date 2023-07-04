@@ -1,22 +1,28 @@
 require("dotenv").config({ path: "./config.env" });
 const express = require("express");
 const app = express();
-// const http = require("http").Server(app);
 const cors = require("cors");
-
+const http = require("http");
 const PORT = process.env.PORT || 1969;
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-
+const { Server } = require("socket.io");
 const { MongoClient, ServerApiVersion } = require("mongodb");
-
 const mongoose = require("mongoose");
 const CoffeeModel = require("./models/Coffee");
 const User = require("./models/User");
 const Admin = require("./models/Admin");
-
 app.use(express.json());
 app.use(cors());
+
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
+});
 
 mongoose.connect(
   `mongodb+srv://${process.env.MONGO_ACC}:${process.env.MONGO_PW}@cluster0.nv1odnc.mongodb.net/coffee_orders?retryWrites=true&w=majority`,
@@ -34,37 +40,69 @@ const client = new MongoClient(mongoUri, {
   },
 });
 
+const clientCollection = client.db("coffee_orders").collection("white_coffees");
+
+// Socket io
+
+io.on("connection", (socket) => {
+  console.log(`Socket id: ${socket.id}`);
+  console.log(`Socket handshake: ${socket.handshake.headers.origin}`);
+
+  // changeStream.on("change", (next) => {
+  //   switch (next.operationType) {
+  //     case "insert":
+  //       socket.emit("New Order", next.fullDocument);
+  //       break;
+  //     case "delete":
+  //       socket.emit("delete_order", next.fullDocument);
+  //     default:
+  //       console.log(next.operationType);
+  //   }
+  // });
+
+  socket.on("user_active", (data) => {
+    socket.join(data);
+    console.log(data);
+  });
+
+  socket.on("new_order", (data) => {
+    // console.log(data);
+    socket.broadcast.emit("New Order", data);
+  });
+
+  socket.on("disconnect", () => {});
+});
+
+var collection = client.db("coffee_orders").collection("white_coffees");
+var changeStream = collection.watch([], { fullDocument: "updateLookup" });
+
 async function run() {
-  var collection = client.db("coffee_orders").collection("white_coffees");
-  var changeStream = collection.watch();
   try {
     // connect client to the server
     await client.connect();
     // send a ping to confirm success
     await client.db("admin").command({ ping: 1 });
-    changeStream.on("change", (next) => {
-      console.log("Coffee ordered");
-    });
     console.log(
       "Pinged your deployment. You Connected successfully to MongoDb",
     );
   } finally {
     // Ensure the client will close when finished or an error occurs
     // I have to turn this off, it causes and error with the collection.watch
-    // await client.close();
+    // client.close();
   }
 }
 run().catch(console.dir);
 
+// mongodb://<USERNAME>:<PASSWORD>@ap-southeast-2.aws.realm.mongodb.com:27020/?authMechanism=PLAIN&authSource=%24external&ssl=true&appName=application-0-mygbf:<SERVICE_NAME>:local-userpass
 
 // VIEWS ORDERS ROUTE
 app.get("/api/view-orders", async (req, res) => {
   const token = req.headers["x-access-token"];
   // Here i want it have a constant connection and to refresh every time a new order rocks up
-
   try {
-    const orders = await CoffeeModel.find({});
-    console.log(orders);
+    await CoffeeModel.find({}).then((res) => {
+      orders = res;
+    });
     return res.json({ status: "ok", orders: orders });
   } catch (error) {
     return res.json({ status: "error", error: "No Coffee Orders" });
@@ -265,6 +303,6 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server Listening on port ${PORT}`);
 });

@@ -17,8 +17,9 @@
     "react-router": "^6.4.3",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
-    "socket.io": "^4.6.2",
-    "socket.io-client": "^4.6.2",
+    "realm-web": "^2.0.0",
+    "socket.io": "^4.7.0",
+    "socket.io-client": "^4.7.0",
     "timers-browserify": "^2.0.12",
     "web-vitals": "^2.1.4"
   },
