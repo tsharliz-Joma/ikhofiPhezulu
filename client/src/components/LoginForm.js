@@ -1,8 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const LoginForm = (props) => {
-  const { e, email } = props;
-  const { p, password } = props;
+const backEndUserLogin = "http://localhost:1969/api/login";
+
+const LoginForm = () => {
+
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const handleSubmit = () => {};
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  };
+  const LoginUser = async (e) => {
+    e.preventDefault();
+
+    const currentUser = {
+      email: email,
+      password: password,
+    };
+    const response = await axios.post(backEndUserLogin, currentUser);
+    const data = response.data;
+    if (data.user) {
+      localStorage.setItem("token", data.user);
+      // socket.emit("user_active", data.user )
+      alert("Login Successful");
+      navigate("/order-coffee");
+    } else {
+      alert("Please Check your username and password");
+    }
+  };
 
   return (
     <div>
@@ -13,13 +45,13 @@ const LoginForm = (props) => {
         email={email}
         password={password}
       /> */}
-      <form onSubmit={props.onSubmit}>
+      <form onSubmit={LoginUser}>
         <div>
           <div className="input-box">
             <label htmlFor="email" className="details">
               Username:
               <input
-                onChange={e}
+                onChange={handleEmail}
                 value={email}
                 id="email"
                 type={"text"}
@@ -31,7 +63,7 @@ const LoginForm = (props) => {
             <label htmlFor="password" className="details">
               Password:
               <input
-                onChange={p}
+                onChange={handlePassword}
                 value={password}
                 id="password"
                 type={"password"}
