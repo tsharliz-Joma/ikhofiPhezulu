@@ -1,0 +1,31 @@
+{
+  "title": "Table Talk Admin",
+  "form": {
+    "fields": [
+      {
+        "id": "Email",
+        "label": "Email",
+        "type": "text",
+        "maxLength": 250,
+        "defaultValue": "",
+        "required": true
+      },
+      {
+        "id": "Password",
+        "label": "Password",
+        "type": "Password",
+        "maxLength": 250,
+        "defaultValue": "",
+        "required": true
+      }
+    ],
+    "submit": {
+      "title": "Login"
+    }
+  },
+  "logo": {
+    "src": "",
+    "alt": ""
+  },
+  "copyright": "Ⓒ Doka Pty Ltd. <br /> All right reserved"
+}

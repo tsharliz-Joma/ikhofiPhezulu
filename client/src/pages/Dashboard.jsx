@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
-import List from "../components/List";
+import List from "../components/Dashbaord/List";
 import DialogueBox from "../components/DialogueBox";
 
 const viewOrderUrl = "http://localhost:1969/api/view-orders";
@@ -195,12 +195,12 @@ const Dashboard = ({socket}) => {
         <h3>Orders</h3>
         {orders.length !== 0 && (
           <div className="coffee-orders-div">
-            <ul className="coffee-order-ul">
+            <div className="coffee-order-ul">
               {selected && (
                 <DialogueBox onClick={cancelOrSend} cDot={selectedCoffee} />
               )}
               <List list={orders} onClick={displayOptions} />
-            </ul>
+            </div>
           </div>
         )}
       </div>

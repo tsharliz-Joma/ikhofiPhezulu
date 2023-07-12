@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import './LoginForm.css'
 
 const backEndUserLogin = "http://localhost:1969/api/login";
 
@@ -37,42 +38,33 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      {/* <LoginForm
-        onClick={handleSubmit}
-        onSubmit={LoginUser}
-        email={email}
-        password={password}
-      /> */}
+    <div id="LoginFormContainer">
       <form onSubmit={LoginUser}>
         <div>
           <div className="input-box">
             <label htmlFor="email" className="details">
-              Username:
-              <input
-                onChange={handleEmail}
-                value={email}
-                id="email"
-                type={"text"}
-                placeholder="Enter Your Email"
-              />
+              Work Email{" "}
             </label>
+            <input
+              onChange={handleEmail}
+              value={email}
+              id="email"
+              type={"text"}
+              placeholder="Email"
+            />
           </div>
           <div className="input-box">
-            <label htmlFor="password" className="details">
-              Password:
-              <input
-                onChange={handlePassword}
-                value={password}
-                id="password"
-                type={"password"}
-                placeholder="Enter Password"
-              />
-            </label>
+            <label htmlFor="password" className="details"></label>
+            <input
+              onChange={handlePassword}
+              value={password}
+              id="password"
+              type={"password"}
+              placeholder="Password"
+            />
           </div>
         </div>
-        <button className="btn btn-outline-success">Login</button>
+        <button id="LoginButton">Login</button>
       </form>
     </div>
   );

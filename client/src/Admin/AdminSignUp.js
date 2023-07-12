@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import jwt from "jsonwebtoken";
+import './admin.css'
+// import FormPropsModel from "./AdministrationForm.model";
+
 
 const registerAdminUrl = "http://localhost:1969/api/adminRegistration";
 
@@ -48,7 +51,6 @@ const AdminSignUp = () => {
 
   return (
     <div>
-      <h1>welcome</h1>
       <form onSubmit={registerAdmin}>
         <div>
           <div className="input-box">

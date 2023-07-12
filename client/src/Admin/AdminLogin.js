@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import jwt from "jsonwebtoken";
+import './admin.css'
 
 const loginAdminUrl = "http://localhost:1969/api/adminLogin";
 
@@ -9,6 +10,8 @@ const AdminLogin = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+
+  const adminLoginContainer = useRef(HTMLDivElement)
 
   const handleName = (e) => {
     setName(e.target.value);
@@ -26,7 +29,7 @@ const AdminLogin = () => {
     };
     const response = await axios.post(loginAdminUrl, currentAdmin);
     const data = response.data;
-
+    
     if (data.user) {
       localStorage.setItem("token", data.user);
       alert("Welcome");
@@ -37,39 +40,44 @@ const AdminLogin = () => {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-
-      <form onSubmit={LoginUser}>
-        <div>
-          <div className="input-box">
+    <div id={"admin_login_container"}>
+      <div id="admin_header"></div>
+      <div id="admin_h_container">
+        <p id="admin_h">Table Talk Admin</p>
+      </div>
+      <div id="circ"></div>
+      <form onSubmit={LoginUser} id="admin_login_form">
+        <div id="admin_login_form_inner">
+          <div className="admin_input_box">
             <label htmlFor="email" className="details">
-              Name:
-              <input
-                onChange={handleName}
-                value={name}
-                id="name"
-                type={"text"}
-                placeholder="Enter Your Name"
-              />
+              Email:
             </label>
+            <input
+              onChange={handleName}
+              value={name}
+              id="name"
+              type={"text"}
+              placeholder="Enter Your Name"
+            />
           </div>
-          <div className="input-box">
+          <div className="admin_input_box">
             <label htmlFor="pwd" className="details">
               Password:
-              <input
-                onChange={handlePassword}
-                value={password}
-                placeholder="Password"
-              />
             </label>
+            <input
+              onChange={handlePassword}
+              value={password}
+              placeholder="Password"
+            />
           </div>
         </div>
-        <button className="btn btn-outline-warning">Login</button>
+        <div id="admin_btn_div">
+          <button className="admin_btn">
+            Login
+          </button>
+        </div>
       </form>
-      <Link to={"/"} className="btn btn-outline-danger">
-        Home
-      </Link>
+      <div id="admin_footer"></div>
     </div>
   );
 };
