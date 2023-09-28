@@ -10,6 +10,11 @@ const UserSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    hashedEmail: {
+        type: String,
+        required: true,
+        unique: true
+    },
     number: {
         type: String,
         required: true

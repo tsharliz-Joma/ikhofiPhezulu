@@ -1,0 +1,31 @@
+{
+    "coffees": [
+        "Cappuccino",
+        "Double Espresso",
+        "Espresso",
+        "Latte",
+        "Mocha",
+        "Long Macchiato",
+        "Macchiato",
+        "Long Black",
+        "Hot Chocolate"
+    ],
+    "milks": [
+        "Full Cream",
+        "Skim Milk",
+        "Soy Milk",
+        "Almond Milk",
+        "Oat Milk"
+    ],
+    "sizes": [
+        "Large",
+        "Regular"
+    ],
+    "sugar": [
+        { "id": 1, "value": 1 },
+        { "id": 2, "value": 2 },
+        { "id": 3, "value": 3 },
+        { "id": 4, "value": 4 },
+        { "id": 5, "value": 5 }
+    ]
+}

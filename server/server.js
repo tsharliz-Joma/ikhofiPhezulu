@@ -1,4 +1,5 @@
 require("dotenv").config({ path: "./config.env" });
+require("dotenv").config({ path: "./.env.dev" });
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -12,7 +13,11 @@ const mongoose = require("mongoose");
 const CoffeeModel = require("./models/Coffee");
 const User = require("./models/User");
 const Admin = require("./models/Admin");
+const sendText = require("./clickSendApi");
+
+// const bodyParser = require("body-parser");
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 const server = http.createServer(app);
@@ -48,33 +53,22 @@ io.on("connection", (socket) => {
   console.log(`Socket id: ${socket.id}`);
   console.log(`Socket handshake: ${socket.handshake.headers.origin}`);
 
-  // changeStream.on("change", (next) => {
-  //   switch (next.operationType) {
-  //     case "insert":
-  //       socket.emit("New Order", next.fullDocument);
-  //       break;
-  //     case "delete":
-  //       socket.emit("delete_order", next.fullDocument);
-  //     default:
-  //       console.log(next.operationType);
-  //   }
-  // });
-
   socket.on("user_active", (data) => {
     socket.join(data);
     console.log(data);
   });
 
+  socket.on("Order Complete", (data) => {
+    socket.broadcast.emit("Update", data);
+    console.log(data);
+  });
+
   socket.on("new_order", (data) => {
-    // console.log(data);
     socket.broadcast.emit("New Order", data);
   });
 
   socket.on("disconnect", () => {});
 });
-
-var collection = client.db("coffee_orders").collection("white_coffees");
-var changeStream = collection.watch([], { fullDocument: "updateLookup" });
 
 async function run() {
   try {
@@ -111,23 +105,31 @@ app.get("/api/view-orders", async (req, res) => {
 
 // CREATE COFFEE ORDER ROUTE
 app.post("/api/coffee", async (req, res) => {
+  // Create a test here to make sure that
+  // What is returned is what is intended and not malicious
   const name = req.body.name;
+  const number = req.body.number;
   const coffeeName = req.body.coffeeName;
   const coffeeMilk = req.body.coffeeMilk;
   const coffeeSize = req.body.coffeeSize;
-  const extras = req.body.extras;
+  // const email = req.body.email;
 
   const coffee = new CoffeeModel({
     name: name,
+    // email: email,
+    number: number,
     coffeeName: coffeeName,
     coffeeMilk: coffeeMilk,
     coffeeSize: coffeeSize,
-    extras: extras,
   });
 
+  console.log(coffee);
+
   try {
-    await coffee.save();
-    return res.json({ status: "ok" });
+    const saved = coffee.save();
+    await saved.then((response) => {
+      return res.json({ status: "ok" });
+    });
   } catch (error) {
     return error;
   }
@@ -135,22 +137,33 @@ app.post("/api/coffee", async (req, res) => {
 
 // DELETE COFFEE FROM DATABASE ROUTE
 app.post("/api/sendCoffee", async (req, res) => {
-  // /* TEST */console.log(req.body);
+  const coffee = {
+    name: req.body.name,
+    number: req.body.number,
+    coffeeName: req.body.coffeeName,
+    coffeeSize: req.body.coffeeSize,
+    coffeeMilk: req.body.coffeeMilk,
+  };
+console.log(coffee)
   try {
-    const coffee = {
-      name: req.body.name,
-      coffeeName: req.body.coffeeName,
-      coffeeSize: req.body.coffeeSize,
-      // coffeeMilk: req.body.coffeeMilk
-    };
-    console.log(`Deleting ${coffee.coffeeName}`);
-
-    return await CoffeeModel.deleteOne({
-      name: req.body.name,
-      coffeeName: req.body.coffeeName,
-      coffeeSize: req.body.coffeeSize,
-      // coffeeMilk: req.body.coffeeMilk
+    const result = sendText(coffee.number, coffee.coffeeName);
+    result.then((data) => {
+      if (data.response_code === "SUCCESS") {
+        console.log(`Text message success`)
+         const test = CoffeeModel.deleteOne(
+          coffee,
+          // {
+          // name: req.body.name,
+          // coffeeName: req.body.coffeeName,
+          // coffeeSize: req.body.coffeeSize,
+          // coffeeMilk: req.body.coffeeMilk
+          // }
+        );
+        console.log(test)
+      return test
+      }
     });
+    console.log(`Deleting ${coffee.coffeeName}`);
 
     // console.log(`DELETED`)
   } catch (error) {
@@ -161,14 +174,21 @@ app.post("/api/sendCoffee", async (req, res) => {
 // REGISTER ROUTE
 app.post("/api/register", async (req, res) => {
   // /* TEST */console.log(req.body)
+
+  const bcryptPassword = await bcrypt.hash(req.body.password, 10);
+  const bcryptEmail = await bcrypt.hash(req.body.email, 13);
+  const bcryptNumber = await bcrypt.hash(req.body.mobileNumber, 15);
+
   try {
-    const bcryptPassword = await bcrypt.hash(req.body.password, 10);
     await User.create({
       name: req.body.name,
+      hashedEmail: bcryptEmail,
       email: req.body.email,
       number: req.body.mobileNumber,
       password: bcryptPassword,
     });
+
+    console.log("User Created");
     res.json({ status: "ok" });
   } catch (err) {
     console.log(err);
@@ -176,11 +196,16 @@ app.post("/api/register", async (req, res) => {
   }
 });
 
+// sendText()
 // LOGIN ROUTE
 app.post("/api/login", async (req, res) => {
   const userFound = await User.findOne({
     email: req.body.email,
   });
+
+  // sendText()
+
+  console.log(userFound);
 
   if (!userFound) {
     return {
@@ -189,12 +214,17 @@ app.post("/api/login", async (req, res) => {
     };
   }
 
+  const emailValid = await bcrypt.compare(
+    req.body.email,
+    userFound.hashedEmail,
+  );
+
   const passwordValid = await bcrypt.compare(
     req.body.password,
     userFound.password,
   );
 
-  if (passwordValid) {
+  if (passwordValid && emailValid) {
     const token = jwt.sign(
       {
         name: userFound.name,
@@ -203,6 +233,7 @@ app.post("/api/login", async (req, res) => {
       },
       process.env.SUPASECRET,
     );
+
     return res.json({ status: "ok", user: token });
   } else {
     return res.json({ status: "error", user: false });

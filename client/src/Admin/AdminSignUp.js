@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
-import jwt from "jsonwebtoken";
+import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import jwt from "jsonwebtoken";
 import './admin.css'
 // import FormPropsModel from "./AdministrationForm.model";
 
@@ -16,12 +16,10 @@ const AdminSignUp = () => {
 
   const handleName = (e) => {
     setName(e.target.value);
-    // /* Test: */ console.log('name: ' + e.target.value);
   };
 
   const handlePassword = (e) => {
     setPwd(e.target.value);
-    // /* Test: */ console.log('Password: ' + e.target.value);
   };
 
   // REGISTER ADMINISTRATOR

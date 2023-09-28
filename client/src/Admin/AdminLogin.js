@@ -1,7 +1,7 @@
-import React, { useState, useRef } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import jwt from "jsonwebtoken";
+// import jwt from "jsonwebtoken";
 import './admin.css'
 
 const loginAdminUrl = "http://localhost:1969/api/adminLogin";
@@ -11,7 +11,7 @@ const AdminLogin = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
-  const adminLoginContainer = useRef(HTMLDivElement)
+  // const adminLoginContainer = useRef(HTMLDivElement)
 
   const handleName = (e) => {
     setName(e.target.value);

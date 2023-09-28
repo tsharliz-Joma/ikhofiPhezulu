@@ -7,147 +7,70 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  /* font-family: 'Exo 2', sans-serif; */
 }
 
-.kanit {
-  font-family: 'Kanit', sans-serif;
+/* Image 1 */
+#logo-image {
+  position: relative; 
+  top: 179px; 
+  left: 158px; 
+  width: 74px; 
+  height: 72px; 
+  border-radius: 0px; 
 }
 
-.h-text-center {
-  display: inline-block;
-  text-align: center;
-  max-width: 100%;
-  margin: 0 auto;
-  background: #FFF;
-  margin:20px auto;
-  padding: 20px 0;
-  border-radius: 5px;
-  border: 1px solid #63D471;
-  box-shadow: 0px 15px 15px #00000026;
+#CoffeeUp {
+  position: relative; 
+  top: 267px; 
+  left: 117px; 
+  font-family: DM Sans; 
+  font-size: 32px; 
+  font-weight: 700; 
+  line-height: 48px; 
+  color: #171A1FFF; 
 }
 
-.b-center {
-  display: inline-block;
-  text-align: center;
-  width: 100%;
-  margin: 0 auto;
-}
-
-.form-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    font-family: 'Jua', sans-serif;
-}
-
-.form-container{
-    position: relative;
-    background-color: #D9D9D9;
-    border: 0.5px solid grey;
-    width: 90%;
-    height: 85%;
-    padding: 20% 0;
-    border-radius: 50px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
-}
-
-.form-container form .user-info {
-  display: inline-block;
-  text-align: start;
-  max-width: 90%;
-}
-
-form .user-info .input-box {
-  margin: 20px 0;
-  width: 100%;
-}
-
-.user-info .input-box .details {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 5px;
-}
-
-/* .user-info .input-box input {
-  height: 45px;
-  width: 100%;
-  outline: none;
-  border-radius: 5px;
-  border: 1px solid #CCC;
-  font-size: 18px;
-  transition: all 0.3s ease;
-} */
-
-/* .user-info .input-box input:focus,
-.user-info .input-box input:valid {
-  border-color: #0BAB64;
-} */
-
-
-
-form .button {
-  height: 45px;
-  margin: 10px;
-}
-
-form .button:hover {
-  background: #63D471;
-}
-
-label {
-  font-size: 1.1em;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-}
-
-
-.outer-container {
-  padding: 10px;
-  width: 80%;
-  margin: 10px 20px;
-  flex-direction: column;
-  display: inline-flex;
-}
-
-.brd-1 {
-  border: 1.5px solid blue;
-}
-
-.brd-2 {
-  border: 1.5px solid red;
-}
-
-.brd-3 {
-  border: 1.5px solid rgb(0, 255, 0);
-}
-
-.brd-4 {
-  border: 1.5px solid orange;
-}
-
-.selectOverlay {
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  background: rgba(0, 0, 0, 0.5);
+.max-height {
   position: absolute;
+  z-index: 1;
   top: 0px;
-  left: 0px;
+  min-height: 100vh;
 }
 
-.selectInnerOverlay {
-  /* display: block; */
-  /* justify-content: center; */
-  text-align: center;
-  /* align-items: center; */
-  background: #0BAB64;
-  border-radius: 10px;
-  max-width: 350px;
-  height: 250px;
-  margin: 10% auto;
+.mocha {
+    background-color: #6F4E37!important;
+    color: #F2E2C5!important;
+}
+
+.cream {
+  background-color: #F2E2C5!important;
+}
+
+.richEspresso {
+  background-color: #2E1F14!important;
+}
+
+.cappuccino {
+  background-color: #A77F66!important;
+  color: #2E1F14!important;
+}
+
+.bean {
+  background-color: #4B3621!important;
+  color: #F2E2C5!important;
+}
+
+.dropShadow {
+    
+}
+
+.dropShadow:hover {
+    border-color: black;
+    border: 1px solid black;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.form-control:focus {
+  border: 1px solid #F2E2C5!important;
+  box-shadow: 0 0 0 0.2rem #F2E2C5!important;
 }

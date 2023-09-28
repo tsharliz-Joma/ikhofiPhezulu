@@ -5,6 +5,10 @@ const CoffeeSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  number: {
+    type: String,
+    required: true
+  },
   coffeeName: {
     type: String,
     required: true,
