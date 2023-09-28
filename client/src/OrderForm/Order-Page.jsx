@@ -8,7 +8,7 @@ const Order = ({ socket }) => {
 
   return (
     <div className="cream max-height col-lg-12 col-12">
-      <Header title="Order" />
+      <Header title="BRUVV" />
       <OrderForm socket={socket} />
     </div>
   );

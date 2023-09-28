@@ -108,7 +108,7 @@ const OrderForm = (props) => {
         </Form.Label>
         <Form.Control
           name="name"
-          className="fw-bold fs-4 fs-md-1 py-2"
+          className="fw-bold  fs-md-1 py-2"
           onChange={handleName}
           value={employeeName ? employeeName : ""}
           id="name"
@@ -123,7 +123,7 @@ const OrderForm = (props) => {
         </Form.Label>
         <Form.Control
           name="number"
-          className="fw-bold fs-4 py-2"
+          className="fw-bold  py-2"
           onChange={handlePhone}
           value={phoneNumber ? phoneNumber : ""}
           id="mobileNumber"
@@ -136,7 +136,7 @@ const OrderForm = (props) => {
         <Form.Label className="text-muted" htmlFor="coffeeName">
           Coffee
         </Form.Label>
-        <Form.Select className="fs-4" onChange={handleCoffeeSelect}>
+        <Form.Select className="" onChange={handleCoffeeSelect}>
           <option value="Latte">Latte</option>
           <option value="Flat White">Flat White</option>
           <option value="Cappuccino">Cappuccino</option>
@@ -152,7 +152,7 @@ const OrderForm = (props) => {
           Size
         </Form.Label>
         <Form.Select
-          className="fs-4"
+          className=""
           value={formData.coffeeSize}
           onChange={handleSizeSelect}>
           <option value="Large">Large</option>
@@ -164,7 +164,7 @@ const OrderForm = (props) => {
           Milk of Choice
         </Form.Label>
         <Form.Select
-          className="fs-4"
+          className=""
           value={formData.coffeeMilk}
           onChange={handleMilkSelect}>
           <option>Full Cream</option>
@@ -179,7 +179,7 @@ const OrderForm = (props) => {
           Sugar
         </Form.Label>
         <Form.Select
-          className="fs-4"
+          className=""
           value={formData.coffeeSugar}
           onChange={handleSugar}>
           <option>1</option>
@@ -192,12 +192,12 @@ const OrderForm = (props) => {
       <Stack className="my-4">
         <Button
           type="submit"
-          className="dropShadow py-3 btn-outline-dark btn mocha">
+          className="dropShadow py-2 btn-outline-dark btn mocha">
           Place Order
         </Button>
         <Link
           to="/"
-          className="dropShadow btn my-3 py-3 btn-outline-dark mocha">
+          className="dropShadow btn my-3 py-2 btn-outline-dark mocha">
           Home
         </Link>
       </Stack>

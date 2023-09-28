@@ -27,17 +27,15 @@ const UserAuthenticatedComponent = (props) => {
       <div className="mx-auto my-4">
         <img style={imgStyles} src={img} />
       </div>
-      <div>
-        {userName}
-      </div>
+      <div>{userName}</div>
       <Link
         to="/order-coffee"
-        className="btn btn-dark btn-outline-light py-3 ">
+        className="btn cappuccino btn-outline-dark py-3 ">
         Order Coffee
       </Link>
       <Button
         onClick={LogoutUser}
-        className="btn btn-light btn-outline-dark py-3">
+        className="btn richEspresso btn-outline-dark py-3">
         Sign Out
       </Button>
     </Stack>

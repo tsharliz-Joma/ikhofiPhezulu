@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import List from "../../components/List/List";
 import DialogueBox from "../../components/DialogueBox/DialogueBox";
+import Header from "../../components/Header/Header.component";
 // @ts-ignore
 import CoffeeItems from "../../JsonFiles/Coffee.json";
 // import "./Dashboard.css";
@@ -164,13 +165,8 @@ const Dashboard = ({ socket }) => {
 
   return (
     <>
-      <div className="" onScroll={handleScroll}>
-        <div className="">
-          <p className="bagara">Dashboard</p>
-          <div className="umbaarih">
-            <p className="fs-1">Orders</p>
-          </div>
-        </div>
+      <div className="font-monospace text-left" onScroll={handleScroll}>
+        <Header title="Dash" />
         <div className="">
           {orders.length !== 0 && (
             <div className="">

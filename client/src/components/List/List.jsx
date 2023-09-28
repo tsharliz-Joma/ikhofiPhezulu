@@ -1,17 +1,17 @@
 import React from "react";
-import './List.css'
+import "./List.css";
 
 const List = (props) => {
-  const { list, onClick } = props
+  const { list, onClick } = props;
   return list.map((order) => (
     <>
-      <div key={order._id} onClick={onClick} className="list_container">
-        <div className="list_inner_container">
-          <div className="btn fs-5 list_button">
-            {order.name}{" "}{order.coffeeSize}{" "}
-            {order.coffeeName}{" "}
-            {order.coffeeMilk}{" "}
-            {order.number}
+      <div key={order._id} onClick={onClick} className="">
+        <div className="btn btn-outline-dark py-2 my-2 fs-5 col-10">
+          <div className="text-start">
+            {order.name} <br />
+            {order.coffeeSize} {order.coffeeName}
+            <br />
+            {order.coffeeMilk} {order.number}
           </div>
         </div>
       </div>
