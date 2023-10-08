@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, Card, Button } from "react-bootstrap";
+import { Stack, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 // @ts-ignore
 import img from "../../images/user-1.jpeg";
@@ -23,9 +23,9 @@ const UserAuthenticatedComponent = (props) => {
   }
 
   return (
-    <Stack gap={4} className="top col-10 mx-auto userAuthenticated">
+    <Stack gap={4} className="top col-12 col-lg-4 mx-auto userAuthenticated">
       <div className="mx-auto my-4">
-        <img style={imgStyles} src={img} />
+        <img style={imgStyles} src={img} alt="user-profile-pic" />
       </div>
       <div>{userName}</div>
       <Link

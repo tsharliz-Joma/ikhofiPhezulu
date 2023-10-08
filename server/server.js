@@ -45,8 +45,8 @@ const client = new MongoClient(mongoUri, {
   },
 });
 
-const clientCollection = client.db("coffee_orders").collection("white_coffees");
-
+const clientCollection = client.db("coffee_orders").collection('white_coffees')
+const changeStream = clientCollection.watch()
 // Socket io
 
 io.on("connection", (socket) => {
@@ -58,13 +58,18 @@ io.on("connection", (socket) => {
     console.log(data);
   });
 
+  changeStream.on('Change', (change) => {
+    const message = JSON.stringify(change);
+    socket.broadcast.emit('Change', message)
+  })
+
   socket.on("Order Complete", (data) => {
     socket.broadcast.emit("Update", data);
     console.log(data);
   });
 
   socket.on("new_order", (data) => {
-    socket.broadcast.emit("New Order", data);
+    socket.broadcast.emit("order incoming", data);
   });
 
   socket.on("disconnect", () => {});
@@ -87,12 +92,9 @@ async function run() {
 }
 run().catch(console.dir);
 
-// mongodb://<USERNAME>:<PASSWORD>@ap-southeast-2.aws.realm.mongodb.com:27020/?authMechanism=PLAIN&authSource=%24external&ssl=true&appName=application-0-mygbf:<SERVICE_NAME>:local-userpass
-
-// VIEWS ORDERS ROUTE
+// View orders
 app.get("/api/view-orders", async (req, res) => {
   const token = req.headers["x-access-token"];
-  // Here i want it have a constant connection and to refresh every time a new order rocks up
   try {
     await CoffeeModel.find({}).then((res) => {
       orders = res;
@@ -107,6 +109,7 @@ app.get("/api/view-orders", async (req, res) => {
 app.post("/api/coffee", async (req, res) => {
   // Create a test here to make sure that
   // What is returned is what is intended and not malicious
+  // Turn this into a function
   const name = req.body.name;
   const number = req.body.number;
   const coffeeName = req.body.coffeeName;
@@ -122,9 +125,6 @@ app.post("/api/coffee", async (req, res) => {
     coffeeMilk: coffeeMilk,
     coffeeSize: coffeeSize,
   });
-
-  console.log(coffee);
-
   try {
     const saved = coffee.save();
     await saved.then((response) => {
@@ -137,6 +137,7 @@ app.post("/api/coffee", async (req, res) => {
 
 // DELETE COFFEE FROM DATABASE ROUTE
 app.post("/api/sendCoffee", async (req, res) => {
+  // Turn this into a function
   const coffee = {
     name: req.body.name,
     number: req.body.number,
@@ -144,7 +145,6 @@ app.post("/api/sendCoffee", async (req, res) => {
     coffeeSize: req.body.coffeeSize,
     coffeeMilk: req.body.coffeeMilk,
   };
-console.log(coffee)
   try {
     const result = sendText(coffee.number, coffee.coffeeName);
     result.then((data) => {
@@ -152,28 +152,17 @@ console.log(coffee)
         console.log(`Text message success`)
          const test = CoffeeModel.deleteOne(
           coffee,
-          // {
-          // name: req.body.name,
-          // coffeeName: req.body.coffeeName,
-          // coffeeSize: req.body.coffeeSize,
-          // coffeeMilk: req.body.coffeeMilk
-          // }
         );
-        console.log(test)
       return test
       }
     });
-    console.log(`Deleting ${coffee.coffeeName}`);
-
-    // console.log(`DELETED`)
   } catch (error) {
     console.log(error);
   }
 });
 
-// REGISTER ROUTE
+// Register
 app.post("/api/register", async (req, res) => {
-  // /* TEST */console.log(req.body)
 
   const bcryptPassword = await bcrypt.hash(req.body.password, 10);
   const bcryptEmail = await bcrypt.hash(req.body.email, 13);
@@ -187,8 +176,6 @@ app.post("/api/register", async (req, res) => {
       number: req.body.mobileNumber,
       password: bcryptPassword,
     });
-
-    console.log("User Created");
     res.json({ status: "ok" });
   } catch (err) {
     console.log(err);
@@ -196,16 +183,12 @@ app.post("/api/register", async (req, res) => {
   }
 });
 
-// sendText()
 // LOGIN ROUTE
 app.post("/api/login", async (req, res) => {
+
   const userFound = await User.findOne({
     email: req.body.email,
   });
-
-  // sendText()
-
-  console.log(userFound);
 
   if (!userFound) {
     return {
@@ -240,41 +223,41 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-//========== User phone Number
-
+/*
+View User Data - Not being used yet
 app.get("/api/user-data", async (req, res) => {
   const token = req.headers["x-access-token"];
   try {
     const decoded = jwt.verify(token, process.env.SUPASECRET);
     const email = decoded.email;
     const user = await User.findOne({ email: email });
-
     return res.json({ status: "ok", name: user.name });
   } catch (error) {
     res.json({ status: "error", error: "invalid token'" });
     console.log(error);
   }
 });
+*/
 
-//===== Update phone number
 
+/*
+Update user data, not being used at the moment 
 app.post("/api/user-data", async (req, res) => {
   const token = req.headers["x-access-token"];
-
   try {
     const decoded = jwt.verify(token, process.env.SUPASECRET);
     const email = decoded.email;
     await User.updateOne({ email: email }, { $set: { name: req.body.name } });
-
     return res.json({ status: "ok " });
   } catch (error) {
     // console.log(error)
     return res.json({ status: "error", error: "invalid token" });
   }
 });
+*/
 
-// MONGO ACCOUNT REGISTRATION
-
+/*
+// MONGO ACCOUNT REGISTRATION - Not being used yet
 app.post("/api/adminRegistration", async (req, res) => {
   console.log(req.body);
   // const newAdmin = new Admin({
@@ -294,6 +277,7 @@ app.post("/api/adminRegistration", async (req, res) => {
     res.json({ status: "error", error: "Duplicate email." });
   }
 });
+*/
 
 app.post("/api/adminLogin", async (req, res) => {
   const adminFound = await Admin.findOne({
@@ -319,13 +303,7 @@ app.post("/api/adminLogin", async (req, res) => {
 });
 
 app.get("/", async (req, res) => {
-  //   const coffee = new CoffeeModel({
-  //     coffeeName: req.body.coffeeName,
-  //     coffeeMilk: "Oat",
-  //     coffeeSize: "Large",
-  //   });
   try {
-    // await coffee.save();
     res.json({
       message: "Hello World",
     });

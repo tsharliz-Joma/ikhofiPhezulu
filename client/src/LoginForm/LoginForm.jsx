@@ -3,16 +3,13 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "./LoginForm.css";
-// Components
 import SpinnerComponent from "../components/Spinner/Spinner.component";
 // React-Bootstrap
 import { Button, Form } from "react-bootstrap";
-import { Stack } from "react-bootstrap";
 
 const backEndUserLogin = "http://localhost:1969/api/login";
 
 const LoginForm = () => {
-  // Teams
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -56,7 +53,7 @@ const LoginForm = () => {
     <>
       <Form
         onSubmit={LoginUser}
-        className="top col-10 pt-5 mx-auto mx-md-auto font-monospace">
+        className="top col-10 pt-5 mx-auto font-monospace">
         <Form.Group className="my-4">
           <Form.Label htmlFor="email" className="text-muted">
             Work Email{" "}
@@ -85,9 +82,6 @@ const LoginForm = () => {
             placeholder="Password"
           />
         </Form.Group>
-        {/* <SignInButton title="Sign in" /> */}
-        {/* <SignOutButton title="Sign out" /> */}
-
         {loading ? (
           <Button
             type="submit"
@@ -99,7 +93,6 @@ const LoginForm = () => {
               size="sm"
               animation="grow"
               role="status"
-              // variant="success"
             />
             Loading...
           </Button>

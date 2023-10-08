@@ -4,7 +4,7 @@ import Wave from "react-wavify";
 import './Header.component.css'
 
 const Header = (props) => {
-  const { title, isAuthenticated } = props;
+  const { title } = props;
 
   const textStyles = {
     fontWeight: "bold",

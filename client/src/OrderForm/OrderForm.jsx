@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import jwt from "jsonwebtoken";
 import { Button } from "react-bootstrap";
@@ -8,10 +8,9 @@ import { Stack } from "react-bootstrap";
 import "../App.css";
 
 const backEndUrl = "http://localhost:1969/api/coffee";
-const SERVERURL = "http://localhost:1969";
 
 const OrderForm = (props) => {
-  const { socket, userName, userEmail, userNumber } = props;
+  const { socket } = props;
   const [formData, setFormData] = useState({
     name: "",
     number: "",
@@ -24,10 +23,8 @@ const OrderForm = (props) => {
   const [employeeName, setEmployeeName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
 
-  const navigate = useNavigate();
-
   const handleName = (e) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
     setFormData({ ...formData, name: value });
   };
 
@@ -82,7 +79,6 @@ const OrderForm = (props) => {
     } catch (error) {
       console.log(error);
     }
-    // navigate("/order-coffee");
   };
 
   useEffect(() => {

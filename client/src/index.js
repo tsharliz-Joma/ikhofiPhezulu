@@ -16,7 +16,6 @@ import * as io from "socket.io-client";
 import LoginForm from "./LoginForm/LoginForm";
 import SignUpPage from "./SignupForm/SignUp";
 
-// const msalInstance = new PublicClientApplication(msalConfig);
 
 const socket = io.connect("http://localhost:1969/");
 

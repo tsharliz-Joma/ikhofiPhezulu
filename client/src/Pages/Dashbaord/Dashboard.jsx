@@ -5,12 +5,9 @@ import DialogueBox from "../../components/DialogueBox/DialogueBox";
 import Header from "../../components/Header/Header.component";
 // @ts-ignore
 import CoffeeItems from "../../JsonFiles/Coffee.json";
-// import "./Dashboard.css";
 
 const viewOrderUrl = "http://localhost:1969/api/view-orders";
-const checkOrderUrl = "http://localhost:1969/api/check-orders";
 const deleteOrderUrl = "http://localhost:1969/api/sendCoffee";
-// const socket = io.connect("http://localhost:1969", { autoConnect: false });
 
 const Dashboard = ({ socket }) => {
   const [orders, setOrders] = useState([]);
@@ -154,9 +151,10 @@ const Dashboard = ({ socket }) => {
 
   useEffect(() => {
     getOrders();
-    socket.on("New Order", (msg) => {
+    socket.on("order incoming", (msg) => {
       setOrders((orders) => [...orders, msg]);
     });
+    
   }, [socket]);
 
   const handleScroll = (event) => {

@@ -19,7 +19,6 @@ const sendText = (recipient, coffee) => {
   return smsApi
     .smsSendPost(smsCollection)
     .then(function (response) {
-      console.log(response.body);
       return response.body
     })
     .catch(function (err) {
