@@ -7,7 +7,8 @@ import { Form } from "react-bootstrap";
 import { Stack } from "react-bootstrap";
 import "../App.css";
 
-const backEndUrl = "http://localhost:1969/api/coffee";
+const backEndUrl =
+  "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/coffee";
 
 const OrderForm = (props) => {
   const { socket } = props;

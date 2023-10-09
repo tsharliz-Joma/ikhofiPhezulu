@@ -6,8 +6,10 @@ import Header from "../../components/Header/Header.component";
 // @ts-ignore
 import CoffeeItems from "../../JsonFiles/Coffee.json";
 
-const viewOrderUrl = "http://localhost:1969/api/view-orders";
-const deleteOrderUrl = "http://localhost:1969/api/sendCoffee";
+const viewOrderUrl =
+  "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/view-orders";
+const deleteOrderUrl =
+  "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/sendCoffee";
 
 const Dashboard = ({ socket }) => {
   const [orders, setOrders] = useState([]);
