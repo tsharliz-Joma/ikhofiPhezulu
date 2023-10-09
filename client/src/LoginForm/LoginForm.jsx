@@ -54,7 +54,7 @@ const LoginForm = () => {
     <>
       <Form
         onSubmit={LoginUser}
-        className="top col-10 pt-5 mx-auto font-monospace">
+        className="top col-12 col-lg-3 pt-5 mx-auto font-monospace">
         <Form.Group className="my-4">
           <Form.Label htmlFor="email" className="text-muted">
             Work Email{" "}

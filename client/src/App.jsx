@@ -39,7 +39,7 @@ function App() {
           <UserAuthenticatedComponent userName={userName} />
         </div>
       ) : (
-        <div className="cream col-12 col-lg-4 mx-auto max-height">
+        <div className="cream col-12 mx-auto max-height">
           <LoginForm />
         </div>
       )}
