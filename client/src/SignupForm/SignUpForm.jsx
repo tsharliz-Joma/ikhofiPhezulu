@@ -4,7 +4,7 @@ import { Form, Stack, Button } from "react-bootstrap";
 import '../App.css'
 
 // import "./registrationForm.css";
-const backEndUserRegister = `http://localhost:1969/api/register`;
+const backEndUserRegister = `https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/register`;
 
 const SignUpForm = () => {
   const navigate = useNavigate();

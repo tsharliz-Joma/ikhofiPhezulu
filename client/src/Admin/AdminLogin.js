@@ -4,7 +4,8 @@ import axios from "axios";
 // import jwt from "jsonwebtoken";
 import './admin.css'
 
-const loginAdminUrl = "http://localhost:1969/api/adminLogin";
+const loginAdminUrl =
+  "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/adminLogin";
 
 const AdminLogin = () => {
   const navigate = useNavigate();

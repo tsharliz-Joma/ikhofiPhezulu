@@ -7,7 +7,8 @@ import SpinnerComponent from "../components/Spinner/Spinner.component";
 // React-Bootstrap
 import { Button, Form } from "react-bootstrap";
 
-const backEndUserLogin = "http://localhost:1969/api/login";
+const backEndUserLogin =
+  "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/login";
 
 const LoginForm = () => {
   const navigate = useNavigate();

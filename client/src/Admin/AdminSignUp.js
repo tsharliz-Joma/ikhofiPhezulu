@@ -6,7 +6,8 @@ import './admin.css'
 // import FormPropsModel from "./AdministrationForm.model";
 
 
-const registerAdminUrl = "http://localhost:1969/api/adminRegistration";
+const registerAdminUrl =
+  "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/adminRegistration";
 
 const AdminSignUp = () => {
   const [name, setName] = useState("");
