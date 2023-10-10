@@ -98,14 +98,14 @@ const OrderForm = (props) => {
   return (
     <Form
       onSubmit={handleCoffeeSubmit}
-      className="font-monospace col-lg-4 col-10 mx-auto">
+      className="font-monospace col-10 col-md-4 col-lg-4 mx-auto">
       <Form.Group className="mt-1">
         <Form.Label className="text-muted" htmlFor="name">
           Name
         </Form.Label>
         <Form.Control
           name="name"
-          className="fw-bold  fs-md-1 py-2"
+          className="fw-bold fs-md-1 py-3"
           onChange={handleName}
           value={employeeName ? employeeName : ""}
           id="name"
@@ -120,7 +120,7 @@ const OrderForm = (props) => {
         </Form.Label>
         <Form.Control
           name="number"
-          className="fw-bold  py-2"
+          className="fw-bold py-3"
           onChange={handlePhone}
           value={phoneNumber ? phoneNumber : ""}
           id="mobileNumber"
@@ -133,7 +133,7 @@ const OrderForm = (props) => {
         <Form.Label className="text-muted" htmlFor="coffeeName">
           Coffee
         </Form.Label>
-        <Form.Select className="" onChange={handleCoffeeSelect}>
+        <Form.Select className="py-3" onChange={handleCoffeeSelect}>
           <option value="Latte">Latte</option>
           <option value="Flat White">Flat White</option>
           <option value="Cappuccino">Cappuccino</option>
@@ -149,7 +149,7 @@ const OrderForm = (props) => {
           Size
         </Form.Label>
         <Form.Select
-          className=""
+          className="py-3"
           value={formData.coffeeSize}
           onChange={handleSizeSelect}>
           <option value="Large">Large</option>
@@ -161,7 +161,7 @@ const OrderForm = (props) => {
           Milk of Choice
         </Form.Label>
         <Form.Select
-          className=""
+          className="py-3"
           value={formData.coffeeMilk}
           onChange={handleMilkSelect}>
           <option>Full Cream</option>
@@ -176,7 +176,7 @@ const OrderForm = (props) => {
           Sugar
         </Form.Label>
         <Form.Select
-          className=""
+          className="py-3"
           value={formData.coffeeSugar}
           onChange={handleSugar}>
           <option>1</option>
@@ -189,12 +189,12 @@ const OrderForm = (props) => {
       <Stack className="my-4">
         <Button
           type="submit"
-          className="dropShadow py-2 btn-outline-dark btn mocha">
+          className="dropShadow py-3 btn-outline-dark btn mocha">
           Place Order
         </Button>
         <Link
           to="/"
-          className="dropShadow btn my-3 py-2 btn-outline-dark mocha">
+          className="dropShadow btn my-3 py-3 btn-outline-dark mocha">
           Home
         </Link>
       </Stack>

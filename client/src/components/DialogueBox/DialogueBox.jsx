@@ -11,14 +11,14 @@ const DialogueBox = ({cDot, onClick}) => {
   }
 
   return (
-    <div style={containerStyles} className="container col-12 cappuccino py-3">
-      <div className="mx-auto col-10 text-center">
+    <div style={containerStyles} className="container col-12 py-3">
+      <div className="richEspresso mx-auto col-12 text-center rounded">
         <div className="">
-          <p className="cream d-inline-block border rounded p-2 fs-2 mt-5">
+          <p className="cream d-inline-block border rounded p-2 fs-2 mt-5 col-10">
             {cDot}
           </p>
         </div>
-        <div className="pt-3">
+        <div className="py-3">
           <Button onClick={onClick} className="cream btn-lg mx-3">
             Back
           </Button>

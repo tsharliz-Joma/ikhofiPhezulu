@@ -24,7 +24,7 @@ const Header = (props) => {
   };
 
   return (
-    <div id="header-container" className="col-lg-12 text-center font-monospace">
+    <div id="header-container" className="col-12 text-center font-monospace">
       <Wave
         fill="#2E1F14"
         paused={false}

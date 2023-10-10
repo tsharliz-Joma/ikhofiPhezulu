@@ -23,7 +23,7 @@ const UserAuthenticatedComponent = (props) => {
   }
 
   return (
-    <Stack gap={4} className="top col-12 col-lg-4 mx-auto userAuthenticated">
+    <Stack gap={4} className="top col-10 col-md-6 col-lg-4 mx-auto userAuthenticated">
       <div className="mx-auto my-4">
         <img style={imgStyles} src={img} alt="user-profile-pic" />
       </div>

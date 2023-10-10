@@ -17,8 +17,11 @@ import LoginForm from "./LoginForm/LoginForm";
 import SignUpPage from "./SignupForm/SignUp";
  
 
+// const socket = io.connect(
+//   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com",
+// );
 const socket = io.connect(
-  "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com",
+  "http://localhost:3000",
 );
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

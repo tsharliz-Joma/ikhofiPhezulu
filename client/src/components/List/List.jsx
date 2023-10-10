@@ -5,9 +5,9 @@ const List = (props) => {
   const { list, onClick } = props;
   return list.map((order) => (
     <>
-      <div key={order._id} onClick={onClick} className="">
-        <div className="btn btn-outline-dark py-2 my-2 fs-5 col-10">
-          <div className="text-start">
+      <div onClick={onClick} className="col-10 col-lg-4 mx-auto">
+        <div className="btn btn-outline-dark py-2 my-2 fs-5 col-12">
+          <div className="text-start" key={order._id}>
             {order.name}{" "}
             {order.coffeeSize} {order.coffeeName}
             <br />

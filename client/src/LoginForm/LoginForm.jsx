@@ -7,8 +7,9 @@ import SpinnerComponent from "../components/Spinner/Spinner.component";
 // React-Bootstrap
 import { Button, Form } from "react-bootstrap";
 
-const backEndUserLogin =
-  "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/login";
+// const backEndUserLogin =
+//   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/login";
+const backEndUserLogin = "http://localhost:1969/api/login";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -54,7 +55,7 @@ const LoginForm = () => {
     <>
       <Form
         onSubmit={LoginUser}
-        className="top col-12 col-lg-3 pt-5 mx-auto font-monospace">
+        className="top col-10 col-md-4 col-lg-4 pt-5 mx-auto font-monospace">
         <Form.Group className="my-4">
           <Form.Label htmlFor="email" className="text-muted">
             Work Email{" "}
