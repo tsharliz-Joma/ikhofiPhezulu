@@ -13,7 +13,7 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import * as io from "socket.io-client";
-import LoginForm from "./LoginForm/LoginForm";
+// import LoginForm from "./LoginForm/LoginForm";
 import SignUpPage from "./SignupForm/SignUp";
  
 
@@ -21,7 +21,7 @@ import SignUpPage from "./SignupForm/SignUp";
 //   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com",
 // );
 const socket = io.connect(
-  "http://localhost:3000",
+  "http://localhost:1969",
 );
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -40,7 +40,7 @@ root.render(
         <Route path="/adminRegister" element={<AdminSignUp />} />
         <Route path="/adminLogin" element={<AdminLogin />} />
         <Route path="/dashboard" element={<Dashboard socket={socket} />} />
-        <Route path="/login" element={<LoginForm />} />
+        <Route path="/login" element={<App />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

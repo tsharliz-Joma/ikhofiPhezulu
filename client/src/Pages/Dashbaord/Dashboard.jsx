@@ -11,8 +11,10 @@ import CoffeeItems from "../../JsonFiles/Coffee.json";
 const viewOrderUrl =
   "http://localhost:1969/api/view-orders";
 
+// const deleteOrderUrl =
+//   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/sendCoffee";
 const deleteOrderUrl =
-  "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/sendCoffee";
+  "http://localhost:1969/api/sendCoffee";
 
 const Dashboard = ({ socket }) => {
   const [orders, setOrders] = useState([]);
@@ -26,7 +28,6 @@ const Dashboard = ({ socket }) => {
 
   const displayOptions = (e) => {
     e.preventDefault();
-    console.log(e.target.innerText)
     setSelected(true);
     setSelectedCoffee(e.target.innerText);
     IsmJabana(e.target.innerText);
@@ -44,7 +45,6 @@ const Dashboard = ({ socket }) => {
 
   const IsmaZol = (string) => {
     const name = string.split(" ")[0];
-    console.log(name)
     return setPerson(name);
   };
 
@@ -122,11 +122,10 @@ const Dashboard = ({ socket }) => {
       coffeeName: Coffee,
       coffeeSize: Size,
       coffeeMilk: Milk,
-    };
-    // console.log(deleteCoffee);
+    }
     try {
-      socket.emit("Order Complete", deleteCoffee);
-      axios.post(deleteOrderUrl, deleteCoffee);
+      socket.emit("order complete", deleteCoffee);
+      axios.post(deleteOrderUrl, deleteCoffee)
       window.location.reload();
     } catch (error) {
       console.log(error);
@@ -156,11 +155,15 @@ const Dashboard = ({ socket }) => {
 
   useEffect(() => {
     getOrders();
-    socket.on("order incoming", (msg) => {
-      setOrders((orders) => [...orders, msg]);
+    socket.on("new order", (order) => {
+      setOrders((orders) => [...orders, order]);
     });
-    
+
+    return () => {
+      socket.disconnect();
+    }
   }, [socket]);
+
 
   const handleScroll = (event) => {
     event.stopPropagation();

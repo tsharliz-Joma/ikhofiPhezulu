@@ -7,11 +7,15 @@ import { Form } from "react-bootstrap";
 import { Stack } from "react-bootstrap";
 import "../App.css";
 
+// const backEndUrl =
+//   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/coffee";
 const backEndUrl =
-  "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/coffee";
+  "http://localhost:1969/api/coffee";
 
 const OrderForm = (props) => {
   const { socket } = props;
+  const [employeeName, setEmployeeName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     number: "",
@@ -20,9 +24,6 @@ const OrderForm = (props) => {
     coffeeMilk: "",
     coffeeSugar: "",
   });
-
-  const [employeeName, setEmployeeName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
 
   const handleName = (e) => {
     const { value } = e.target;
@@ -65,9 +66,8 @@ const OrderForm = (props) => {
       coffeeSugar: formData.coffeeSugar,
     };
     try {
-      socket.emit("new_order", newCoffee);
+      socket.emit("new order", newCoffee)
       const result = await axios.post(backEndUrl, newCoffee);
-      console.log(result);
       setFormData({
         name: "",
         number: "",

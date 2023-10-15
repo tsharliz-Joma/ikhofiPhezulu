@@ -37,7 +37,7 @@ const LoginForm = () => {
     try {
       const response = await axios
         .post(backEndUserLogin, currentUser)
-        .then(setLoading(true));
+        .then(setLoading(true))
       const data = response.data;
       if (data.user) {
         localStorage.setItem("token", data.user);
@@ -45,6 +45,7 @@ const LoginForm = () => {
         navigate("/order-coffee");
       } else {
         alert("Please Check your username and password");
+        setLoading(false);
       }
     } catch (e) {
       console.log(e);
@@ -58,7 +59,7 @@ const LoginForm = () => {
         className="top col-10 col-md-4 col-lg-4 pt-5 mx-auto font-monospace">
         <Form.Group className="my-4">
           <Form.Label htmlFor="email" className="text-muted">
-            Work Email{" "}
+            Email{" "}
           </Form.Label>
           <Form.Control
             name="email"

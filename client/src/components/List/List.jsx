@@ -9,9 +9,9 @@ const List = (props) => {
         <div className="btn btn-outline-dark py-2 my-2 fs-5 col-12">
           <div className="text-start" key={order._id}>
             {order.name}{" "}
-            {order.coffeeSize} {order.coffeeName}
-            <br />
-            {order.coffeeMilk} {order.number}
+            {order.coffeeSize}{" "}{order.coffeeName}
+            {" "}
+            {order.coffeeMilk}{" "}{order.number}
           </div>
         </div>
       </div>
