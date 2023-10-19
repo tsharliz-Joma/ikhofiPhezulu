@@ -3,41 +3,36 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "./LoginForm.css";
-import SpinnerComponent from "../components/Spinner/Spinner.component";
-// React-Bootstrap
-import { Button, Form } from "react-bootstrap";
+import Container from "@mui/material/Container";
+// import { Container } from "react-bootstrap";
+import Box from "@mui/material/Box";
+import Avatar from "@mui/material/Avatar";
+// Material UI
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import { Checkbox, FormControlLabel, Grid, TextField } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
 
 // const backEndUserLogin =
 //   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/login";
 const backEndUserLogin = "http://localhost:1969/api/login";
 
+
 const LoginForm = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const LoginUser = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    const data = new FormData(e.currentTarget);
     const currentUser = {
-      email: formData.email,
-      password: formData.password,
+      email: data.get("email"),
+      password: data.get("password"),
     };
     try {
       const response = await axios
         .post(backEndUserLogin, currentUser)
-        .then(setLoading(true))
+        .then(setLoading(true));
       const data = response.data;
       if (data.user) {
         localStorage.setItem("token", data.user);
@@ -54,64 +49,70 @@ const LoginForm = () => {
 
   return (
     <>
-      <Form
-        onSubmit={LoginUser}
-        className="top col-10 col-md-4 col-lg-4 pt-5 mx-auto font-monospace">
-        <Form.Group className="my-4">
-          <Form.Label htmlFor="email" className="text-muted">
-            Email{" "}
-          </Form.Label>
-          <Form.Control
-            name="email"
-            className="py-3 fw-bold"
-            onChange={handleInputChange}
-            value={formData.email}
-            id="email"
-            type="email"
-            placeholder="Enter email"
-          />
-        </Form.Group>
-        <Form.Group className="mb-4">
-          <Form.Label htmlFor="password" className="text-muted">
-            Password
-          </Form.Label>
-          <Form.Control
-            name="password"
-            className="py-3 fw-bold"
-            onChange={handleInputChange}
-            value={formData.password}
-            id="password"
-            type={"password"}
-            placeholder="Password"
-          />
-        </Form.Group>
-        {loading ? (
-          <Button
-            type="submit"
-            id="mocha"
-            className="btn btn-outline-dark py-3 my-4 col-12"
-            disabled>
-            <SpinnerComponent
-              as="span"
-              size="sm"
-              animation="grow"
-              role="status"
+      <Container maxWidth="xs" sx={{ marginTop: "-50px" }}>
+        <CssBaseline />
+        <Typography component="h1" variant="h6" align="right">
+          <Avatar sx={{ bgcolor: "info.dark", my: 1 }}></Avatar>
+          Sign In
+        </Typography>
+        <Box
+          sx={{
+            marginTop: "0px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            width: "100%",
+          }}>
+          <Box
+            component="form"
+            onSubmit={handleLogin}
+            sx={{ mt: 1, width: "100%" }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
             />
-            Loading...
-          </Button>
-        ) : (
-          <Button
-            type="submit"
-            className="dropShadow cappuccino btn btn-outline-dark py-3 my-4 col-12">
-            Login
-          </Button>
-        )}
-        <Link
-          to="/register"
-          className="dropShadow btn bean col-12 mx-auto py-3 ">
-          Register Account
-        </Link>
-      </Form>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ my: 3, fontSize: 16 }}>
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link to='/register' variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+      </Container>
     </>
   );
 };
