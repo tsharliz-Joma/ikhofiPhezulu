@@ -12,7 +12,7 @@ const Header = (props) => {
     paddingBottom: "16px",
     position: "relative",
     fontSize: "40px",
-    color: "#F2E2C5",
+    color: "#FFF",
   };
 
   const waveCustomStyles = {

@@ -4,7 +4,26 @@ import jwt from "jsonwebtoken";
 import LoginForm from "./LoginForm/LoginForm";
 import Header from "./components/Header/Header.component";
 import UserAuthenticatedComponent from "./components/user-Authenticed-component/User.authenticated.component";
+import Image from "./components/Imag∑/ImageComponent";
+import phLogo from './images/phLogo.png'
+// MATERIAL UI
+import Grid from "@mui/material/Grid";
+import Typography  from "@mui/material/Typography";
+import Link from "@mui/material/Link";
 import "./App.css";
+
+
+
+function Copyright(props){
+  return (
+  <Typography variant="body2" color="text.secondary" align="center" {...props}>
+    {'Copyright ©'}
+    <Link color="inherit" href="#">
+      Jsphere Inc.
+    </Link>
+  </Typography>
+  )
+}
 
 function App() {
   const navigate = useNavigate();
@@ -39,9 +58,13 @@ function App() {
           <UserAuthenticatedComponent userName={userName} />
         </div>
       ) : (
-        <div className="cream col-12 mx-auto max-height">
-          <LoginForm />
-        </div>
+        <Grid>
+          
+            <Image imgSrc={phLogo} alt="2000s cellphone" />
+            <LoginForm />
+            <Copyright sx={{ mt: 14 }} />
+          
+        </Grid>
       )}
     </>
   );

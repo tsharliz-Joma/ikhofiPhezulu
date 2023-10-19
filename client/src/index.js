@@ -15,7 +15,6 @@ import "@fontsource/roboto/700.css";
 import * as io from "socket.io-client";
 // import LoginForm from "./LoginForm/LoginForm";
 import SignUpPage from "./SignupForm/SignUp";
- 
 
 // const socket = io.connect(
 //   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com",
@@ -23,8 +22,11 @@ import SignUpPage from "./SignupForm/SignUp";
 const socket = io.connect(
   "http://localhost:1969",
 );
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const link = document.createElement("link");
+link.rel = "stylesheet";
+link.href = "https://fonts.googleapis.com/icon?family=Material+Icons";
+document.head.appendChild(link)
 root.render(
   <React.StrictMode>
     <BrowserRouter>

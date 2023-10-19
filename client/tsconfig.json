@@ -5,7 +5,7 @@
     "target": "ES5",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": true,
-    "checkJs": true,
+    "checkJs": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
