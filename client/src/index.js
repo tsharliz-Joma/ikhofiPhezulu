@@ -16,7 +16,7 @@ import * as io from "socket.io-client";
 // import LoginForm from "./LoginForm/LoginForm";
 import SignUpPage from "./SignupForm/SignUp";
 import { ThemeProvider, createTheme } from "@mui/material";
-import { ThemeOptions } from "@mui/material";
+
 
 // const socket = io.connect(
 //   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com",
@@ -36,10 +36,15 @@ const themeOptions = {
       light: "rgb(244, 231, 208)",
       dark: "rgb(169, 158, 137)",
     },
+    info: {
+      main: "#2196f3",
+      dark: "#00473d",
+      light: "#a9fbda",
+    },
   },
   typography: {
-    fontsize: 14
-  }
+    fontsize: 14,
+  },
 };
 
 const theme = createTheme(themeOptions)

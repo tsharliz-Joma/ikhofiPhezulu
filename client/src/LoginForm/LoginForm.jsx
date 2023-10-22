@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./LoginForm.css";
 import Container from "@mui/material/Container";
@@ -12,14 +12,13 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Checkbox, FormControlLabel, Grid, TextField } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
+import Link from "@mui/material/Link";
 
 // const backEndUserLogin =
 //   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/login";
 const backEndUserLogin = "http://localhost:1969/api/login";
 
-
 const LoginForm = () => {
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
@@ -37,7 +36,7 @@ const LoginForm = () => {
       if (data.user) {
         localStorage.setItem("token", data.user);
         setLoading(false);
-        window.location.reload()
+        window.location.reload();
         // navigate("/");
       } else {
         alert("Please Check your username and password");
@@ -53,7 +52,7 @@ const LoginForm = () => {
       <Container maxWidth="xs" sx={{ marginTop: "-50px" }}>
         <CssBaseline />
         <Typography component="h1" variant="h6" align="right">
-          <Avatar sx={{ bgcolor: "info.dark", my: 1 }}></Avatar>
+          <Avatar sx={{ bgcolor: "info.light", my: 1 }}></Avatar>
           Sign In
         </Typography>
         <Box
@@ -89,26 +88,35 @@ const LoginForm = () => {
               autoComplete="current-password"
             />
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+           
+              control={<Checkbox value="remember" color="primary" size="small" />}
               label="Remember me"
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ my: 3, fontSize: 16 }}>
+              sx={{ my: 3.5, fontSize: 16 }}>
               Sign In
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
+                <Typography color={"info.light"}>
+                  <Link
+                    href="#"
+                    color="inherit"
+                    underline={"hover"}
+                    variant="body2">
+                    Forgot password?
+                  </Link>
+                </Typography>
               </Grid>
               <Grid item>
-                <Link to='/register' variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
+                <Typography color={"info.light"}>
+                  <Link href="/register" color={"inherit"} underline={"hover"} variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Typography>
               </Grid>
             </Grid>
           </Box>
