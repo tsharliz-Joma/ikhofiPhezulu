@@ -37,7 +37,8 @@ const LoginForm = () => {
       if (data.user) {
         localStorage.setItem("token", data.user);
         setLoading(false);
-        navigate("/order-coffee");
+        window.location.reload()
+        // navigate("/");
       } else {
         alert("Please Check your username and password");
         setLoading(false);

@@ -4,7 +4,7 @@ import Wave from "react-wavify";
 import './Header.component.css'
 
 const Header = (props) => {
-  const { title } = props;
+  const { title, theme } = props;
 
   const textStyles = {
     fontWeight: "bold",
@@ -12,7 +12,7 @@ const Header = (props) => {
     paddingBottom: "16px",
     position: "relative",
     fontSize: "40px",
-    color: "#FFF",
+    color: "#000",
   };
 
   const waveCustomStyles = {
@@ -26,7 +26,7 @@ const Header = (props) => {
   return (
     <div id="header-container" className="col-12 text-center font-monospace">
       <Wave
-        fill="#2E1F14"
+        fill={theme.palette.primary.main}
         paused={false}
         style={waveCustomStyles}
         options={{

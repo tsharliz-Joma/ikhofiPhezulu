@@ -1,44 +1,48 @@
 import React from "react";
-import { Stack, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 // @ts-ignore
-import img from "../../images/user-1.jpeg";
-import '../../App.css'
+import character from "../../images/character.png";
+import Image from "../Imag∑/ImageComponent";
+import "../../App.css";
+// Material UI
+import { Box, Typography } from "@mui/material";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
 
- const LogoutUser = () => {
-   if (localStorage.getItem("token")) {
-     localStorage.removeItem("token");
-     window.location.reload();
-     console.log("Logged out");
-   }
- };
+const LogoutUser = () => {
+  if (localStorage.getItem("token")) {
+    localStorage.removeItem("token");
+    window.location.reload();
+    console.log("Logged out");
+  }
+};
 
 const UserAuthenticatedComponent = (props) => {
   const { userName } = props;
 
   const imgStyles = {
-      maxWidth: '200px',
-      maxHeight: '200px',
-      borderRadius: '10%'
-  }
+    maxWidth: "200px",
+    maxHeight: "200px",
+    borderRadius: "10%",
+  };
 
   return (
-    <Stack gap={4} className="top col-10 col-md-6 col-lg-4 mx-auto userAuthenticated">
-      <div className="mx-auto my-4">
-        <img style={imgStyles} src={img} alt="user-profile-pic" />
-      </div>
-      <div>{userName}</div>
-      <Link
-        to="/order-coffee"
-        className="btn cappuccino btn-outline-dark py-3 ">
-        Order Coffee
-      </Link>
-      <Button
-        onClick={LogoutUser}
-        className="btn richEspresso btn-outline-dark py-3">
-        Sign Out
-      </Button>
-    </Stack>
+    <Grid container spacing={2} align="center">
+      <Grid item xs={12}>
+        <Image style={imgStyles} imgSrc={character} alt="user-profile-pic" />
+      </Grid>
+      <Grid item xs={6}>
+        <Typography>{userName}</Typography>
+      </Grid>
+      <Grid item xs={6}>
+        <Link to="/order-coffee">Order Coffee</Link>
+      </Grid>
+      <Grid item xs={10} md={6} lg={2} sx={{ margin: "0 auto" }}>
+        <Button variant="contained" sx={{ width: "100%" }} onClick={LogoutUser}>
+          Sign Out
+        </Button>
+      </Grid>
+    </Grid>
   );
 };
 
