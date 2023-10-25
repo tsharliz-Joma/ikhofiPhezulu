@@ -4,10 +4,11 @@ import character from "../../images/character.png";
 import Image from "../Imag∑/ImageComponent";
 import "../../App.css";
 // Material UI
-import { Box, Typography } from "@mui/material";
+import { CssBaseline, Typography} from "@mui/material";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
+
 
 const LogoutUser = () => {
   if (localStorage.getItem("token")) {
@@ -28,6 +29,7 @@ const UserAuthenticatedComponent = (props) => {
 
   return (
     <Grid container spacing={2} align="center">
+      <CssBaseline/>
       <Grid item xs={12}>
         <Image style={imgStyles} imgSrc={character} alt="user-profile-pic" />
       </Grid>
@@ -35,7 +37,7 @@ const UserAuthenticatedComponent = (props) => {
         <Typography>{userName}</Typography>
       </Grid>
       <Grid item xs={6}>
-        <Link to="/order-coffee">Order Coffee</Link>
+        <Link href="/order-coffee">Order Coffee</Link>
       </Grid>
       <Grid item xs={10} md={6} lg={2} sx={{ margin: "0 auto" }}>
         <Button variant="contained" sx={{ width: "100%" }} onClick={LogoutUser}>

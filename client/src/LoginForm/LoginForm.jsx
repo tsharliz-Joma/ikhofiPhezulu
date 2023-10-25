@@ -3,16 +3,15 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./LoginForm.css";
-import Container from "@mui/material/Container";
-// import { Container } from "react-bootstrap";
-import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
 // Material UI
+import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Checkbox, FormControlLabel, Grid, TextField } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import Link from "@mui/material/Link";
+import Box from "@mui/material/Box";
+import Avatar from "@mui/material/Avatar";
 
 // const backEndUserLogin =
 //   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/login";

@@ -1,14 +1,16 @@
 import React from "react";
 import OrderForm from "./OrderForm";
 import Header from "../components/Header/Header.component";
+import { ThemeProvider, createTheme, useTheme } from "@mui/material";
 
 const Order = ({ socket }) => {
+  const theme = useTheme();
 
   return (
-    <div className="cream max-height col-12">
-      <Header title="BRUVV" />
+    <ThemeProvider theme={theme}>
+      <Header title="BRUVV" theme={theme} />
       <OrderForm socket={socket} />
-    </div>
+    </ThemeProvider>
   );
 };
 

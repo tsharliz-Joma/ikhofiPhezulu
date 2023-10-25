@@ -1,16 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import jwt from "jsonwebtoken";
-import { Button } from "react-bootstrap";
-import { Form } from "react-bootstrap";
-import { Stack } from "react-bootstrap";
+import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import {
+  Checkbox,
+  FormControlLabel,
+  Grid,
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
+import Link from "@mui/material/Link";
+import Box from "@mui/material/Box";
 import "../App.css";
 
 // const backEndUrl =
 //   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/coffee";
-const backEndUrl =
-  "http://localhost:1969/api/coffee";
+const backEndUrl = "http://localhost:1969/api/coffee";
 
 const OrderForm = (props) => {
   const { socket } = props;
@@ -25,57 +36,24 @@ const OrderForm = (props) => {
     coffeeSugar: "",
   });
 
-  const handleName = (e) => {
-    const { value } = e.target;
-    setFormData({ ...formData, name: value });
-  };
-
-  const handleSizeSelect = (e) => {
-    const { value } = e.target;
-    setFormData({ ...formData, coffeeSize: value });
-  };
-
-  const handleMilkSelect = (e) => {
-    const { value } = e.target;
-    setFormData({ ...formData, coffeeMilk: value });
-  };
-
-  const handleCoffeeSelect = (e) => {
-    const { value } = e.target;
-    setFormData({ ...formData, coffee: value });
-  };
-
-  const handlePhone = (e) => {
-    const { value } = e.target;
-    setFormData({ ...formData, number: value });
-  };
-
-  const handleSugar = (e) => {
-    const { value } = e.target;
-    setFormData({ ...formData, coffeeSugar: value });
+  const handleChange = (e) => {
+    const { value, name } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleCoffeeSubmit = async (e) => {
     e.preventDefault();
-    const newCoffee = {
-      name: employeeName,
-      number: phoneNumber,
+    const newOrder = {
+      name: formData.name,
+      number: formData.number,
       coffeeName: formData.coffee,
       coffeeMilk: formData.coffeeMilk,
       coffeeSize: formData.coffeeSize,
-      coffeeSugar: formData.coffeeSugar,
-    };
+      coffeeSugar: formData.coffeeSugar
+    }
     try {
-      socket.emit("new order", newCoffee)
-      const result = await axios.post(backEndUrl, newCoffee);
-      setFormData({
-        name: "",
-        number: "",
-        coffee: "",
-        coffeeSize: "",
-        coffeeMilk: "",
-        coffeeSugar: "",
-      });
+      socket.emit("new order", newOrder);
+      const result = await axios.post(backEndUrl, newOrder);
       return result;
     } catch (error) {
       console.log(error);
@@ -96,109 +74,131 @@ const OrderForm = (props) => {
   }, []);
 
   return (
-    <Form
-      onSubmit={handleCoffeeSubmit}
-      className="font-monospace col-10 col-md-4 col-lg-4 mx-auto">
-      <Form.Group className="mt-1">
-        <Form.Label className="text-muted" htmlFor="name">
-          Name
-        </Form.Label>
-        <Form.Control
-          name="name"
-          className="fw-bold fs-md-1 py-3"
-          onChange={handleName}
-          value={employeeName ? employeeName : ""}
-          id="name"
-          type="text"
-          placeholder="Enter Your Name"
-          disabled
-        />
-      </Form.Group>
-      <Form.Group className="mt-3">
-        <Form.Label className="text-muted" htmlFor="mobile">
-          Mobile
-        </Form.Label>
-        <Form.Control
-          name="number"
-          className="fw-bold py-3"
-          onChange={handlePhone}
-          value={phoneNumber ? phoneNumber : ""}
-          id="mobileNumber"
-          type="number"
-          placeholder="Enter Your Mobile Number"
-          disabled
-        />
-      </Form.Group>
-      <Form.Group className="mt-3">
-        <Form.Label className="text-muted" htmlFor="coffeeName">
-          Coffee
-        </Form.Label>
-        <Form.Select className="py-3" onChange={handleCoffeeSelect}>
-          <option value="Latte">Latte</option>
-          <option value="Flat White">Flat White</option>
-          <option value="Cappuccino">Cappuccino</option>
-          <option value="Long Black">Long Black</option>
-          <option value="Macchiato">Macchiato</option>
-          <option value="Long Macchiato">Long Macchiato</option>
-          <option value="Espresso">Espresso</option>
-          <option value="Double Espresso">Double Espresso</option>
-        </Form.Select>
-      </Form.Group>
-      <Form.Group className="mt-3">
-        <Form.Label className="text-muted" htmlFor="coffeeSize">
-          Size
-        </Form.Label>
-        <Form.Select
-          className="py-3"
-          value={formData.coffeeSize}
-          onChange={handleSizeSelect}>
-          <option value="Large">Large</option>
-          <option value="Regular">Regular</option>
-        </Form.Select>
-      </Form.Group>
-      <Form.Group className="mt-3">
-        <Form.Label className="text-muted" htmlFor="coffeeMilk">
-          Milk of Choice
-        </Form.Label>
-        <Form.Select
-          className="py-3"
-          value={formData.coffeeMilk}
-          onChange={handleMilkSelect}>
-          <option>Full Cream</option>
-          <option>Skim Milk</option>
-          <option>Soy Milk</option>
-          <option>Almond Milk</option>
-          <option>Oat Milk</option>
-        </Form.Select>
-      </Form.Group>
-      <Form.Group className="mt-3">
-        <Form.Label className="text-muted" htmlFor="coffeeSugar">
-          Sugar
-        </Form.Label>
-        <Form.Select
-          className="py-3"
-          value={formData.coffeeSugar}
-          onChange={handleSugar}>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </Form.Select>
-      </Form.Group>
-      <Stack className="my-4">
-        <Button
-          type="submit"
-          className="dropShadow py-3 btn-outline-dark btn mocha">
-          Place Order
-        </Button>
-        <Link
-          to="/"
-          className="dropShadow btn my-3 py-3 btn-outline-dark mocha">
-          Home
-        </Link>
-      </Stack>
-    </Form>
+    <>
+      <Container maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: "50px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            width: "100%",
+          }}>
+          <Box
+            component={"form"}
+            onSubmit={handleCoffeeSubmit}
+            sx={{ mt: 0, width: "100%" }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="name"
+              label="Name"
+              name="name"
+              autoComplete="name"
+              autoFocus
+              onChange={handleChange}
+              value={employeeName}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="number"
+              id="number"
+              type="number"
+              label="Mobile Number"
+              autoComplete="number"
+              autoFocus
+              onChange={handleChange}
+              value={phoneNumber}
+              sx={{ mb: 5 }}
+            />
+            <FormControl fullWidth required sx={{ mt: 5 }}>
+              <InputLabel>Coffee</InputLabel>
+              <Select
+                labelId="coffee"
+                label="coffee"
+                name="coffee"
+                value={formData.coffee}
+                onChange={handleChange}>
+                <MenuItem value={"Flat White"}>Flat White</MenuItem>
+                <MenuItem value={"Latte"}>Latte</MenuItem>
+                <MenuItem value={"Cappuccino"}>Cappuccino</MenuItem>
+                <MenuItem value={"Espresso"}>Espresso</MenuItem>
+                <MenuItem value={"Double Espresso"}>Double Espresso</MenuItem>
+                <MenuItem value={"Long Black"}>Long Black</MenuItem>
+                <MenuItem value={"Macchiato"}>Macchiato</MenuItem>
+                <MenuItem value={"Long Macchiato"}>Long Macchiato</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl fullWidth required sx={{ mt: 2 }}>
+              <InputLabel>Size</InputLabel>
+              <Select
+                labelId="size"
+                label="size"
+                name="coffeeSize"
+                value={formData.coffeeSize}
+                onChange={handleChange}>
+                <MenuItem value={"Regular"}>Regular</MenuItem>
+                <MenuItem value={"Large"}>Large</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl fullWidth required sx={{ mt: 2 }}>
+              <InputLabel>Milk</InputLabel>
+              <Select
+                labelId="milk"
+                label="milk"
+                name="coffeeMilk"
+                value={formData.coffeeMilk}
+                onChange={handleChange}>
+                <MenuItem value={"Full Cream"}>Full</MenuItem>
+                <MenuItem value={"Skim Milk"}>Skim</MenuItem>
+                <MenuItem value={"Soy Milk"}>Soy</MenuItem>
+                <MenuItem value={"Almond Milk"}>Almond</MenuItem>
+                <MenuItem value={"Oat Milk"}>Oat</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl fullWidth sx={{ mt: 2 }}>
+              <InputLabel>Sugar</InputLabel>
+              <Select
+                labelId="sugar"
+                label="sugar"
+                name="coffeeSugar"
+                value={formData.coffeeSugar}
+                onChange={handleChange}>
+                <MenuItem value={1}>1</MenuItem>
+                <MenuItem value={2}>2</MenuItem>
+                <MenuItem value={3}>3</MenuItem>
+                <MenuItem value={4}>4</MenuItem>
+              </Select>
+            </FormControl>
+            <Grid container spacing={3}>
+              <Grid item xs={6}>
+                <Link href="/">
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    sx={{ my: 3, fontSize: 16 }}>
+                    Back
+                  </Button>
+                </Link>
+              </Grid>
+              <Grid item xs={6}>
+                <Button
+                  fullWidth
+                  type="submit"
+                  variant="contained"
+                  sx={{ my: 3, fontSize: 16 }}>
+                  Sennndit
+                </Button>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+      </Container>
+    </>
   );
 };
 

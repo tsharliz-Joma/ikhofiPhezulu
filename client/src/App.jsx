@@ -29,7 +29,6 @@ const Copyright = (props) => {
 };
 
 function App(props) {
-
   const navigate = useNavigate();
   const [userName, setUsername] = useState("");
   const [userPresent, setUserPresent] = useState(false);
@@ -58,11 +57,11 @@ function App(props) {
     <ThemeProvider theme={theme}>
       <Header title="Table Talk" theme={theme} />
       {userPresent ? (
-        <Grid>
-          <UserAuthenticatedComponent userName={userName} />
+        <Grid container>
+          <UserAuthenticatedComponent userName={userName} theme={theme} />
         </Grid>
       ) : (
-        <Grid>
+        <Grid container>
           <Image imgSrc={phone} alt="2000s cellphone" />
           <LoginForm />
           <Copyright sx={{ mt: 14 }} />
