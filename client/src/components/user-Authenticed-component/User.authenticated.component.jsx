@@ -31,7 +31,7 @@ const UserAuthenticatedComponent = (props) => {
     <Grid container spacing={2} align="center">
       <CssBaseline/>
       <Grid item xs={12}>
-        <Image style={imgStyles} imgSrc={character} alt="user-profile-pic" />
+        <Image style={imgStyles} imgSrc={character} alt="user-profile-pic"/>
       </Grid>
       <Grid item xs={6}>
         <Typography>{userName}</Typography>

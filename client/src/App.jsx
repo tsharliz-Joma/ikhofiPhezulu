@@ -58,7 +58,7 @@ function App(props) {
       <Header title="Table Talk" theme={theme} />
       {userPresent ? (
         <Grid container>
-          <UserAuthenticatedComponent userName={userName} theme={theme} />
+          <UserAuthenticatedComponent userName={userName} theme={theme}/>
         </Grid>
       ) : (
         <Grid container>
