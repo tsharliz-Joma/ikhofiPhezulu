@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import jwt from "jsonwebtoken";
+// Material UI
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -17,6 +18,8 @@ import {
 import CssBaseline from "@mui/material/CssBaseline";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import "../App.css";
 
 // const backEndUrl =
@@ -49,8 +52,8 @@ const OrderForm = (props) => {
       coffeeName: formData.coffee,
       coffeeMilk: formData.coffeeMilk,
       coffeeSize: formData.coffeeSize,
-      coffeeSugar: formData.coffeeSugar
-    }
+      coffeeSugar: formData.coffeeSugar,
+    };
     try {
       socket.emit("new order", newOrder);
       const result = await axios.post(backEndUrl, newOrder);
@@ -181,7 +184,8 @@ const OrderForm = (props) => {
                     fullWidth
                     variant="contained"
                     sx={{ my: 3, fontSize: 16 }}>
-                    Back
+                    <ArrowBackIosIcon />
+                    Runaway
                   </Button>
                 </Link>
               </Grid>
@@ -191,7 +195,8 @@ const OrderForm = (props) => {
                   type="submit"
                   variant="contained"
                   sx={{ my: 3, fontSize: 16 }}>
-                  Sennndit
+                  Fish Fillet
+                  <ArrowForwardIosIcon />
                 </Button>
               </Grid>
             </Grid>

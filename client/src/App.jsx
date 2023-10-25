@@ -57,9 +57,7 @@ function App(props) {
     <ThemeProvider theme={theme}>
       <Header title="Table Talk" theme={theme} />
       {userPresent ? (
-        <Grid container>
-          <UserAuthenticatedComponent userName={userName} theme={theme}/>
-        </Grid>
+        <UserAuthenticatedComponent userName={userName} theme={theme} />
       ) : (
         <Grid container>
           <Image imgSrc={phone} alt="2000s cellphone" />
