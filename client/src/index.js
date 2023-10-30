@@ -7,6 +7,7 @@ import Order from "./OrderForm/Order-Page";
 import AdminSignUp from "./Admin/AdminSignUp";
 import AdminLogin from "./Admin/AdminLogin";
 import Dashboard from "./Pages/Dashbaord/Dashboard";
+import { GoogleOAuthProvider } from '@react-oauth/google'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
@@ -57,24 +58,26 @@ link.href = "https://fonts.googleapis.com/icon?family=Material+Icons";
 document.head.appendChild(link);
 
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <Routes>
-          <Route
-            // @ts-ignore
-            exact
-            path="/"
-            element={<App />}
-          />
-          <Route path="/order-coffee" element={<Order socket={socket} />} />
-          <Route path="/register" element={<SignUpPage />} />
-          <Route path="/adminRegister" element={<AdminSignUp />} />
-          <Route path="/adminLogin" element={<AdminLogin />} />
-          <Route path="/dashboard" element={<Dashboard socket={socket} />} />
-          <Route path="/login" element={<App />} />
-        </Routes>
-      </ThemeProvider>
-    </BrowserRouter>
-  </React.StrictMode>,
+  <GoogleOAuthProvider clientId="1001901641435-vmfp4ept1c6pmtpfvj9c2e28bmttetos.apps.googleusercontent.com">
+    <React.StrictMode>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <Routes>
+            <Route
+              // @ts-ignore
+              exact
+              path="/"
+              element={<App />}
+            />
+            <Route path="/order-coffee" element={<Order socket={socket} />} />
+            <Route path="/register" element={<SignUpPage />} />
+            <Route path="/adminRegister" element={<AdminSignUp />} />
+            <Route path="/adminLogin" element={<AdminLogin />} />
+            <Route path="/dashboard" element={<Dashboard socket={socket} />} />
+            <Route path="/login" element={<App />} />
+          </Routes>
+        </ThemeProvider>
+      </BrowserRouter>
+    </React.StrictMode>
+  </GoogleOAuthProvider>,
 );
