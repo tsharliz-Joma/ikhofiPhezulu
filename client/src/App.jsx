@@ -22,7 +22,7 @@ const Copyright = (props) => {
       {...props}>
       {"Copyright ©"}
       <Link color="inherit" href="#">
-        Jsphere Inc.
+        Doka Pty Ltd.
       </Link>
     </Typography>
   );

@@ -44,6 +44,7 @@ const themeOptions = {
   },
   typography: {
     fontsize: 14,
+    
   },
 };
 
