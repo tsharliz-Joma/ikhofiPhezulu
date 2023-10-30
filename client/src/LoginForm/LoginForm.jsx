@@ -20,16 +20,6 @@ const backEndUserLogin =
 const LoginForm = () => {
   const [loading, setLoading] = useState(false);
 
-  const [ formData , setFormData ] = useState({
-    email: '',
-    password: ''
-  })
-
-  const handleChange = (e) => {
-    const { value, name } = e.target;
-    setFormData({ ...formData, [name]: value });
-  }
-
   const handleLogin = async (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
@@ -37,7 +27,7 @@ const LoginForm = () => {
       email: data.get("email"),
       password: data.get("password"),
     };
-    console.log(currentUser)
+
     try {
       const response = await axios
         .post(backEndUserLogin, currentUser)
