@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./LoginForm.css";
+// GOOGLE LOGIN
+import { GoogleLogin } from "@react-oauth/google";
+
 // Material UI
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
@@ -14,11 +17,19 @@ import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 
 const backEndUserLogin =
-   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/login";
+  "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/login";
 // const backEndUserLogin = "http://localhost:1969/api/login";
 
 const LoginForm = () => {
   const [loading, setLoading] = useState(false);
+
+  const responseMsg = (res) => {
+    console.log(res);
+  };
+
+  const errorMsg = (err) => {
+    console.log(err);
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -52,7 +63,7 @@ const LoginForm = () => {
       <Container maxWidth="xs" sx={{ marginTop: "-50px" }}>
         <CssBaseline />
         <Typography component="h1" variant="h6" align="right">
-          <Avatar sx={{ bgcolor: "info.light", my: 1 }}></Avatar>
+          <Avatar sx={{ bgcolor: "info.light", my: 0 }}></Avatar>
           Sign In
         </Typography>
         <Box
@@ -88,17 +99,26 @@ const LoginForm = () => {
               autoComplete="current-password"
             />
             <FormControlLabel
-           
-              control={<Checkbox value="remember" color="primary" size="small" />}
+              control={
+                <Checkbox value="remember" color="primary" size="small" />
+              }
               label="Remember me"
             />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ my: 3.5, fontSize: 16 }}>
-              Sign In
-            </Button>
+            <Grid container={12} spacing={2} sx={{ my: 2}}>
+              <Grid item xs={6}>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ fontSize: 16 }}>
+                  Sign In
+                </Button>
+              </Grid>
+              <Grid item xs={6}>
+                <GoogleLogin onSuccess={responseMsg} onError={errorMsg} />
+              </Grid>
+            </Grid>
+
             <Grid container>
               <Grid item xs>
                 <Typography color={"info.light"}>
@@ -113,7 +133,11 @@ const LoginForm = () => {
               </Grid>
               <Grid item>
                 <Typography color={"info.light"}>
-                  <Link href="/register" color={"inherit"} underline={"hover"} variant="body2">
+                  <Link
+                    href="/register"
+                    color={"inherit"}
+                    underline={"hover"}
+                    variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Typography>

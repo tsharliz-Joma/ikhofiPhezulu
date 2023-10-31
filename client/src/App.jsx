@@ -7,7 +7,6 @@ import UserAuthenticatedComponent from "./components/user-Authenticed-component/
 import Image from "./components/Imag∑/ImageComponent";
 import phone from "./images/phone.png";
 // GOOGLE LOGIN
-import { GoogleLogin } from '@react-oauth/google'
 // MATERIAL UI
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -36,13 +35,7 @@ function App(props) {
   const [userPresent, setUserPresent] = useState(false);
   const theme = useTheme();
 
-  const responseMsg = (res) => {
-    console.log(res)
-  }
-
-  const errorMsg = (err) => {
-    console.log(err)
-  }
+ 
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       navigate("/");
@@ -71,7 +64,6 @@ function App(props) {
         <Grid container>
           <Image imgSrc={phone} alt="2000s cellphone" />
           <LoginForm />
-          <GoogleLogin onSuccess={responseMsg} onError={errorMsg} />
           <Copyright sx={{ mt: 14 }} />
         </Grid>
       )}
