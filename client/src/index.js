@@ -9,10 +9,10 @@ import AdminLogin from "./Admin/AdminLogin";
 import Dashboard from "./Pages/Dashbaord/Dashboard";
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import "bootstrap/dist/css/bootstrap.min.css";
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
+// import "@fontsource/roboto/300.css";
+// import "@fontsource/roboto/400.css";
+// import "@fontsource/roboto/500.css";
+// import "@fontsource/roboto/700.css";
 import * as io from "socket.io-client";
 // import LoginForm from "./LoginForm/LoginForm";
 import SignUpPage from "./SignupForm/SignUp";

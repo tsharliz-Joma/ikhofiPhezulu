@@ -22,7 +22,7 @@
           },
           {
             "key": "Content-Security-Policy",
-            "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://ikhofiphezulu.web.app/; style-src 'self' 'unsafe-inline'; object-src 'none'"
+            "value": "default-src 'self'; script-src 'self' 1001901641435-vmfp4ept1c6pmtpfvj9c2e28bmttetos.apps.googleusercontent.com https://ikhofiphezulu.web.app/; style-src 'self' 'unsafe-inline'; object-src 'none'"
           }
         ]
       }
