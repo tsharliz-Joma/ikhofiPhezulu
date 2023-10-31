@@ -58,7 +58,7 @@ link.href = "https://fonts.googleapis.com/icon?family=Material+Icons";
 document.head.appendChild(link);
 
 root.render(
-  <GoogleOAuthProvider clientId="1001901641435-vmfp4ept1c6pmtpfvj9c2e28bmttetos.apps.googleusercontent.com">
+  <GoogleOAuthProvider clientId={process.env.REACT_APP_GCLI_ID}>
     <React.StrictMode>
       <BrowserRouter>
         <ThemeProvider theme={theme}>
