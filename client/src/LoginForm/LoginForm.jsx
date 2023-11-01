@@ -1,11 +1,9 @@
 // @ts-nocheck
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./LoginForm.css";
 // GOOGLE LOGIN
-import { GoogleLogin } from "@react-oauth/google";
-
 // Material UI
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
@@ -22,14 +20,7 @@ const backEndUserLogin =
 
 const LoginForm = () => {
   const [loading, setLoading] = useState(false);
-
-  const responseMsg = (res) => {
-    console.log(res);
-  };
-
-  const errorMsg = (err) => {
-    console.log(err);
-  };
+ 
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -57,6 +48,9 @@ const LoginForm = () => {
       console.log(e);
     }
   };
+
+  
+  
 
   return (
     <>
@@ -104,7 +98,7 @@ const LoginForm = () => {
               }
               label="Remember me"
             />
-            <Grid container={12} spacing={2} sx={{ my: 2}}>
+            <Grid container spacing={2} sx={{ my: 2 }}>
               <Grid item xs={6}>
                 <Button
                   type="submit"
@@ -113,9 +107,6 @@ const LoginForm = () => {
                   sx={{ fontSize: 16 }}>
                   Sign In
                 </Button>
-              </Grid>
-              <Grid item xs={6}>
-                <GoogleLogin onSuccess={responseMsg} onError={errorMsg} />
               </Grid>
             </Grid>
 
