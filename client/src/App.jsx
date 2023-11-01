@@ -78,7 +78,8 @@ function App(props) {
         )
         .then((res) => {
           setUserActive(true)
-          setUserInfo(res.data);
+          setGoogleUser(res.data);
+          console.log(googleUser)
           navigate('/order-coffee')
         })
         .catch((err) => console.log(err));
