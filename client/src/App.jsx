@@ -40,7 +40,7 @@ function App(props) {
   const theme = useTheme();
 
   const login = useGoogleLogin({
-    onSuccess: (response) => setGoogleUser(response),
+    onSuccess: (response) => console.log(response),
     onError: (error) => console.log("Login failed", error),
   });
 
