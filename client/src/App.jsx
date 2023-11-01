@@ -34,7 +34,7 @@ const Copyright = (props) => {
 function App(props) {
   const navigate = useNavigate();
   const [userName, setUsername] = useState("");
-  const [userPresent, setUserPresent] = useState(false);
+  const [userActive, setUserActive] = useState(false);
   const [googleUser, setGoogleUser] = useState([]);
   const [userInfo, setUserInfo] = useState([]);
   const theme = useTheme();
@@ -45,19 +45,20 @@ function App(props) {
   });
 
   useEffect(() => {
-    if (!localStorage.getItem("token")) {
+    const localToken = localStorage.getItem("token") ? true : false
+    if (!localToken) {
       navigate("/");
     }
     const token = localStorage.getItem("token");
     if (token) {
       const user = jwt.decode(token);
-      // console.log(user);
+      setUserInfo(user)
+      setUserActive(true);
       if (user) {
         setUsername(user.name);
-        setUserPresent(true);
       }
       if (!user) {
-        setUserPresent(false);
+        setUserActive(false);
         return;
       }
     }
@@ -76,22 +77,24 @@ function App(props) {
           },
         )
         .then((res) => {
-          console.log(res);
-          setGoogleUser(res.data);
+          setUserActive(true)
+          setUserInfo(res.data);
+          navigate('/order-coffee')
         })
         .catch((err) => console.log(err));
     }
   }, [googleUser]);
 
+  
   return (
     <ThemeProvider theme={theme}>
       <Header title="Table Talk" theme={theme} />
-      {userPresent ? (
-        <UserAuthenticatedComponent userName={userName} theme={theme} />
+      {userActive ? (
+        <UserAuthenticatedComponent userData={userInfo} userName={userName} theme={theme} />
       ) : (
         <Grid container>
           <Image imgSrc={phone} alt="2000s cellphone" />
-          <LoginForm />
+          <LoginForm active={userActive} />
           <GoogleLogin onClick={() => login()} />
           <Copyright sx={{ mt: 14 }} />
         </Grid>

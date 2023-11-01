@@ -21,7 +21,8 @@ const LogoutUser = () => {
 };
 
 const UserAuthenticatedComponent = (props) => {
-  const { userName } = props;
+  const { userData } = props;
+  console.log(userData)
 
   const imgStyles = {
     maxWidth: "200px",
@@ -39,6 +40,7 @@ const UserAuthenticatedComponent = (props) => {
               imgSrc={character}
               alt="user-profile-pic"
             />
+            {userData.name}
           </Grid>
           <Grid item xs={12} >
             {/* <Typography textAlign={'center'}>{userName}</Typography> */}
