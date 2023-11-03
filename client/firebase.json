@@ -14,11 +14,7 @@
         "headers": [
           {
             "key": "Cross-Origin-Opener-Policy",
-            "value": "same-origin"
-          },
-          {
-            "key": "Cross-Origin-Allow-Popups",
-            "value": "same-origin"
+            "value": "same-origin-allow-pops"
           },
           {
             "key": "Access-Control-Allow-Origin",
