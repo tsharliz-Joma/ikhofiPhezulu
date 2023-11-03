@@ -19,10 +19,10 @@ import SignUpPage from "./SignupForm/SignUp";
 import { ThemeProvider, createTheme } from "@mui/material";
 
 
-// const socket = io.connect(
-//   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com",
-// );
-const socket = io.connect("http://localhost:1969");
+const socket = io.connect(
+  "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com",
+);
+// const socket = io.connect("http://localhost:1969");
 
 const themeOptions = {
   palette: {
