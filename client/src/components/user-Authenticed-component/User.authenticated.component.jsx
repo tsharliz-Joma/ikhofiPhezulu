@@ -12,7 +12,7 @@ import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 
 
-const LogoutUser = () => {
+export const LogoutUser = () => {
   if (localStorage.getItem("token")) {
     localStorage.removeItem("token");
     window.location.reload();
@@ -22,8 +22,6 @@ const LogoutUser = () => {
 
 const UserAuthenticatedComponent = (props) => {
   const { userData } = props;
-  console.log(userData)
-
   const imgStyles = {
     maxWidth: "200px",
     maxHeight: "200px",

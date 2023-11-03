@@ -10,9 +10,9 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Box, Container, CssBaseline, Button } from "@mui/material";
 
-import "./registrationForm.css";
-const backEndUserRegister = `https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/register`;
-// const backEndUserRegister = `http://localhost:1969/api/register`;
+// import "./registrationForm.css";
+// const backEndUserRegister = `https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/register`;
+const backEndUserRegister = `http://localhost:1969/api/register`;
 
 const SignUpForm = () => {
   const navigate = useNavigate();

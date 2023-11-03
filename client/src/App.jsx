@@ -14,7 +14,8 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import "./App.css";
 import { ThemeProvider, createTheme, useTheme } from "@mui/material";
-import axios from "axios";
+import { LogoutUser } from "./components/user-Authenticed-component/User.authenticated.component";
+import { Button } from "react-bootstrap";
 
 const Copyright = (props) => {
   return (
@@ -31,77 +32,62 @@ const Copyright = (props) => {
   );
 };
 
-function App(props) {
+const App = (props) => {
   const navigate = useNavigate();
-  const [userName, setUsername] = useState("");
-  const [userActive, setUserActive] = useState(false);
-  const [googleUser, setGoogleUser] = useState([]);
-  const [userInfo, setUserInfo] = useState([]);
+  const [userData, setUserData] = useState([]);
+  const [userPresent, setUserPresent] = useState(false);
   const theme = useTheme();
 
-  const login = useGoogleLogin({
-    onSuccess: (response) => console.log(response),
-    onError: (error) => console.log("Login failed", error),
-  });
+  const handleGoogle = useGoogleLogin({
+    onSuccess: (codeResponse) => setUserData(codeResponse),
+    onError: (error) => console.log("Login Failed:", error),
+  }); 
 
+  const failGoogle = async (message) => {
+    console.log(message)
+  }
+
+  const logout = () => {
+    googleLogout()
+    // LogoutUser()
+  }
+console.log(localStorage.getItem('token'))
   useEffect(() => {
-    const localToken = localStorage.getItem("token") ? true : false
+    const localToken = localStorage.getItem("token")
+      ? localStorage.getItem("token")
+      : false;
     if (!localToken) {
       navigate("/");
     }
-    const token = localStorage.getItem("token");
-    if (token) {
-      const user = jwt.decode(token);
-      setUserInfo(user)
-      setUserActive(true);
+    if (localToken) {
+      const user = jwt.decode(localToken);
       if (user) {
-        setUsername(user.name);
+        setUserData(user);
+        setUserPresent(true);
       }
       if (!user) {
-        setUserActive(false);
+        setUserPresent(false);
         return;
       }
     }
   }, [navigate]);
 
-  useEffect(() => {
-    if (googleUser) {
-      axios
-        .get(
-          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${googleUser.access_token}`,
-          {
-            headers: {
-              Authorization: `Bearer ${googleUser.access_token}`,
-              Accept: "application/json",
-            },
-          },
-        )
-        .then((res) => {
-          setUserActive(true)
-          setGoogleUser(res.data);
-          console.log(googleUser)
-          navigate('/order-coffee')
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [googleUser]);
-
-  
   return (
     <ThemeProvider theme={theme}>
       <Header title="Table Talk" theme={theme} />
-      {userActive ? (
-        <UserAuthenticatedComponent userData={userInfo} userName={userName} theme={theme} />
+      {userPresent ? (
+        <UserAuthenticatedComponent userData={userData} theme={theme} />
       ) : (
         <Grid container>
           <Image imgSrc={phone} alt="2000s cellphone" />
-          <LoginForm active={userActive} />
-          <GoogleLogin onClick={() => login()} />
+          <LoginForm />
+          <GoogleLogin onSuccess={handleGoogle} onError={failGoogle} />
+          {/* <Button onClick={logout}>Log out</Button> */}
           <Copyright sx={{ mt: 14 }} />
         </Grid>
       )}
     </ThemeProvider>
   );
-}
+};
 
 export default App;
