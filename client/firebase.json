@@ -17,6 +17,10 @@
             "value": "same-origin"
           },
           {
+            "key": "Cross-Origin-Allow-Popups",
+            "value": "same-origin"
+          },
+          {
             "key": "Access-Control-Allow-Origin",
             "value": "https://ikhofiphezulu.web.app/"
           },
