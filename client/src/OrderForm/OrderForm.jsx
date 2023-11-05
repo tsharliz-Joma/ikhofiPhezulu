@@ -21,9 +21,10 @@ import Box from "@mui/material/Box";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import "../App.css";
+import { json } from "react-router";
 
- const backEndUrl =
-   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/coffee";
+const backEndUrl =
+  "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/coffee";
 // const backEndUrl = "http://localhost:1969/api/coffee";
 
 const OrderForm = (props) => {
@@ -65,14 +66,18 @@ const OrderForm = (props) => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const googleToken = localStorage.getItem("googleToken");
     if (token) {
       const user = jwt.decode(token);
       setEmployeeName(user.name);
       setPhoneNumber(user.number);
-      if (!user) {
-        localStorage.removeItem("token");
-        console.log("cant find token");
-      }
+    } else if (googleToken) {
+      const jsonGoogleToken = JSON.parse(googleToken)
+      setEmployeeName(jsonGoogleToken.name);
+      // setPhoneNumber(jsonGoogleToken.number);
+    } else {
+      localStorage.removeItem("token");
+      console.log("cant find token");
     }
   }, []);
 

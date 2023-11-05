@@ -13,8 +13,11 @@ import Link from "@mui/material/Link";
 
 
 export const LogoutUser = () => {
-  if (localStorage.getItem("token")) {
-    localStorage.removeItem("token");
+  const localUser = localStorage.getItem("token") ? true : false
+  const googleUser = localStorage.getItem("googleToken") ? true : false
+  if (localUser || googleUser) {
+    localStorage.removeItem("token")
+    localStorage.removeItem("googleToken")
     window.location.reload();
     console.log("Logged out");
   }

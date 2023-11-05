@@ -14,11 +14,11 @@
         "headers": [
           {
             "key": "Cross-Origin-Opener-Policy",
-            "value": "same-origin-allow-pops"
+            "value": "same-origin"
           },
           {
             "key": "Access-Control-Allow-Origin",
-            "value": "https://ikhofiphezulu.web.app/"
+            "value": "https://ikhofiphezulu.web.app/ http://localhost:3000"
           },
           {
             "key": "Strict-Transport-Security",
