@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./LoginForm.css";
 // GOOGLE LOGIN
+import { GoogleLogin } from "@react-oauth/google";
 // Material UI
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
@@ -19,7 +20,7 @@ const backEndUserLogin =
 // const backEndUserLogin = "http://localhost:1969/api/login";
 
 const LoginForm = (props) => {
-  const { active } = props;
+  const { active, onSuccess, onError } = props;
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
@@ -51,12 +52,23 @@ const LoginForm = (props) => {
 
   return (
     <>
-      <Container maxWidth="xs" sx={{ marginTop: "-50px" }}>
+      <Container maxWidth="xs"sx={{ marginTop: "0px" }}>
         <CssBaseline />
-        <Typography component="h1" variant="h6" align="right">
-          <Avatar sx={{ bgcolor: "info.light", my: 0 }}></Avatar>
-          Sign In
-        </Typography>
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "center",
+          }}>
+          <Avatar
+            sx={{
+              bgcolor: "info.light",
+              mr: 2,
+            }}
+          />
+          <Typography>Sign In</Typography>
+        </Box>
         <Box
           sx={{
             marginTop: "0px",
@@ -104,6 +116,9 @@ const LoginForm = (props) => {
                   sx={{ fontSize: 16 }}>
                   Sign In
                 </Button>
+              </Grid>
+              <Grid item xs={6}>
+                <GoogleLogin onSuccess={onSuccess} onError={onError} />
               </Grid>
             </Grid>
             <Grid container>

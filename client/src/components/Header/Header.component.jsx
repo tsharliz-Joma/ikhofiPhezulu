@@ -1,6 +1,7 @@
 // @ts-nocheck
 import React from "react";
 import Wave from "react-wavify";
+import { Typography } from "@mui/material";
 import './Header.component.css'
 
 const Header = (props) => {
@@ -8,8 +9,8 @@ const Header = (props) => {
 
   const textStyles = {
     fontWeight: "bold",
-    paddingTop: "48px",
-    paddingBottom: "16px",
+    paddingTop: "35px",
+    paddingBottom: "20px",
     position: "relative",
     fontSize: "40px",
     color: "#000",
@@ -30,7 +31,7 @@ const Header = (props) => {
         paused={false}
         style={waveCustomStyles}
         options={{
-          height: 20,
+          height: 25,
           amplitude: 10,
           speed: 0.2,
           points: 3,

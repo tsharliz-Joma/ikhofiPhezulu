@@ -21,7 +21,6 @@ import Box from "@mui/material/Box";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import "../App.css";
-import { json } from "react-router";
 
 const backEndUrl =
   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/coffee";

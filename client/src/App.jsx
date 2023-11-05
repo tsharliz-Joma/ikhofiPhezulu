@@ -13,7 +13,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import "./App.css";
-import { ThemeProvider, createTheme, useTheme } from "@mui/material";
+import { Container, ThemeProvider, createTheme, useTheme } from "@mui/material";
 import { LogoutUser } from "./components/user-Authenticed-component/User.authenticated.component";
 import axios from "axios";
 
@@ -39,7 +39,7 @@ const App = (props) => {
   const [userPresent, setUserPresent] = useState(false);
   const theme = useTheme();
 
-  const handleSubmit = useGoogleLogin({
+  const handleGoogleLogin = useGoogleLogin({
     onSuccess: (response) => {
       axios
         .get(
@@ -87,15 +87,17 @@ const App = (props) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Header title="Table Talk" theme={theme} />
+      <Header title="Coffee up" theme={theme} />
       {userPresent ? (
         <UserAuthenticatedComponent userData={userData} theme={theme} />
       ) : (
-        <Grid container>
+        <Grid container >
           <Image imgSrc={phone} alt="2000s cellphone" />
-          <LoginForm />
-          <GoogleLogin onSuccess={handleSubmit} onError={handleGoogleError} />
-          <Copyright sx={{ mt: 14 }} />
+          <LoginForm
+            onSuccess={handleGoogleLogin}
+            onError={handleGoogleError}
+          />
+          <Copyright sx={{ position: 'absolute', bottom: '0px' }} />
         </Grid>
       )}
     </ThemeProvider>

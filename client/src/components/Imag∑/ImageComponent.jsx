@@ -1,26 +1,33 @@
 import React from "react";
-import Container from "react-bootstrap/Container";
+import { Container, Grid } from "@mui/material";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 const Image = (props) => {
-    const { imgSrc } = props
+  const { imgSrc } = props;
 
   const LogoStyles = {
-    position: 'relative',
-    top: '0px',
-    width: '45%',
-    height: 'auto',
+    position: "relative",
+    top: "0px",
+    maxWidth: "45%",
+    height: "auto",
   };
 
   return (
-    <Container fluid="xl" className="text-center">
-      <Row>
-        <Col md className="mx-auto">
-          <img style={LogoStyles} src={imgSrc} />
-        </Col>
-      </Row>
-    </Container>
+    <Grid
+      container
+      xs={12}
+      xl={12}
+      sx={{
+        textAlign: "center",
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+      }}>
+      <Grid item xs={12} xl={6}>
+        <img style={LogoStyles} src={imgSrc} />
+      </Grid>
+    </Grid>
   );
 };
 

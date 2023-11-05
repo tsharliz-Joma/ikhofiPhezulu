@@ -10,34 +10,6 @@
   overscroll-behavior: none;
 }
 
-/* Image 1 */
-#logo-image {
-  position: relative; 
-  top: 179px; 
-  left: 158px; 
-  width: 74px; 
-  height: 72px; 
-  border-radius: 0px; 
-}
-
-#CoffeeUp {
-  position: relative; 
-  top: 267px; 
-  left: 117px; 
-  font-family: DM Sans; 
-  font-size: 32px; 
-  font-weight: 700; 
-  line-height: 48px; 
-  color: #171A1FFF; 
-}
-
-.max-height {
-  position: absolute;
-  z-index: 1;
-  top: 0px;
-  min-height: 100vh;
-}
-
 .mocha {
     background-color: #6F4E37!important;
     color: #F2E2C5!important;
