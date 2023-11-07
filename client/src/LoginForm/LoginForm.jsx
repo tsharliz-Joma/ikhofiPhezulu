@@ -52,7 +52,7 @@ const LoginForm = (props) => {
 
   return (
     <>
-      <Container maxWidth="xs"sx={{ marginTop: "0px" }}>
+      <Container maxWidth="xs" sx={{ marginTop: "0px" }}>
         <CssBaseline />
         <Box
           sx={{
