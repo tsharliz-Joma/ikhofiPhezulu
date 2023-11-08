@@ -65,11 +65,12 @@ const UserAuthenticatedComponent = (props) => {
         </Grid>
         <Grid
           item
-          xs={4}
+          xs={6}
           md={6}
           lg={2}
           sx={{ position: "absolute", marginLeft: "5%", bottom: "-150%" }}>
           <Button
+          fullWidth
             variant="contained"
             sx={{ width: "100%" }}
             onClick={LogoutUser}>
