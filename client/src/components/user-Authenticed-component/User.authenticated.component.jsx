@@ -35,7 +35,7 @@ const UserAuthenticatedComponent = (props) => {
     <>
       <Box>
         <Grid container sx={{ justifyContent: 'center'}}>
-          <Grid item xs={12} sx={{ paddingTop: "50px"}}>
+          <Grid item xs={12} sx={{ paddingTop: "30px"}}>
             <Image
               style={imgStyles}
               imgSrc={character}
@@ -68,11 +68,11 @@ const UserAuthenticatedComponent = (props) => {
           xs={6}
           md={6}
           lg={2}
-          sx={{ position: "absolute", marginLeft: "5%", bottom: "-150%" }}>
+          sx={{ position: "absolute", margin: '5% 5%', bottom: "-150%" }}>
           <Button
           fullWidth
             variant="contained"
-            sx={{ width: "100%" }}
+            sx={{ width: "100%", margin: '15px 0px' }}
             onClick={LogoutUser}>
             <ArrowBackIosIcon />
             Sign Out

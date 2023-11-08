@@ -31,7 +31,7 @@ const Header = (props) => {
         paused={false}
         style={waveCustomStyles}
         options={{
-          height: 25,
+          height: 35,
           amplitude: 10,
           speed: 0.2,
           points: 3,
