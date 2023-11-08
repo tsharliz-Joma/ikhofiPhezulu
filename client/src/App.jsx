@@ -89,15 +89,17 @@ const App = (props) => {
     <ThemeProvider theme={theme}>
       <Header title="Coffee up" theme={theme} />
       {userPresent ? (
-        <UserAuthenticatedComponent userData={userData} theme={theme} />
+        <Grid Container sx={{ margin: '30px 0px'}}>
+          <UserAuthenticatedComponent userData={userData} theme={theme} />
+        </Grid>
       ) : (
-        <Grid container >
+        <Grid container>
           <Image imgSrc={phone} alt="2000s cellphone" />
           <LoginForm
             onSuccess={handleGoogleLogin}
             onError={handleGoogleError}
           />
-          <Copyright sx={{ position: 'absolute', bottom: '0px' }} />
+          <Copyright sx={{ position: "absolute", bottom: "-50px" }} />
         </Grid>
       )}
     </ThemeProvider>
