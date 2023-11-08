@@ -8,7 +8,7 @@ const Order = ({ socket }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Header title="What she order ?" theme={theme} />
+      <Header title="What she order?" theme={theme} />
       <OrderForm socket={socket} />
     </ThemeProvider>
   );

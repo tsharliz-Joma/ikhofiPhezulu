@@ -93,7 +93,7 @@ const App = (props) => {
           <UserAuthenticatedComponent userData={userData} theme={theme} />
         </Grid>
       ) : (
-        <Grid container>
+        <Grid container sx={{ overflow: 'hidden'}}>
           <Image imgSrc={phone} alt="2000s cellphone" />
           <LoginForm
             onSuccess={handleGoogleLogin}

@@ -1,31 +1,34 @@
 // @ts-nocheck
 import React from "react";
 import Wave from "react-wavify";
-import { Typography } from "@mui/material";
-import './Header.component.css'
+import { Typography, Box } from "@mui/material";
+import "./Header.component.css";
 
 const Header = (props) => {
-  const { title, theme } = props;
+  const { title, theme, fontSize } = props;
 
   const textStyles = {
     fontWeight: "bold",
     paddingTop: "35px",
     paddingBottom: "20px",
     position: "relative",
-    fontSize: "40px",
+    fontSize: "30px",
     color: "#000",
   };
 
   const waveCustomStyles = {
-      display: "flex",
-      top: '0px',
-      width: '100%',
-      transform: 'rotate(180deg)',
-      position: 'absolute',
+    display: "flex",
+    top: "0px",
+    width: "100%",
+    transform: "rotate(180deg)",
+    position: "absolute",
   };
 
   return (
-    <div id="header-container" className="col-12 text-center font-monospace">
+    <Box
+    fontFamily={theme.typography.fontFamily}
+      xs={12}
+      sx={{ textAlign: "center", padding: "35px 0px", fontWeight: "bold" }}>
       <Wave
         fill={theme.palette.primary.main}
         paused={false}
@@ -37,8 +40,10 @@ const Header = (props) => {
           points: 3,
         }}
       />
-      <p style={textStyles}>{title}</p>
-    </div>
+      <Typography position={"relative"} color={"#000"} variant="h3" >
+        {title}
+      </Typography>
+    </Box>
   );
 };
 

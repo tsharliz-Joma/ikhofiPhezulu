@@ -122,24 +122,28 @@ const OrderForm = (props) => {
               value={phoneNumber}
               sx={{ mb: 5 }}
             />
-            <FormControl fullWidth required sx={{ mt: 5 }}>
-              <InputLabel>Coffee</InputLabel>
-              <Select
-                labelId="coffee"
-                label="coffee"
-                name="coffee"
-                value={formData.coffee}
-                onChange={handleChange}>
-                <MenuItem value={"Flat White"}>Flat White</MenuItem>
-                <MenuItem value={"Latte"}>Latte</MenuItem>
-                <MenuItem value={"Cappuccino"}>Cappuccino</MenuItem>
-                <MenuItem value={"Espresso"}>Espresso</MenuItem>
-                <MenuItem value={"Double Espresso"}>Double Espresso</MenuItem>
-                <MenuItem value={"Long Black"}>Long Black</MenuItem>
-                <MenuItem value={"Macchiato"}>Macchiato</MenuItem>
-                <MenuItem value={"Long Macchiato"}>Long Macchiato</MenuItem>
-              </Select>
-            </FormControl>
+            <Box>
+              <Typography fontSize={20}>Coffee order</Typography>
+              <FormControl fullWidth required sx={{ mt: 1 }}>
+                <InputLabel>Coffee</InputLabel>
+                <Select
+                  labelId="coffee"
+                  label="coffee"
+                  name="coffee"
+                  value={formData.coffee}
+                  onChange={handleChange}>
+                  <MenuItem value={"Flat White"}>Flat White</MenuItem>
+                  <MenuItem value={"Latte"}>Latte</MenuItem>
+                  <MenuItem value={"Cappuccino"}>Cappuccino</MenuItem>
+                  <MenuItem value={"Espresso"}>Espresso</MenuItem>
+                  <MenuItem value={"Double Espresso"}>Double Espresso</MenuItem>
+                  <MenuItem value={"Long Black"}>Long Black</MenuItem>
+                  <MenuItem value={"Macchiato"}>Macchiato</MenuItem>
+                  <MenuItem value={"Long Macchiato"}>Long Macchiato</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+
             <FormControl fullWidth required sx={{ mt: 2 }}>
               <InputLabel>Size</InputLabel>
               <Select

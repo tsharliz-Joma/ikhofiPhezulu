@@ -45,7 +45,7 @@ const themeOptions = {
   },
   typography: {
     fontsize: 14,
-    
+    fontFamily: 'Jua'
   },
 };
 

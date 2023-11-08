@@ -16,8 +16,8 @@ const Image = (props) => {
   return (
     <Grid
       container
-      xs={12}
-      xl={12}
+      // xs={12}
+      // xl={12}
       sx={{
         textAlign: "center",
         width: "100%",
