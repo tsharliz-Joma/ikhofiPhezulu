@@ -5,16 +5,18 @@ import DialogueBox from "../../components/DialogueBox/DialogueBox";
 import Header from "../../components/Header/Header.component";
 // @ts-ignore
 import CoffeeItems from "../../JsonFiles/Coffee.json";
+import { Container, Box, useTheme, CssBaseline, Grid } from "@mui/material";
+
 
 const viewOrderUrl =
   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/view-orders";
 // const viewOrderUrl =
-  // "http://localhost:1969/api/view-orders";
+// "http://localhost:1969/api/view-orders";
 
 const deleteOrderUrl =
   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/sendCoffee";
 // const deleteOrderUrl =
-  // "http://localhost:1969/api/sendCoffee";
+// "http://localhost:1969/api/sendCoffee";
 
 const Dashboard = ({ socket }) => {
   const [orders, setOrders] = useState([]);
@@ -25,9 +27,14 @@ const Dashboard = ({ socket }) => {
   const [Person, setPerson] = useState("");
   const [Coffee, setCoffee] = useState("");
   const [inombolo, setInombolo] = useState("");
+  const [open, setOpen] = useState(false)
+  
+  const theme = useTheme();
 
   const displayOptions = (e) => {
     e.preventDefault();
+    // I can make this more concise by make a function that grabs these
+    // values, same as in the list component 
     setSelected(true);
     setSelectedCoffee(e.target.innerText);
     IsmJabana(e.target.innerText);
@@ -35,11 +42,12 @@ const Dashboard = ({ socket }) => {
     ShaySize(e.target.innerText);
     ShayLaban(e.target.innerText);
     sliceInombolo(e.target.innerText);
+    setOpen(true)
   };
 
   const sliceInombolo = (string) => {
     const split = string.split(" ");
-    const inombolo = split[split.length - 1]
+    const inombolo = split[split.length - 1];
     setInombolo(inombolo);
   };
 
@@ -89,11 +97,12 @@ const Dashboard = ({ socket }) => {
     return setSize(findMatches(string) || "Maafih Size");
   };
 
-  const cancelOrSend = (e) => {
+  const handleOrder = (e) => {
     e.preventDefault();
-    if (e.target.innerText === "Back") {
+    console.log(e.target.innerText)
+    if (e.target.innerText === "BACK") {
       cancel();
-    } else if (e.target.innerText === "Coffee Up") {
+    } else if (e.target.innerText === "COFFEE UP") {
       send();
     }
   };
@@ -122,10 +131,10 @@ const Dashboard = ({ socket }) => {
       coffeeName: Coffee,
       coffeeSize: Size,
       coffeeMilk: Milk,
-    }
+    };
     try {
       socket.emit("order complete", deleteCoffee);
-      axios.post(deleteOrderUrl, deleteCoffee)
+      axios.post(deleteOrderUrl, deleteCoffee);
       window.location.reload();
     } catch (error) {
       console.log(error);
@@ -161,28 +170,32 @@ const Dashboard = ({ socket }) => {
 
     return () => {
       socket.disconnect();
-    }
+    };
   }, [socket]);
-
 
   const handleScroll = (event) => {
     event.stopPropagation();
   };
 
+  const handleClose = () => {
+    setOpen(false)
+  }
+
   return (
-    <>
-      <div className="font-monospace text-left col-12 cream max-height" onScroll={handleScroll}>
-        <Header title="Dash" />
-          {orders.length !== 0 && (
-              <div className="col-12 mx-auto">
-                {selected && (
-                  <DialogueBox onClick={cancelOrSend} cDot={selectedCoffee} />
-                )}
-                <List list={orders} onClick={displayOptions} />
-              </div>
+    <Box>
+      <CssBaseline />
+      <Header title="Dash" theme={theme} />
+      {orders.length !== 0 && (
+        <Grid container xs={12}>
+          {selected && (
+            <DialogueBox handleOrder={handleOrder} open={open} onClose={handleClose} cDot={selectedCoffee} />
           )}
-      </div>
-    </>
+          <Grid container justifyContent="center" alignItems="center" >
+            <List list={orders} onClick={displayOptions} theme={theme} />
+          </Grid>
+        </Grid>
+      )}
+    </Box>
   );
 };
 

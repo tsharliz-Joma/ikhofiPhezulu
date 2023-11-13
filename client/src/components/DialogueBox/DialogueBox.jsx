@@ -1,33 +1,98 @@
 // @ts-nocheck
-import React from "react";
-import { Button } from "react-bootstrap";
-import '../../App.css'
+import React, { forwardRef } from "react";
+import {
+  Button,
+  Box,
+  Typography,
+  CssBaseline,
+  useTheme,
+  Grid,
+  Dialog,
+  DialogTitle,
+  List,
+  ListItem,
+  ListItemText,
+  Card,
+  Container,
+  Slide,
+  DialogContent,
+  DialogActions,
+} from "@mui/material";
 
-const DialogueBox = ({cDot, onClick}) => {
+import "../../App.css";
 
+const DialogueBox = (props) => {
+  const { onClose, selectedValue, open, handleOrder, cDot } = props;
 
-  const containerStyles = {
-    position: 'absolute',
-  }
+  const transition = forwardRef(function transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
 
+  const handleClose = () => {
+    onClose(selectedValue);
+  };
+
+  const sortOrder = (props) => {
+    let splitOrder = props.split("\n");
+    const cofObj = {
+      getKeys() {
+        return {
+          name: splitOrder[0],
+          size: splitOrder[1],
+          coffee: splitOrder[2],
+          milk: splitOrder[3],
+          number: splitOrder[4],
+        };
+      },
+    };
+    let res = cofObj.getKeys();
+    console.log(res);
+    return res;
+  };
+  var order = sortOrder(cDot);
   return (
-    <div style={containerStyles} className="container col-12 py-3">
-      <div className="richEspresso mx-auto col-12 text-center rounded">
-        <div className="">
-          <p className="cream d-inline-block border rounded p-2 fs-2 mt-5 col-10">
-            {cDot}
-          </p>
-        </div>
-        <div className="py-3">
-          <Button onClick={onClick} className="cream btn-lg mx-3">
-            Back
-          </Button>
-          <Button onClick={onClick} className="cream btn-lg mx-3">
-            Coffee Up
-          </Button>
-        </div>
-      </div>
-    </div>
+    <Dialog
+      onClose={handleClose}
+      open={open}
+      TransitionComponent={transition}
+      maxWidth={"md"}
+      fullWidth>
+      <DialogTitle textAlign={"center"} sx={{ paddingTop: '30px'}}>
+        <Typography variant="h3">Complete Order ?</Typography>
+      </DialogTitle>
+      <DialogContent>
+        <Card variant="outlined" sx={{ width: "90%", margin: "0 auto", padding: '20px' }}>
+          <Typography variant="h3">{order.name}</Typography>
+          <Container>
+            <Typography variant="h4" paddingY="10px">
+              - Size: {order.size}
+            </Typography>
+            <Typography variant="h4" paddingY="10px">
+              - Milk: {order.milk}
+            </Typography>
+            <Typography variant="h4" paddingY="10px">
+              - Coffee: {order.coffee}
+            </Typography>
+          </Container>
+        </Card>
+      </DialogContent>
+      <DialogActions sx={{ padding: '30px'}}>
+        <Button
+          sx={{ fontSize: "32px", margin: "5px" }}
+          variant="contained"
+          onClick={handleOrder}
+          fullWidth>
+          Back
+        </Button>
+        <Button
+          sx={{ fontSize: "32px", margin: "5px" }}
+          variant="contained"
+          onClick={handleOrder}
+          fullWidth>
+          Coffee up
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 
