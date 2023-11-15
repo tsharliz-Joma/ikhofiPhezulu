@@ -9,8 +9,13 @@ const SignUpPage = () => {
 
   return (
     <Box>
-    <CssBaseline />
-      <Header title="Late Registration" theme={theme} fontSize={32} />
+      <CssBaseline />
+      <Header
+        title="Late Registration"
+        theme={theme}
+        fontSize={32}
+        color={theme.palette.primary.main}
+      />
       <Container>
         <Box
           sx={{

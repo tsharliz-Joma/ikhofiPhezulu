@@ -7,7 +7,6 @@ import Header from "../../components/Header/Header.component";
 import CoffeeItems from "../../JsonFiles/Coffee.json";
 import { Container, Box, useTheme, CssBaseline, Grid } from "@mui/material";
 
-
 const viewOrderUrl =
   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/view-orders";
 // const viewOrderUrl =
@@ -27,79 +26,27 @@ const Dashboard = ({ socket }) => {
   const [Person, setPerson] = useState("");
   const [Coffee, setCoffee] = useState("");
   const [inombolo, setInombolo] = useState("");
-  const [open, setOpen] = useState(false)
-  
+  const [open, setOpen] = useState(false);
+
   const theme = useTheme();
 
   const displayOptions = (e) => {
     e.preventDefault();
-    // I can make this more concise by make a function that grabs these
-    // values, same as in the list component 
-    setSelected(true);
+    let toArray = e.target.innerText.split("\n");
+    setPerson(toArray[0]);
+    setCoffee(toArray[2] || "Maafih Jabana");
+    setSize(toArray[1])
+    setMilk(toArray[3])
+    setInombolo(toArray[4])
     setSelectedCoffee(e.target.innerText);
-    IsmJabana(e.target.innerText);
-    IsmaZol(e.target.innerText);
-    ShaySize(e.target.innerText);
-    ShayLaban(e.target.innerText);
-    sliceInombolo(e.target.innerText);
-    setOpen(true)
+    setSelected(true);
+    setOpen(true);
   };
 
-  const sliceInombolo = (string) => {
-    const split = string.split(" ");
-    const inombolo = split[split.length - 1];
-    setInombolo(inombolo);
-  };
-
-  const IsmaZol = (string) => {
-    const name = string.split(" ")[0];
-    return setPerson(name);
-  };
-
-  const IsmJabana = (string) => {
-    const regexPatterns = CoffeeItems.coffees.map(
-      (coffeeName) => new RegExp(`\\b${coffeeName}\\b`, "i"),
-    );
-    const findMatches = (str) => {
-      const matches = regexPatterns
-        .map((pattern) => str.match(pattern))
-        .filter(Boolean);
-      return matches.length > 0 ? matches[0][0] : null;
-    };
-    return setCoffee(findMatches(string) || "Maafih Jabana");
-  };
-
-  const ShayLaban = (string) => {
-    const regexPatterns = CoffeeItems.milks.map(
-      (milkName) => new RegExp(`\\b${milkName}\\b`, "i"),
-    );
-    const findMatches = (str) => {
-      const matches = regexPatterns
-        .map((pattern) => str.match(pattern))
-        .filter(Boolean);
-      return matches.length > 0 ? matches[0][0] : null;
-    };
-    return setMilk(findMatches(string) || "Maafih Laban");
-  };
-
-  const ShaySize = (string) => {
-    const regexPatterns = CoffeeItems.sizes.map(
-      (sizeName) => new RegExp(`\\b${sizeName}\\b`, "i"),
-    );
-
-    const findMatches = (str) => {
-      const matches = regexPatterns
-        .map((pattern) => str.match(pattern))
-        .filter(Boolean);
-      return matches.length > 0 ? matches[0][0] : null;
-    };
-
-    return setSize(findMatches(string) || "Maafih Size");
-  };
-
+  
   const handleOrder = (e) => {
     e.preventDefault();
-    console.log(e.target.innerText)
+    console.log(e.target.innerText);
     if (e.target.innerText === "BACK") {
       cancel();
     } else if (e.target.innerText === "COFFEE UP") {
@@ -156,6 +103,7 @@ const Dashboard = ({ socket }) => {
           coffeeOrders = response.data.orders;
         }
         setOrders(coffeeOrders);
+        // console.log(coffeeOrders)
       });
     } catch (error) {
       console.log(error);
@@ -178,21 +126,29 @@ const Dashboard = ({ socket }) => {
   };
 
   const handleClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   return (
     <Box>
       <CssBaseline />
-      <Header title="Dash" theme={theme} />
+      <Header
+        title="Dashboard"
+        theme={theme}
+        color={theme.palette.primary.white}
+      />
       {orders.length !== 0 && (
-        <Grid container xs={12}>
+        <Grid container justifyContent={"center"} alignItems={"center"}>
           {selected && (
-            <DialogueBox handleOrder={handleOrder} open={open} onClose={handleClose} cDot={selectedCoffee} />
+            <DialogueBox
+              handleOrder={handleOrder}
+              open={open}
+              onClose={handleClose}
+              cDot={selectedCoffee}
+            />
           )}
-          <Grid container justifyContent="center" alignItems="center" >
-            <List list={orders} onClick={displayOptions} theme={theme} />
-          </Grid>
+
+          <List list={orders} onClick={displayOptions} theme={theme} />
         </Grid>
       )}
     </Box>

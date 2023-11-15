@@ -57,26 +57,30 @@ const DialogueBox = (props) => {
       TransitionComponent={transition}
       maxWidth={"md"}
       fullWidth>
-      <DialogTitle textAlign={"center"} sx={{ paddingTop: '30px'}}>
-        <Typography variant="h3">Complete Order ?</Typography>
+      <DialogTitle textAlign={"center"} sx={{ paddingTop: "30px" }}>
+        <Typography fontSize={"40px"} fontWeight={"500"}>
+          Complete Order ?
+        </Typography>
       </DialogTitle>
       <DialogContent>
-        <Card variant="outlined" sx={{ width: "90%", margin: "0 auto", padding: '20px' }}>
-          <Typography variant="h3">{order.name}</Typography>
+        <Card
+          variant="outlined"
+          sx={{ width: "90%", margin: "0 auto", padding: "20px" }}>
+          <Typography fontSize={"40px"}>{order.name}</Typography>
           <Container>
-            <Typography variant="h4" paddingY="10px">
-              - Size: {order.size}
+            <Typography sx={{ fontSize: "2em", paddingY: "10px" }}>
+              Size: {order.size}
             </Typography>
-            <Typography variant="h4" paddingY="10px">
-              - Milk: {order.milk}
+            <Typography sx={{ fontSize: "2em", paddingY: "10px" }}>
+              Milk: {order.milk}
             </Typography>
-            <Typography variant="h4" paddingY="10px">
-              - Coffee: {order.coffee}
+            <Typography sx={{ fontSize: "2em", paddingY: "10px" }}>
+              Coffee: {order.coffee}
             </Typography>
           </Container>
         </Card>
       </DialogContent>
-      <DialogActions sx={{ padding: '30px'}}>
+      <DialogActions sx={{ padding: "30px" }}>
         <Button
           sx={{ fontSize: "32px", margin: "5px" }}
           variant="contained"

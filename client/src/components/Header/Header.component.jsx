@@ -5,7 +5,7 @@ import { Typography, Box } from "@mui/material";
 import "./Header.component.css";
 
 const Header = (props) => {
-  const { title, theme, fontSize } = props;
+  const { title, theme, fontSize, color } = props;
 
   const textStyles = {
     fontWeight: "bold",
@@ -30,17 +30,17 @@ const Header = (props) => {
       xs={12}
       sx={{ textAlign: "center", padding: "35px 0px", fontWeight: "bold" }}>
       <Wave
-        fill={theme.palette.primary.main}
+        fill={color}
         paused={false}
         style={waveCustomStyles}
         options={{
-          height: 35,
+          height: 3,
           amplitude: 10,
           speed: 0.2,
           points: 3,
         }}
       />
-      <Typography position={"relative"} color={"#000"} variant="h3" >
+      <Typography sx={{ position:'relative', color:'#000', fontWeight: '700', fontSize: '4em'}}>
         {title}
       </Typography>
     </Box>

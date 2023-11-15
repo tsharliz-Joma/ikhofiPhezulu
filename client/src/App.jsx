@@ -87,7 +87,7 @@ const App = (props) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Header title="Coffee up" theme={theme} />
+      <Header title="Coffee up" theme={theme} color={theme.palette.primary.main} />
       {userPresent ? (
         <Grid Container sx={{ margin: '30px 0px'}}>
           <UserAuthenticatedComponent userData={userData} theme={theme} />

@@ -9,10 +9,10 @@ import AdminLogin from "./Admin/AdminLogin";
 import Dashboard from "./Pages/Dashbaord/Dashboard";
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import "bootstrap/dist/css/bootstrap.min.css";
-// import "@fontsource/roboto/300.css";
-// import "@fontsource/roboto/400.css";
-// import "@fontsource/roboto/500.css";
-// import "@fontsource/roboto/700.css";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 import * as io from "socket.io-client";
 // import LoginForm from "./LoginForm/LoginForm";
 import SignUpPage from "./SignupForm/SignUp";
@@ -31,6 +31,7 @@ const themeOptions = {
       main: "#f2e2c5",
       light: "rgb(242, 171, 96)",
       dark: "rgb(167, 105, 39)",
+      white: "#FFF"
     },
     secondary: {
       main: "#ef9739",
@@ -45,7 +46,7 @@ const themeOptions = {
   },
   typography: {
     fontsize: 14,
-    fontFamily: 'Jua'
+    fontFamily: "IBM Plex Mono",
   },
 };
 
