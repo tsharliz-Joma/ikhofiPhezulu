@@ -47,16 +47,17 @@ const OrderForm = (props) => {
   const handleCoffeeSubmit = async (e) => {
     e.preventDefault();
     const newOrder = {
-      name: formData.name,
+      name: employeeName,
       number: formData.number,
       coffeeName: formData.coffee,
       coffeeMilk: formData.coffeeMilk,
       coffeeSize: formData.coffeeSize,
       coffeeSugar: formData.coffeeSugar,
     };
+    
     try {
       socket.emit("new order", newOrder);
-      const result = await axios.post(backEndUrl, newOrder);
+      const result = await axios.post(backEndUrl, newOrder).then(window.location.reload())
       return result;
     } catch (error) {
       console.log(error);
@@ -69,6 +70,7 @@ const OrderForm = (props) => {
     if (token) {
       const user = jwt.decode(token);
       setEmployeeName(user.name);
+      formData.number = user.number;
       setPhoneNumber(user.number);
     } else if (googleToken) {
       const jsonGoogleToken = JSON.parse(googleToken)
@@ -119,7 +121,7 @@ const OrderForm = (props) => {
               autoComplete="number"
               autoFocus
               onChange={handleChange}
-              value={phoneNumber}
+              value={formData.number}
               sx={{ mb: 5 }}
             />
             <Box>
