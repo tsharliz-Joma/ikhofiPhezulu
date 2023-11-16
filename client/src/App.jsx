@@ -7,7 +7,7 @@ import UserAuthenticatedComponent from "./components/user-Authenticed-component/
 import Image from "./components/Imag∑/ImageComponent";
 import phone from "./images/phone.png";
 // GOOGLE LOGIN
-import { GoogleLogin, googleLogout, useGoogleLogin } from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
 // MATERIAL UI
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -89,7 +89,7 @@ const App = (props) => {
     <ThemeProvider theme={theme}>
       <Header title="Coffee up" theme={theme} color={theme.palette.primary.main} />
       {userPresent ? (
-        <Grid Container sx={{ margin: '30px 0px'}}>
+        <Grid container sx={{ margin: '30px 0px'}}>
           <UserAuthenticatedComponent userData={userData} theme={theme} />
         </Grid>
       ) : (

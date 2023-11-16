@@ -41,10 +41,10 @@ const UserAuthenticatedComponent = (props) => {
               imgSrc={character}
               alt="user-profile-pic"
             />
-            {userData.name}
+            
           </Grid>
           <Grid item xs={12} >
-            {/* <Typography textAlign={'center'}>{userName}</Typography> */}
+            <Typography textAlign={'center'}>{userData.name}</Typography>
           </Grid>
         </Grid>
       </Box>

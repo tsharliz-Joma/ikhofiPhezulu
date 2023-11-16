@@ -1,8 +1,7 @@
 import React from "react";
 import SignUpForm from "./SignUpForm";
 import Header from "../components/Header/Header.component";
-import { Box, CssBaseline, useTheme } from "@mui/material";
-import { Container } from "react-bootstrap";
+import { Box, CssBaseline, useTheme,Container } from "@mui/material";
 
 const SignUpPage = () => {
   const theme = useTheme();
