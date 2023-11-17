@@ -29,7 +29,8 @@ const SignUpPage = () => {
             padding: "25px 0",
             fontFamily: "monospace",
           }}>
-          Sign up to Table talk
+          
+          
         </Box>
       </Container>
       <SignUpForm />

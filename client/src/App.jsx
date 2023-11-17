@@ -87,19 +87,30 @@ const App = (props) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Header title="Coffee up" theme={theme} color={theme.palette.primary.main} />
+      <Header
+        title="Coffee up"
+        theme={theme}
+        color={theme.palette.primary.main}
+      />
       {userPresent ? (
-        <Grid container sx={{ margin: '30px 0px'}}>
+        <Grid container sx={{ margin: "30px 0px" }}>
           <UserAuthenticatedComponent userData={userData} theme={theme} />
         </Grid>
       ) : (
-        <Grid container sx={{ overflow: 'hidden'}}>
+        <Grid container sx={{ overflow: "hidden" }}>
           <Image imgSrc={phone} alt="2000s cellphone" />
           <LoginForm
             onSuccess={handleGoogleLogin}
             onError={handleGoogleError}
           />
-          <Copyright sx={{ position: "absolute", bottom: "-50px" }} />
+          <Copyright
+            sx={{
+              position: "absolute",
+              bottom: "10px",
+              left: "10px",
+              fontSize: { xs: "10px", md: "12px", lg: "12px" },
+            }}
+          />
         </Grid>
       )}
     </ThemeProvider>

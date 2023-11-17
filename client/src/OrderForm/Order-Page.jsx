@@ -9,7 +9,7 @@ const Order = ({ socket }) => {
   return (
     <ThemeProvider theme={theme}>
       <Header
-        title="What she order?"
+        title="Order"
         theme={theme}
         color={theme.palette.primary.main}
       />

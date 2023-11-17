@@ -26,7 +26,7 @@ const Header = (props) => {
 
   return (
     <Box
-    fontFamily={theme.typography.fontFamily}
+      fontFamily={theme.typography.fontFamily}
       xs={12}
       sx={{ textAlign: "center", padding: "35px 0px", fontWeight: "bold" }}>
       <Wave
@@ -40,7 +40,13 @@ const Header = (props) => {
           points: 3,
         }}
       />
-      <Typography sx={{ position:'relative', color:'#000', fontWeight: '700', fontSize: '4em'}}>
+      <Typography
+        sx={{
+          position: "relative",
+          color: "#000",
+          fontWeight: "700",
+          fontSize: { xs: "3em", md: "3.5em", lg: "4em" },
+        }}>
         {title}
       </Typography>
     </Box>

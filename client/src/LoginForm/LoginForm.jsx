@@ -52,7 +52,7 @@ const LoginForm = (props) => {
 
   return (
     <>
-      <Container maxWidth="xs" sx={{ marginTop: "0px" }}>
+      <Container maxWidth="sm" sx={{ marginTop: "0px" }}>
         <CssBaseline />
         <Box
           sx={{
@@ -123,23 +123,23 @@ const LoginForm = (props) => {
             </Grid>
             <Grid container>
               <Grid item xs>
-                <Typography color={"info.light"}>
-                  <Link
-                    href="#"
-                    color="inherit"
-                    underline={"hover"}
-                    variant="body2">
+                <Typography
+                  sx={{
+                    color: "info.light",
+                    fontSize: { xs: "12px", md: "16px" },
+                  }}>
+                  <Link href="#" color="inherit" underline={"hover"}>
                     Forgot password?
                   </Link>
                 </Typography>
               </Grid>
               <Grid item>
-                <Typography color={"info.light"}>
-                  <Link
-                    href="/register"
-                    color={"inherit"}
-                    underline={"hover"}
-                    variant="body2">
+                <Typography
+                  sx={{
+                    color: "info.light",
+                    fontSize: { xs: "12px", md: "16px" },
+                  }}>
+                  <Link href="/register" color={"inherit"} underline={"hover"}>
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Typography>

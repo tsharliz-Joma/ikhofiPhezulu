@@ -4,20 +4,19 @@ import character from "../../images/character.png";
 import Image from "../Imag∑/ImageComponent";
 import "../../App.css";
 // Material UI
-import { Box, CssBaseline, Typography} from "@mui/material";
+import { Box, CssBaseline, Typography } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 
-
 export const LogoutUser = () => {
-  const localUser = localStorage.getItem("token") ? true : false
-  const googleUser = localStorage.getItem("googleToken") ? true : false
+  const localUser = localStorage.getItem("token") ? true : false;
+  const googleUser = localStorage.getItem("googleToken") ? true : false;
   if (localUser || googleUser) {
-    localStorage.removeItem("token")
-    localStorage.removeItem("googleToken")
+    localStorage.removeItem("token");
+    localStorage.removeItem("googleToken");
     window.location.reload();
     console.log("Logged out");
   }
@@ -26,53 +25,67 @@ export const LogoutUser = () => {
 const UserAuthenticatedComponent = (props) => {
   const { userData } = props;
   const imgStyles = {
-    maxWidth: "200px",
-    maxHeight: "200px",
+    maxWidth: "700px",
+    maxHeight: "auto",
     borderRadius: "10%",
   };
 
   return (
     <>
-      <Box>
-        <Grid container sx={{ justifyContent: 'center'}}>
-          <Grid item xs={12} sx={{ paddingTop: "30px"}}>
+      <Grid container sx={{ justifyContent: { xs: "center" }, paddingTop: { lg: '25%'} }}>
+        <Grid item xs={12}>
+          <Grid
+            item
+            xs={12}
+            lg={10}
+            sx={{ margin: "0 auto" }}>
             <Image
               style={imgStyles}
               imgSrc={character}
               alt="user-profile-pic"
             />
-            
-          </Grid>
-          <Grid item xs={12} >
-            <Typography textAlign={'center'}>{userData.name}</Typography>
           </Grid>
         </Grid>
-      </Box>
+        <Grid item xs={12}>
+          <Grid item xs={12} md={6} lg={6} mt={3} sx={{ margin: "0 auto" }}>
+            <Typography sx={{ fontSize: "32px", textAlign: "center" }}>
+              {userData.name}
+            </Typography>
+          </Grid>
+        </Grid>
+      </Grid>
 
       <Grid
         container
         spacing={2}
         align="center"
-        sx={{ position: "absolute", bottom: "20%" }}>
+        sx={{ position: "absolute", bottom: "10%" }}>
         <CssBaseline />
 
-        <Grid item xs={12} sx={{ mb: 5, alignItems: 'center', justifyContent: 'center' }}>
+        <Grid
+          item
+          xs={12}
+          sx={{ mb: 5, alignItems: "center", justifyContent: "center" }}>
           <Link href="/order-coffee">
-            <Button variant="contained" sx={{ fontSize: "16px" }}>
-              Order Coffee <ArrowForwardIosIcon sx={{ ml: 1, fontSize: '25px' }} />
+            <Button
+              variant="contained"
+              sx={{ fontSize: { xs: "20px", md: "27px", lg: "25px" } }}>
+              Order Coffee{" "}
+              <ArrowForwardIosIcon sx={{ ml: 1, fontSize: "25px" }} />
             </Button>
           </Link>
         </Grid>
+
         <Grid
           item
           xs={6}
           md={6}
-          lg={2}
-          sx={{ position: "absolute", margin: '5% 5%', bottom: "-150%" }}>
+          lg={4}
+          sx={{ position: "absolute", margin: "5% 5%", bottom: "-150%" }}>
           <Button
-          fullWidth
+            fullWidth
             variant="contained"
-            sx={{ width: "100%", margin: '15px 0px' }}
+            sx={{ width: "100%", margin: "15px 0px" }}
             onClick={LogoutUser}>
             <ArrowBackIosIcon />
             Sign Out
