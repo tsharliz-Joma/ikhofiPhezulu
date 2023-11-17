@@ -28,7 +28,7 @@ const Header = (props) => {
     <Box
       fontFamily={theme.typography.fontFamily}
       xs={12}
-      sx={{ textAlign: "center", padding: "35px 0px", fontWeight: "bold" }}>
+      sx={{ textAlign: "center", padding: { xs: "45px 0px", md: '35px 0px'}, fontWeight: "bold" }}>
       <Wave
         fill={color}
         paused={false}
