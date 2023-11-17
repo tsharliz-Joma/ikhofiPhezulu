@@ -85,7 +85,7 @@ const LoginForm = (props) => {
           <Box
             component="form"
             onSubmit={handleLogin}
-            sx={{ mt: 1, width: "100%" }}>
+            sx={{ mt:{ lg: 3 , xs: 1 }, width: "100%" }}>
             <TextField
               margin="normal"
               required
@@ -95,6 +95,7 @@ const LoginForm = (props) => {
               name="email"
               autoComplete="email"
               autoFocus
+              sx={{}}
             />
             <TextField
               margin="normal"
@@ -112,7 +113,7 @@ const LoginForm = (props) => {
               }
               label="Remember me"
             />
-            <Grid container spacing={2} sx={{ my: 2 }}>
+            <Grid container spacing={2} sx={{ my: 3 }}>
               <Grid item xs={6}>
                 <Button
                   type="submit"
