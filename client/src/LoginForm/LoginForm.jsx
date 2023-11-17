@@ -64,10 +64,15 @@ const LoginForm = (props) => {
           <Avatar
             sx={{
               bgcolor: "info.light",
+
               mr: 2,
+              width: { xs: "25px", lg: "50px" },
+              height: { xs: "25px", lg: "50px" },
             }}
           />
-          <Typography>Sign In</Typography>
+          <Typography sx={{ fontSize: { sm: "12px", md: "16px", lg: "26px" } }}>
+            Sign In
+          </Typography>
         </Box>
         <Box
           sx={{
