@@ -1,7 +1,6 @@
 import React from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import "./List.css";
-import { Container } from "react-bootstrap";
 
 const List = (props) => {
   const { list, onClick, theme } = props;
@@ -19,7 +18,7 @@ const List = (props) => {
         lg={4}
         md={6}
         xs={11}
-        sx={{ fontSize: { md: "30px", xs: "20px" }, fontWeight: 500 }}>
+        sx={{ fontSize: { md: "25px", xs: "20px" }, fontWeight: 500 }}>
         <Box
           sx={{
             padding: { xs: "10px" },
