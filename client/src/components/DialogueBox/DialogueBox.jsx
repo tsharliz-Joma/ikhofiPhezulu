@@ -49,6 +49,7 @@ const DialogueBox = (props) => {
     console.log(res);
     return res;
   };
+
   var order = sortOrder(cDot);
   return (
     <Dialog
@@ -57,8 +58,14 @@ const DialogueBox = (props) => {
       TransitionComponent={transition}
       maxWidth={"md"}
       fullWidth>
-      <DialogTitle textAlign={"center"} sx={{ paddingTop: "30px" }}>
-        <Typography fontSize={"40px"} fontWeight={"500"}>
+      <DialogTitle
+        textAlign={"center"}
+        sx={{ paddingTop: { lg: "30px" }, textAlign: "center" }}>
+        <Typography
+          sx={{
+            fontSize: { xs: "20px", md: "30px", lg: "40px" },
+            fontWeight: 500,
+          }}>
           Complete Order ?
         </Typography>
       </DialogTitle>
@@ -66,30 +73,50 @@ const DialogueBox = (props) => {
         <Card
           variant="outlined"
           sx={{ width: "90%", margin: "0 auto", padding: "20px" }}>
-          <Typography fontSize={"40px"}>{order.name}</Typography>
-          <Container>
-            <Typography sx={{ fontSize: "2em", paddingY: "10px" }}>
+          <Typography sx={{ fontSize: { xs: "16px", md: "20px", lg: "2em" }, textAlign: 'center' }}>
+            {order.name}
+          </Typography>
+         
+            <Typography
+              sx={{
+                fontSize: { xs: "16px", md: "20px", lg: "2em" },
+                paddingY: "15px",
+              }}>
               Size: {order.size}
             </Typography>
-            <Typography sx={{ fontSize: "2em", paddingY: "10px" }}>
+            <Typography
+              sx={{
+                fontSize: { xs: "16px", md: "20px", lg: "2em" },
+                paddingY: "15px",
+              }}>
               Milk: {order.milk}
             </Typography>
-            <Typography sx={{ fontSize: "2em", paddingY: "10px" }}>
+            <Typography
+              sx={{
+                fontSize: { xs: "16px", md: "20px", lg: "2em" },
+                paddingY: "15px",
+              }}>
               Coffee: {order.coffee}
             </Typography>
-          </Container>
+         
         </Card>
       </DialogContent>
-      <DialogActions sx={{ padding: "30px" }}>
+      <DialogActions sx={{ padding: { lg: "30px" , xs: '10px'} }}>
         <Button
-          sx={{ fontSize: "32px", margin: "5px" }}
+          sx={{
+            fontSize: { xs: "14px", md: "16px", lg: "32px" },
+            margin: "5px",
+          }}
           variant="contained"
           onClick={handleOrder}
           fullWidth>
           Back
         </Button>
         <Button
-          sx={{ fontSize: "32px", margin: "5px" }}
+          sx={{
+            fontSize: { xs: "14px", md: "16px", lg: "32px" },
+            margin: "5px",
+          }}
           variant="contained"
           onClick={handleOrder}
           fullWidth>

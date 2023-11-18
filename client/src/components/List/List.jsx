@@ -1,15 +1,7 @@
 import React from "react";
-import {
-  Box,
-  CssBaseline,
-  ThemeProvider,
-  useTheme,
-  Button,
-  Grid,
-  Typography,
-} from "@mui/material";
-import { makeStyles } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import "./List.css";
+import { Container } from "react-bootstrap";
 
 const List = (props) => {
   const { list, onClick, theme } = props;
@@ -26,11 +18,11 @@ const List = (props) => {
         onClick={onClick}
         lg={4}
         md={6}
-        xs={10}
-        sx={{ fontSize: { md: "48px", xs: "32px" }, fontWeight: 500 }}>
+        xs={11}
+        sx={{ fontSize: { md: "30px", xs: "20px" }, fontWeight: 500 }}>
         <Box
           sx={{
-            padding: { xs: "20px" },
+            padding: { xs: "10px" },
             bgcolor: "primary.white",
             color: "#000",
           }}>
