@@ -12,7 +12,7 @@ const SignUpPage = () => {
       <Header
         title="Late Registration"
         theme={theme}
-        fontSize={32}
+        fontSize={36}
         color={theme.palette.primary.main}
       />
       <Container>
@@ -30,7 +30,7 @@ const SignUpPage = () => {
             fontFamily: "monospace",
           }}>
           
-          
+
         </Box>
       </Container>
       <SignUpForm />

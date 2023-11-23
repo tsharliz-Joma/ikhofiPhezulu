@@ -91,13 +91,14 @@ const App = (props) => {
         title="Coffee up"
         theme={theme}
         color={theme.palette.primary.main}
+        fontSize={42}
       />
       {userPresent ? (
-        <Grid container sx={{ margin: "30px 0px" }}>
+        <Grid container sx={{ margin: "0px 0px" }}>
           <UserAuthenticatedComponent userData={userData} theme={theme} />
         </Grid>
       ) : (
-        <Grid container sx={{ overflow: "hidden" }}>
+        <Grid container sx={{ overflow: "hidden", padding: "0px 0px 0px 0px", height: '100%' }}>
           <Image imgSrc={phone} alt="2000s cellphone" />
           <LoginForm
             onSuccess={handleGoogleLogin}
@@ -105,7 +106,7 @@ const App = (props) => {
           />
           <Copyright
             sx={{
-              position: "absolute",
+              position: "relative",
               bottom: "10px",
               left: "10px",
               fontSize: { xs: "10px", md: "12px", lg: "12px" },

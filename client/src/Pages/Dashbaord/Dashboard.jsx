@@ -35,15 +35,14 @@ const Dashboard = ({ socket }) => {
     let toArray = e.target.innerText.split("\n");
     setPerson(toArray[0]);
     setCoffee(toArray[2] || "Maafih Jabana");
-    setSize(toArray[1])
-    setMilk(toArray[3])
-    setInombolo(toArray[4])
+    setSize(toArray[1]);
+    setMilk(toArray[3]);
+    setInombolo(toArray[4]);
     setSelectedCoffee(e.target.innerText);
     setSelected(true);
     setOpen(true);
   };
 
-  
   const handleOrder = (e) => {
     e.preventDefault();
     console.log(e.target.innerText);
@@ -136,12 +135,13 @@ const Dashboard = ({ socket }) => {
         title="Dashboard"
         theme={theme}
         color={theme.palette.primary.white}
+        fontSize={42}
       />
       {orders.length !== 0 && (
-        <Grid container justifyContent={"center"} alignItems={"center"}>
+        <Grid container sx={{ justifyContent: "center", alignItems: "center", margin: '7.5% 0%' }}>
           {selected && (
             <DialogueBox
-              handleOrder={handleOrder}
+              handleOrder={handleOrder}x
               open={open}
               onClose={handleClose}
               cDot={selectedCoffee}

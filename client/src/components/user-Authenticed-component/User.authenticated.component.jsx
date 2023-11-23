@@ -32,13 +32,16 @@ const UserAuthenticatedComponent = (props) => {
 
   return (
     <>
-      <Grid container sx={{ justifyContent: { xs: "center" }, paddingTop: { lg: '25%'} }}>
+      <CssBaseline />
+      <Grid
+        container
+        sx={{
+          alignItems: "center",
+          justifyContent: { xs: "center" },
+          paddingTop: { lg: "25%" },
+        }}>
         <Grid item xs={12}>
-          <Grid
-            item
-            xs={12}
-            lg={10}
-            sx={{ margin: "0 auto" }}>
+          <Grid item xs={12} lg={10} sx={{ margin: { xs: "100px auto" } }}>
             <Image
               style={imgStyles}
               imgSrc={character}
@@ -47,46 +50,39 @@ const UserAuthenticatedComponent = (props) => {
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          <Grid item xs={12} md={6} lg={6} mt={3} sx={{ margin: "0 auto" }}>
+          <Grid item xs={12} md={6} lg={6} sx={{ margin: "0 auto" }}>
             <Typography sx={{ fontSize: "32px", textAlign: "center" }}>
               {userData.name}
             </Typography>
           </Grid>
         </Grid>
       </Grid>
-
       <Grid
         container
         spacing={2}
         align="center"
-        sx={{ position: "absolute", bottom: "10%" }}>
-        <CssBaseline />
-
-        <Grid
-          item
-          xs={12}
-          sx={{ mb: 5, alignItems: "center", justifyContent: "center" }}>
+        sx={{
+          position: "absolute",
+          bottom: "0px",
+          padding: "0px 0px 50px 0px",
+        }}>
+        <Grid item xs={12} sx={{ margin: "0px 0px 0px 0px" }}>
           <Link href="/order-coffee">
             <Button
               variant="contained"
-              sx={{ fontSize: { xs: "20px", md: "27px", lg: "25px" } }}>
+              sx={{ fontSize: { xs: "16px", md: "27px", lg: "25px" } }}>
               Order Coffee{" "}
               <ArrowForwardIosIcon sx={{ ml: 1, fontSize: "25px" }} />
             </Button>
           </Link>
         </Grid>
-
         <Grid
           item
-          xs={6}
+          xs={12}
           md={6}
-          lg={4}
-          sx={{ position: "absolute", margin: "5% 5%", bottom: "-150%" }}>
-          <Button
-            fullWidth
-            variant="contained"
-            sx={{ width: "100%", margin: "15px 0px" }}
-            onClick={LogoutUser}>
+          lg={2}
+          sx={{ margin: "5% 5%", bottom: "0px" }}>
+          <Button fullWidth variant="contained" sx={{}} onClick={LogoutUser}>
             <ArrowBackIosIcon />
             Sign Out
           </Button>

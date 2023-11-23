@@ -8,9 +8,11 @@ const List = (props) => {
   return list.map((order) => (
     <Grid
       container
-      justifyContent={"center"}
-      alignItems={"center"}
-      margin={"2.5% 0px"}
+      sx={{
+        justifyContent: "center",
+        alignItems: "center",
+        margin: "2% 0px ",
+      }}
       key={order._id}>
       <Grid
         item

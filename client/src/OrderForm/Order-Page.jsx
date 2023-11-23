@@ -12,6 +12,7 @@ const Order = ({ socket }) => {
         title="Order"
         theme={theme}
         color={theme.palette.primary.main}
+        fontSize={'30px'}
       />
       <OrderForm socket={socket} />
     </ThemeProvider>
