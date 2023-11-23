@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import LoginForm from "./LoginForm/LoginForm";
 import Header from "./components/Header/Header.component";
 import UserAuthenticatedComponent from "./components/user-Authenticed-component/User.authenticated.component";
-import Image from "./components/Imag∑/ImageComponent";
+import Image from "./components/ImgComponent/ImageComponent";
 import phone from "./images/phone.png";
 // GOOGLE LOGIN
 import { useGoogleLogin } from "@react-oauth/google";
@@ -98,7 +98,13 @@ const App = (props) => {
           <UserAuthenticatedComponent userData={userData} theme={theme} />
         </Grid>
       ) : (
-        <Grid container sx={{ overflow: "hidden", padding: "0px 0px 0px 0px", height: '100%' }}>
+        <Grid
+          container
+          sx={{
+            overflow: "hidden",
+            padding: "0px 0px 0px 0px",
+            height: "100%",
+          }}>
           <Image imgSrc={phone} alt="2000s cellphone" />
           <LoginForm
             onSuccess={handleGoogleLogin}

@@ -1,7 +1,5 @@
 import React from "react";
-import { Container, Grid } from "@mui/material";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Grid } from "@mui/material";
 
 const Image = (props) => {
   const { imgSrc } = props;

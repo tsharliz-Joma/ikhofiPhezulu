@@ -1,7 +1,7 @@
 import React from "react";
 // @ts-ignore
 import character from "../../images/character.png";
-import Image from "../Imag∑/ImageComponent";
+import Image from "../ImgComponent/ImageComponent";
 import "../../App.css";
 // Material UI
 import { Box, CssBaseline, Typography } from "@mui/material";
