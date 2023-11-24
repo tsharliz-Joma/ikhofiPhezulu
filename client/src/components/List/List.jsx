@@ -1,10 +1,10 @@
 import React from "react";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import "./List.css";
-
+// Make your own grid component that takes the coffeeObject as params
 const List = (props) => {
   const { list, onClick, theme } = props;
-
+console.log(list)
   return list.map((order) => (
     <Grid
       container
@@ -27,6 +27,7 @@ const List = (props) => {
             bgcolor: "primary.white",
             color: "#000",
           }}>
+          {/* {Object.keys(order)} */}
           {order.name}
           <br />
           {order.coffeeSize}
@@ -36,6 +37,10 @@ const List = (props) => {
           {order.coffeeMilk}
           <br />
           {order.number}
+          <br />
+          <Typography sx={{ visibility: 'hidden'}}>
+            {order.email}
+          </Typography>
         </Box>
       </Grid>
     </Grid>

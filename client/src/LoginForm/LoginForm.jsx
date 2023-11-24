@@ -36,6 +36,7 @@ const LoginForm = (props) => {
         .post(backEndUserLogin, currentUser)
         .then(setLoading(true));
       const data = response.data;
+      console.log(data )
       if (data.user) {
         localStorage.setItem("token", data.user);
         setLoading(false);

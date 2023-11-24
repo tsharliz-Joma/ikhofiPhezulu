@@ -12,10 +12,10 @@ const viewOrderUrl =
 // const viewOrderUrl =
 // "http://localhost:1969/api/view-orders";
 
-const deleteOrderUrl =
-  "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/sendCoffee";
 // const deleteOrderUrl =
-// "http://localhost:1969/api/sendCoffee";
+//   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/sendCoffee";
+const deleteOrderUrl =
+"http://localhost:1969/api/sendCoffee";
 
 const Dashboard = ({ socket }) => {
   const [orders, setOrders] = useState([]);
@@ -26,6 +26,7 @@ const Dashboard = ({ socket }) => {
   const [Person, setPerson] = useState("");
   const [Coffee, setCoffee] = useState("");
   const [inombolo, setInombolo] = useState("");
+  const [ email, setEmail] = useState("");
   const [open, setOpen] = useState(false);
 
   const theme = useTheme();
@@ -33,11 +34,13 @@ const Dashboard = ({ socket }) => {
   const displayOptions = (e) => {
     e.preventDefault();
     let toArray = e.target.innerText.split("\n");
+    console.log(toArray)
     setPerson(toArray[0]);
     setCoffee(toArray[2] || "Maafih Jabana");
     setSize(toArray[1]);
     setMilk(toArray[3]);
     setInombolo(toArray[4]);
+    // setEmail(toArray[7])
     setSelectedCoffee(e.target.innerText);
     setSelected(true);
     setOpen(true);
@@ -80,8 +83,9 @@ const Dashboard = ({ socket }) => {
     };
     try {
       socket.emit("order complete", deleteCoffee);
+      console.log(deleteCoffee)
       axios.post(deleteOrderUrl, deleteCoffee);
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -141,7 +145,7 @@ const Dashboard = ({ socket }) => {
         <Grid container sx={{ justifyContent: "center", alignItems: "center", margin: '7.5% 0%' }}>
           {selected && (
             <DialogueBox
-              handleOrder={handleOrder}x
+              handleOrder={handleOrder}
               open={open}
               onClose={handleClose}
               cDot={selectedCoffee}

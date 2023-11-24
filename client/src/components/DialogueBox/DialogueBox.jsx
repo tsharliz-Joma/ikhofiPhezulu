@@ -56,7 +56,7 @@ const DialogueBox = (props) => {
       onClose={handleClose}
       open={open}
       TransitionComponent={transition}
-      maxWidth={"md"}
+      maxWidth={"sm"}
       fullWidth>
       <DialogTitle
         textAlign={"center"}
@@ -73,27 +73,27 @@ const DialogueBox = (props) => {
         <Card
           variant="outlined"
           sx={{ width: "90%", margin: "0 auto", padding: "20px" }}>
-          <Typography sx={{ fontSize: { xs: "16px", md: "20px", lg: "2em" }, textAlign: 'center' }}>
+          <Typography sx={{ fontSize: { xs: "16px", md: "20px", lg: "3em" }, fontWeight: { md: 'bold'}, textAlign: 'center' }}>
             {order.name}
           </Typography>
          
             <Typography
               sx={{
-                fontSize: { xs: "16px", md: "20px", lg: "2em" },
+                fontSize: { xs: "16px", md: "26px", lg: "3.5em" },
                 paddingY: "15px",
               }}>
               Size: {order.size}
             </Typography>
             <Typography
               sx={{
-                fontSize: { xs: "16px", md: "20px", lg: "2em" },
+                fontSize: { xs: "16px", md: "26px", lg: "3.5em" },
                 paddingY: "15px",
               }}>
               Milk: {order.milk}
             </Typography>
             <Typography
               sx={{
-                fontSize: { xs: "16px", md: "20px", lg: "2em" },
+                fontSize: { xs: "16px", md: "26px", lg: "3.5em" },
                 paddingY: "15px",
               }}>
               Coffee: {order.coffee}

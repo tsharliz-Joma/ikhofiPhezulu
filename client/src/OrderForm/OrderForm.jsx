@@ -6,8 +6,6 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import {
-  Checkbox,
-  FormControlLabel,
   Grid,
   TextField,
   FormControl,
@@ -22,14 +20,17 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import "../App.css";
 
-const backEndUrl =
-  "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/coffee";
-// const backEndUrl = "http://localhost:1969/api/coffee";
+// const backEndUrl =
+//   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/coffee";
+const backEndUrl = "http://localhost:1969/api/coffee";
 
 const OrderForm = (props) => {
   const { socket } = props;
-  const [employeeName, setEmployeeName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [userData, setUserData] = useState({
+    name: '',
+    email: '',
+    userId: ''
+  });
   const [formData, setFormData] = useState({
     name: "",
     number: "",
@@ -47,17 +48,23 @@ const OrderForm = (props) => {
   const handleCoffeeSubmit = async (e) => {
     e.preventDefault();
     const newOrder = {
-      name: employeeName,
+      name: userData.name,
+      userId: userData.id,
+      email: userData.email,
       number: formData.number,
       coffeeName: formData.coffee,
       coffeeMilk: formData.coffeeMilk,
       coffeeSize: formData.coffeeSize,
       coffeeSugar: formData.coffeeSugar,
     };
-    
+
     try {
       socket.emit("new order", newOrder);
-      const result = await axios.post(backEndUrl, newOrder).then(window.location.reload())
+      console.log(newOrder)
+      const result = await axios
+        .post(backEndUrl, newOrder)
+        // .then(window.location.reload());
+      console.log(result)
       return result;
     } catch (error) {
       console.log(error);
@@ -69,13 +76,10 @@ const OrderForm = (props) => {
     const googleToken = localStorage.getItem("googleToken");
     if (token) {
       const user = jwt.decode(token);
-      setEmployeeName(user.name);
-      formData.number = user.number;
-      setPhoneNumber(user.number);
+      setUserData(user);
     } else if (googleToken) {
-      const jsonGoogleToken = JSON.parse(googleToken)
-      setEmployeeName(jsonGoogleToken.name);
-      // setPhoneNumber(jsonGoogleToken.number);
+      const jsonGoogleToken = JSON.parse(googleToken);
+      setUserData(jsonGoogleToken);
     } else {
       localStorage.removeItem("token");
       console.log("cant find token");
@@ -108,7 +112,7 @@ const OrderForm = (props) => {
               autoComplete="name"
               autoFocus
               onChange={handleChange}
-              value={employeeName}
+              value={userData.name}
             />
             <TextField
               margin="normal"

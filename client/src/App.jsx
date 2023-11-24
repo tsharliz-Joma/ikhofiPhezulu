@@ -81,10 +81,10 @@ const App = (props) => {
       }
     } else if (localGoogleToken) {
       setUserData(JSON.parse(localGoogleToken));
+     
       setUserPresent(true);
     }
   }, [userPresent]);
-
   return (
     <ThemeProvider theme={theme}>
       <Header
