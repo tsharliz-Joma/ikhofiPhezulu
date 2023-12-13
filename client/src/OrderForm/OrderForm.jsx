@@ -29,8 +29,9 @@ const OrderForm = (props) => {
   const [userData, setUserData] = useState({
     name: '',
     email: '',
-    userId: ''
+    id: ''
   });
+
   const [formData, setFormData] = useState({
     name: "",
     number: "",
@@ -79,6 +80,7 @@ const OrderForm = (props) => {
       setUserData(user);
     } else if (googleToken) {
       const jsonGoogleToken = JSON.parse(googleToken);
+      console.log(jsonGoogleToken)
       setUserData(jsonGoogleToken);
     } else {
       localStorage.removeItem("token");

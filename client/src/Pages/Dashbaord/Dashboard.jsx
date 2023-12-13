@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import List from "../../components/List/List";
 import DialogueBox from "../../components/DialogueBox/DialogueBox";
 import Header from "../../components/Header/Header.component";
@@ -14,37 +14,48 @@ const viewOrderUrl =
 
 // const deleteOrderUrl =
 //   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/sendCoffee";
-const deleteOrderUrl =
-"http://localhost:1969/api/sendCoffee";
+const deleteOrderUrl = "http://localhost:1969/api/sendCoffee";
 
 const Dashboard = ({ socket }) => {
+
+  const [userData, setUserData] = useState({
+    person: "",
+    number: "",
+    email: "",
+    coffee: "",
+    size: "",
+    milk: "",
+    userId: ""
+  });
+
   const [orders, setOrders] = useState([]);
   const [selected, setSelected] = useState(false);
   const [selectedCoffee, setSelectedCoffee] = useState("");
-  const [Size, setSize] = useState("");
-  const [Milk, setMilk] = useState("");
-  const [Person, setPerson] = useState("");
-  const [Coffee, setCoffee] = useState("");
-  const [inombolo, setInombolo] = useState("");
-  const [ email, setEmail] = useState("");
   const [open, setOpen] = useState(false);
-
   const theme = useTheme();
 
   const displayOptions = (e) => {
     e.preventDefault();
     let toArray = e.target.innerText.split("\n");
-    console.log(toArray)
-    setPerson(toArray[0]);
-    setCoffee(toArray[2] || "Maafih Jabana");
-    setSize(toArray[1]);
-    setMilk(toArray[3]);
-    setInombolo(toArray[4]);
-    // setEmail(toArray[7])
+console.log(toArray)
+    setUserData({
+      ...userData,
+      person: toArray[0],
+      email: toArray[7],
+      milk: toArray[3],
+      number: toArray[4],
+      coffee: toArray[2],
+      size: toArray[1],
+      userId: toArray[5],
+      _id: toArray[6],
+    });
+
     setSelectedCoffee(e.target.innerText);
     setSelected(true);
     setOpen(true);
   };
+
+  console.log(userData);
 
   const handleOrder = (e) => {
     e.preventDefault();
@@ -57,33 +68,36 @@ const Dashboard = ({ socket }) => {
   };
 
   const updateMilk = (defaultItem) => {
-    setMilk(defaultItem);
+    userData.milk = defaultItem;
   };
 
   const updateName = (defaultName) => {
-    setPerson(defaultName);
+    userData.person = defaultName;
   };
 
   const send = () => {
     let defaultMilk = "Full cream";
     let defaultName = "George";
 
-    if (Milk === "") {
+    if (userData.milk === "") {
       updateMilk(defaultMilk);
     }
-    if (Coffee === "") {
+    if (userData.coffee === "") {
       updateName(defaultName);
     }
     const deleteCoffee = {
-      name: Person,
-      number: inombolo,
-      coffeeName: Coffee,
-      coffeeSize: Size,
-      coffeeMilk: Milk,
+      name: userData.person,
+      email: userData.email,
+      userId: userData.userId,
+      number: userData.number,
+      coffeeName: userData.coffee,
+      coffeeSize: userData.size,
+      coffeeMilk: userData.milk,
     };
+
     try {
       socket.emit("order complete", deleteCoffee);
-      console.log(deleteCoffee)
+      console.log(deleteCoffee);
       axios.post(deleteOrderUrl, deleteCoffee);
       // window.location.reload();
     } catch (error) {
@@ -104,6 +118,7 @@ const Dashboard = ({ socket }) => {
           alert("failed to retrieve orders");
         } else {
           coffeeOrders = response.data.orders;
+        
         }
         setOrders(coffeeOrders);
         // console.log(coffeeOrders)
@@ -142,7 +157,13 @@ const Dashboard = ({ socket }) => {
         fontSize={42}
       />
       {orders.length !== 0 && (
-        <Grid container sx={{ justifyContent: "center", alignItems: "center", margin: '7.5% 0%' }}>
+        <Grid
+          container
+          sx={{
+            justifyContent: "center",
+            alignItems: "center",
+            margin: "7.5% 0%",
+          }}>
           {selected && (
             <DialogueBox
               handleOrder={handleOrder}

@@ -34,6 +34,7 @@ const DialogueBox = (props) => {
 
   const sortOrder = (props) => {
     let splitOrder = props.split("\n");
+    console.log(splitOrder)
     const cofObj = {
       getKeys() {
         return {
@@ -46,7 +47,7 @@ const DialogueBox = (props) => {
       },
     };
     let res = cofObj.getKeys();
-    console.log(res);
+    // console.log(res);
     return res;
   };
 
@@ -56,7 +57,7 @@ const DialogueBox = (props) => {
       onClose={handleClose}
       open={open}
       TransitionComponent={transition}
-      maxWidth={"sm"}
+      maxWidth={"md"}
       fullWidth>
       <DialogTitle
         textAlign={"center"}
@@ -73,27 +74,27 @@ const DialogueBox = (props) => {
         <Card
           variant="outlined"
           sx={{ width: "90%", margin: "0 auto", padding: "20px" }}>
-          <Typography sx={{ fontSize: { xs: "16px", md: "20px", lg: "3em" }, fontWeight: { md: 'bold'}, textAlign: 'center' }}>
+          <Typography sx={{ fontSize: { xs: "16px", md: "20px", lg: "2.5em" }, fontWeight: { md: 'bold'}, textAlign: 'center' }}>
             {order.name}
           </Typography>
          
             <Typography
               sx={{
-                fontSize: { xs: "16px", md: "26px", lg: "3.5em" },
+                fontSize: { xs: "16px", md: "26px", lg: "2.5em" },
                 paddingY: "15px",
               }}>
               Size: {order.size}
             </Typography>
             <Typography
               sx={{
-                fontSize: { xs: "16px", md: "26px", lg: "3.5em" },
+                fontSize: { xs: "16px", md: "26px", lg: "2.5em" },
                 paddingY: "15px",
               }}>
               Milk: {order.milk}
             </Typography>
             <Typography
               sx={{
-                fontSize: { xs: "16px", md: "26px", lg: "3.5em" },
+                fontSize: { xs: "16px", md: "26px", lg: "2.5em" },
                 paddingY: "15px",
               }}>
               Coffee: {order.coffee}
