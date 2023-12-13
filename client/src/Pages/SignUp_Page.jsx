@@ -1,5 +1,5 @@
 import React from "react";
-import SignUpForm from "../SignupForm/SignUp_Form";
+import SignUpForm from "../Forms/SignUp_Form";
 import Header from "../components/Header/Header.component";
 import { Box, CssBaseline, useTheme, Container } from "@mui/material";
 

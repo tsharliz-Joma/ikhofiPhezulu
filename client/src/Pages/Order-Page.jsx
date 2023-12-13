@@ -1,5 +1,5 @@
 import React from "react";
-import OrderForm from "../OrderForm/OrderForm";
+import OrderForm from "../Forms/OrderForm";
 import Header from "../components/Header/Header.component";
 import { ThemeProvider, createTheme, useTheme } from "@mui/material";
 

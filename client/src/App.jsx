@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import jwt from "jsonwebtoken";
-import LoginForm from "./LoginForm/LoginForm";
+import LoginForm from "./Forms/LoginForm";
 import Header from "./components/Header/Header.component";
 import UserAuthenticatedComponent from "./components/user-Authenticed-component/User.authenticated.component";
 import Image from "./components/ImgComponent/ImageComponent";
