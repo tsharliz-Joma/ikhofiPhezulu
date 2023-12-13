@@ -1,8 +1,6 @@
 // @ts-nocheck
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import axios from "axios";
-import "./LoginForm.css";
 // GOOGLE LOGIN
 import { GoogleLogin } from "@react-oauth/google";
 // Material UI

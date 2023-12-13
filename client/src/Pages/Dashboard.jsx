@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
-import List from "../../components/List/List";
-import DialogueBox from "../../components/DialogueBox/DialogueBox";
-import Header from "../../components/Header/Header.component";
+import List from "../components/List/List";
+import DialogueBox from "../components/DialogueBox/DialogueBox";
+import Header from "../components/Header/Header.component";
 // @ts-ignore
-import CoffeeItems from "../../JsonFiles/Coffee.json";
+import CoffeeItems from "../JsonFiles/Coffee.json";
 import { Container, Box, useTheme, CssBaseline, Grid } from "@mui/material";
 
 const viewOrderUrl =
@@ -17,7 +17,6 @@ const viewOrderUrl =
 const deleteOrderUrl = "http://localhost:1969/api/sendCoffee";
 
 const Dashboard = ({ socket }) => {
-
   const [userData, setUserData] = useState({
     person: "",
     number: "",
@@ -25,7 +24,7 @@ const Dashboard = ({ socket }) => {
     coffee: "",
     size: "",
     milk: "",
-    userId: ""
+    userId: "",
   });
 
   const [orders, setOrders] = useState([]);
@@ -37,7 +36,7 @@ const Dashboard = ({ socket }) => {
   const displayOptions = (e) => {
     e.preventDefault();
     let toArray = e.target.innerText.split("\n");
-console.log(toArray)
+    console.log(toArray);
     setUserData({
       ...userData,
       person: toArray[0],
@@ -118,7 +117,6 @@ console.log(toArray)
           alert("failed to retrieve orders");
         } else {
           coffeeOrders = response.data.orders;
-        
         }
         setOrders(coffeeOrders);
         // console.log(coffeeOrders)

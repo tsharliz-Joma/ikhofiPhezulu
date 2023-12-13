@@ -1,5 +1,5 @@
 import React from "react";
-import OrderForm from "./OrderForm";
+import OrderForm from "../OrderForm/OrderForm";
 import Header from "../components/Header/Header.component";
 import { ThemeProvider, createTheme, useTheme } from "@mui/material";
 
@@ -12,7 +12,7 @@ const Order = ({ socket }) => {
         title="Order"
         theme={theme}
         color={theme.palette.primary.main}
-        fontSize={'30px'}
+        fontSize={"30px"}
       />
       <OrderForm socket={socket} />
     </ThemeProvider>

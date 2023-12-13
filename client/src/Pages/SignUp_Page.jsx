@@ -1,7 +1,7 @@
 import React from "react";
-import SignUpForm from "./SignUpForm";
+import SignUpForm from "../SignupForm/SignUp_Form";
 import Header from "../components/Header/Header.component";
-import { Box, CssBaseline, useTheme,Container } from "@mui/material";
+import { Box, CssBaseline, useTheme, Container } from "@mui/material";
 
 const SignUpPage = () => {
   const theme = useTheme();
@@ -28,10 +28,7 @@ const SignUpPage = () => {
             typography: "h6",
             padding: "25px 0",
             fontFamily: "monospace",
-          }}>
-          
-
-        </Box>
+          }}></Box>
       </Container>
       <SignUpForm />
     </Box>
