@@ -37,7 +37,7 @@ const List = (props) => {
           {order.coffeeMilk} <br />
           {order.number}
           <Typography sx={{ position: 'absolute', opacity: '0' }}>
-            {order.id}<br />{order.email}
+            {order.userId}<br />{order.email}
           </Typography>
         </Box>
       </Grid>

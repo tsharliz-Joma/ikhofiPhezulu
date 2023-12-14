@@ -36,7 +36,6 @@ const Dashboard = ({ socket }) => {
   const displayOptions = (e) => {
     e.preventDefault();
     let toArray = e.target.innerText.split("\n");
-    console.log(toArray);
     setUserData({
       ...userData,
       person: toArray[0],
@@ -45,8 +44,7 @@ const Dashboard = ({ socket }) => {
       number: toArray[4],
       coffee: toArray[2],
       size: toArray[1],
-      userId: toArray[5],
-      _id: toArray[6],
+      userId: toArray[6],
     });
 
     setSelectedCoffee(e.target.innerText);

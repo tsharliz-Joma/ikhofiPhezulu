@@ -34,7 +34,6 @@ const DialogueBox = (props) => {
 
   const sortOrder = (props) => {
     let splitOrder = props.split("\n");
-    console.log(splitOrder)
     const cofObj = {
       getKeys() {
         return {
