@@ -52,8 +52,6 @@ const Dashboard = ({ socket }) => {
     setOpen(true);
   };
 
-  console.log(userData);
-
   const handleOrder = (e) => {
     e.preventDefault();
     console.log(e.target.innerText);
@@ -96,7 +94,7 @@ const Dashboard = ({ socket }) => {
       socket.emit("order complete", deleteCoffee);
       console.log(deleteCoffee);
       axios.post(deleteOrderUrl, deleteCoffee);
-      // window.location.reload();
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
