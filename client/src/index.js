@@ -18,10 +18,10 @@ import * as io from "socket.io-client";
 import SignUpPage from "./Pages/SignUp_Page";
 import { ThemeProvider, createTheme } from "@mui/material";
 
-const socket = io.connect(
-  "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com",
-);
-// const socket = io.connect("http://localhost:1969");
+// const socket = io.connect(
+//   "https://ikhofiphezulu-server-19652a0dabe7.herokuapp.com",
+// );
+const socket = io.connect("http://localhost:1969");
 
 const themeOptions = {
   palette: {

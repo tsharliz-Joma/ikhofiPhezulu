@@ -1,13 +1,11 @@
 // @ts-nocheck
-import React, { useState } from "react";
+import React, {useState} from "react";
 import axios from "axios";
-// GOOGLE LOGIN
-import { GoogleLogin } from "@react-oauth/google";
-// Material UI
+import {GoogleLogin} from "@react-oauth/google";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Checkbox, FormControlLabel, Grid, TextField } from "@mui/material";
+import {Checkbox, FormControlLabel, Grid, TextField} from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
@@ -18,7 +16,7 @@ const backEndUserLogin =
 // const backEndUserLogin = "http://localhost:1969/api/login";
 
 const LoginForm = (props) => {
-  const { active, onSuccess, onError } = props;
+  const {active, onSuccess, onError} = props;
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
@@ -34,7 +32,6 @@ const LoginForm = (props) => {
         .post(backEndUserLogin, currentUser)
         .then(setLoading(true));
       const data = response.data;
-      console.log(data )
       if (data.user) {
         localStorage.setItem("token", data.user);
         setLoading(false);
@@ -51,7 +48,7 @@ const LoginForm = (props) => {
 
   return (
     <>
-      <Container maxWidth="sm" sx={{ margin: "0px 0px 10% 0px",  }}>
+      <Container maxWidth="sm" sx={{margin: "0px 0px 10% 0px"}}>
         <CssBaseline />
         <Box
           sx={{
@@ -65,11 +62,11 @@ const LoginForm = (props) => {
               bgcolor: "info.light",
 
               mr: 2,
-              width: { xs: "25px", lg: "50px" },
-              height: { xs: "25px", lg: "50px" },
+              width: {xs: "25px", lg: "50px"},
+              height: {xs: "25px", lg: "50px"},
             }}
           />
-          <Typography sx={{ fontSize: { sm: "12px", md: "16px", lg: "26px" } }}>
+          <Typography sx={{fontSize: {sm: "12px", md: "16px", lg: "26px"}}}>
             Sign In
           </Typography>
         </Box>
@@ -84,7 +81,7 @@ const LoginForm = (props) => {
           <Box
             component="form"
             onSubmit={handleLogin}
-            sx={{ mt:{ lg: 3 , xs: 1 }, width: "100%" }}>
+            sx={{mt: {lg: 3, xs: 1}, width: "100%"}}>
             <TextField
               margin="normal"
               required
@@ -94,7 +91,6 @@ const LoginForm = (props) => {
               name="email"
               autoComplete="email"
               autoFocus
-              sx={{}}
             />
             <TextField
               margin="normal"
@@ -112,13 +108,13 @@ const LoginForm = (props) => {
               }
               label="Remember me"
             />
-            <Grid container spacing={2} sx={{ my: 3 }}>
+            <Grid container spacing={2} sx={{my: 3}}>
               <Grid item xs={6}>
                 <Button
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ fontSize: 16 }}>
+                  sx={{fontSize: 16}}>
                   Sign In
                 </Button>
               </Grid>
@@ -131,7 +127,7 @@ const LoginForm = (props) => {
                 <Typography
                   sx={{
                     color: "info.light",
-                    fontSize: { xs: "12px", md: "16px" },
+                    fontSize: {xs: "12px", md: "16px"},
                   }}>
                   <Link href="#" color="inherit" underline={"hover"}>
                     Forgot password?
@@ -142,7 +138,7 @@ const LoginForm = (props) => {
                 <Typography
                   sx={{
                     color: "info.light",
-                    fontSize: { xs: "12px", md: "16px" },
+                    fontSize: {xs: "12px", md: "16px"},
                   }}>
                   <Link href="/register" color={"inherit"} underline={"hover"}>
                     {"Don't have an account? Sign Up"}

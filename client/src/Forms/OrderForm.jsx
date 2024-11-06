@@ -61,7 +61,6 @@ const OrderForm = (props) => {
 
     try {
       socket.emit("new order", newOrder);
-      console.log(newOrder)
       const result = await axios
         .post(backEndUrl, newOrder)
         // .then(window.location.reload());
@@ -80,7 +79,6 @@ const OrderForm = (props) => {
       setUserData(user);
     } else if (googleToken) {
       const jsonGoogleToken = JSON.parse(googleToken);
-      console.log(jsonGoogleToken)
       setUserData(jsonGoogleToken);
     } else {
       localStorage.removeItem("token");
@@ -90,7 +88,7 @@ const OrderForm = (props) => {
 
   return (
     <>
-      <Container maxWidth="xs">
+      <Container maxWidth="sm">
         <CssBaseline />
         <Box
           sx={{

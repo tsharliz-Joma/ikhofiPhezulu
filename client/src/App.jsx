@@ -1,21 +1,30 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import jwt from "jsonwebtoken";
-import LoginForm from "./Forms/LoginForm";
+import React, {useState} from "react";
+import {useNavigate} from "react-router-dom";
 import Header from "./components/Header/Header.component";
-import UserAuthenticatedComponent from "./components/user-Authenticed-component/User.authenticated.component";
-import Image from "./components/ImgComponent/ImageComponent";
-import phone from "./images/phone.png";
-// GOOGLE LOGIN
-import { useGoogleLogin } from "@react-oauth/google";
-// MATERIAL UI
-import Grid from "@mui/material/Grid";
+import {useGoogleLogin} from "@react-oauth/google";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import "./App.css";
-import { Container, ThemeProvider, createTheme, useTheme } from "@mui/material";
-import { LogoutUser } from "./components/user-Authenticed-component/User.authenticated.component";
+import {ThemeProvider, useTheme} from "@mui/material";
 import axios from "axios";
+import {ContextProvider} from "./Providers/ContextProvider";
+import {DisplayUser} from "./components/dashboard/DisplayUser";
+
+const getServerData = (url) => async () => {};
+
+const getLocalStorageData = async (primaryKey, secondaryKey) => {
+  // const localToken = localStorage.getItem(primaryKey);
+  const googleToken = localStorage.getItem(secondaryKey);
+  const user = JSON.parse(googleToken);
+  return {state: user};
+  // if (localToken) {
+  //   const user = jwt.decode(localToken);
+  //   return { key: user};
+  // } else if (googleToken) {
+  //   const user = JSON.parse(googleToken);
+  //   return { key: user};
+  // }
+};
 
 const Copyright = (props) => {
   return (
@@ -66,60 +75,21 @@ const App = (props) => {
     // console.log(response);
   };
 
-  useEffect(() => {
-    const localToken = localStorage.getItem("token")
-      ? localStorage.getItem("token")
-      : false;
-    const localGoogleToken = localStorage.getItem("googleToken")
-      ? localStorage.getItem("googleToken")
-      : false;
-    if (localToken) {
-      const user = jwt.decode(localToken);
-      if (user) {
-        setUserData(user);
-        setUserPresent(true);
-      }
-    } else if (localGoogleToken) {
-      setUserData(JSON.parse(localGoogleToken));
-     
-      setUserPresent(true);
-    }
-  }, [userPresent]);
   return (
     <ThemeProvider theme={theme}>
-      <Header
-        title="Coffee up"
-        theme={theme}
-        color={theme.palette.primary.main}
-        fontSize={42}
-      />
-      {userPresent ? (
-        <Grid container sx={{ margin: "0px 0px" }}>
-          <UserAuthenticatedComponent userData={userData} theme={theme} />
-        </Grid>
-      ) : (
-        <Grid
-          container
-          sx={{
-            overflow: "hidden",
-            padding: "0px 0px 0px 0px",
-            height: "100%",
-          }}>
-          <Image imgSrc={phone} alt="2000s cellphone" />
-          <LoginForm
-            onSuccess={handleGoogleLogin}
-            onError={handleGoogleError}
-          />
-          <Copyright
-            sx={{
-              position: "relative",
-              bottom: "10px",
-              left: "10px",
-              fontSize: { xs: "10px", md: "12px", lg: "12px" },
-            }}
-          />
-        </Grid>
-      )}
+      <ContextProvider
+        getDataFunc={() => getLocalStorageData("token", "googleToken")}>
+        <Header
+          title="Coffee up"
+          theme={theme}
+          color={theme.palette.primary.main}
+          fontSize={42}
+        />
+        <DisplayUser
+          handleGoogleError={handleGoogleError}
+          handleGoogleLogin={handleGoogleLogin}
+        />
+      </ContextProvider>
     </ThemeProvider>
   );
 };

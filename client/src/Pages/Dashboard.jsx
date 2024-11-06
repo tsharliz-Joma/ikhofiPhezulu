@@ -7,10 +7,9 @@ import Header from "../components/Header/Header.component";
 import CoffeeItems from "../JsonFiles/Coffee.json";
 import { Container, Box, useTheme, CssBaseline, Grid } from "@mui/material";
 
-const viewOrderUrl =
-  "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/view-orders";
 // const viewOrderUrl =
-// "http://localhost:1969/api/view-orders";
+  // "https://ikhofiphezulu-server-19652a0dabe7.herokuapp.com/api/view-orders";
+const viewOrderUrl = "http://localhost:1969/api/view-orders";
 
 // const deleteOrderUrl =
 //   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/sendCoffee";
