@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 export const LogoutUser = () => {
   const localUser = localStorage.getItem("token") ? true : false;
   const googleUser = localStorage.getItem("googleToken") ? true : false;
+
   if (localUser || googleUser) {
     localStorage.removeItem("token");
     localStorage.removeItem("googleToken");
@@ -20,8 +21,8 @@ export const LogoutUser = () => {
   }
 };
 
-const UserAuthenticatedComponent = (props) => {
-  const {userData} = props;
+const UserAuthenticatedComponent = ({state}) => {
+
   const imgStyles = {
     maxWidth: "700px",
     maxHeight: "auto",
@@ -45,7 +46,7 @@ const UserAuthenticatedComponent = (props) => {
               alt="user-profile-pic"
             />
             <Typography sx={{fontSize: "32px", textAlign: "center"}}>
-              {userData.name}
+              {/* {state.name} */}
             </Typography>
           </Box>
           <Box

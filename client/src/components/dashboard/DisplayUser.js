@@ -5,10 +5,12 @@ import Copyright from "../../App";
 import UserAuthenticatedComponent from "../user-Authenticed-component/User.authenticated.component";
 
 export const DisplayUser = ({state, handleGoogleLogin, handleGoogleError}) => {
+
+
   // console.log('hey')
-  const {id, email, name, picture} = state;
+  // const {id, email, name, picture} = state;
   // console.log({state});
-  return state ? (
+  return state.state ? (
     <Grid container>
       <UserAuthenticatedComponent userData={state.state} />
     </Grid>
@@ -20,7 +22,7 @@ export const DisplayUser = ({state, handleGoogleLogin, handleGoogleError}) => {
         padding: "0px 0px 0px 0px",
         height: "100%",
       }}>
-      <Image imgSrc={picture} alt="2000s cellphone" />
+      <Image imgSrc={state.picture} alt="2000s cellphone" />
       <LoginForm onSuccess={handleGoogleLogin} onError={handleGoogleError} />
       <Copyright
         sx={{
