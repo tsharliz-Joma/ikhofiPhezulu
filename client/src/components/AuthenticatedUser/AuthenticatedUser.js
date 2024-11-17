@@ -1,14 +1,13 @@
 import React from "react";
 // @ts-ignore
 import character from "../../images/character.png";
-import Image from "../ImgComponent/ImageComponent";
 import "../../App.css";
 // Material UI
 import { CssBaseline, Typography } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Button from "@mui/material/Button";
-import { ButtonContainer, Container, UserContainer } from "./AuthenticatedUser.styles";
+import { ButtonContainer, Container, UserContainer, Image } from "./AuthenticatedUser.styles";
 
 export const LogoutUser = () => {
   const localUser = localStorage.getItem("token") ? true : false;
@@ -23,17 +22,12 @@ export const LogoutUser = () => {
 };
 
 const UserAuthenticatedComponent = ({ user }) => {
-  const imgStyles = {
-    maxWidth: "700px",
-    maxHeight: "auto",
-  };
-
   return (
     <>
       <CssBaseline />
       <Container>
         <UserContainer>
-          <Image style={imgStyles} imgSrc={character} alt="user-profile-pic" />
+          <Image src={character} alt={"user-profile-pic"} />
           <Typography sx={{ fontSize: "32px", textAlign: "center" }}>{user.user.name}</Typography>
         </UserContainer>
         <ButtonContainer>

@@ -18,13 +18,11 @@ const Image = (props) => {
       // xl={12}
       sx={{
         textAlign: "center",
-        width: "100%",
         display: "flex",
         justifyContent: "center",
-      }}>
-      <Grid item xs={12} xl={6}>
-        <img style={LogoStyles} src={imgSrc} />
-      </Grid>
+      }}
+    >
+      <img style={LogoStyles} src={imgSrc} />
     </Grid>
   );
 };
