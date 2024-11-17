@@ -10,14 +10,9 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
-import { useNavigate } from "react-router-dom";
-
-// const backEndUserLogin = "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/login";
-// const backEndUserLogin = "http://localhost:1969/api/login";
 
 const LoginForm = ({ handleSubmit, handleGoogleLogin, handleGoogleError }) => {
   const formRef = useRef(null);
-
   const invalidClasses = ["!border-feedback-red", "!text-feedback-red", "placeholder:!text-feedback-red"];
 
   const onSubmit = (e) => {
@@ -79,8 +74,26 @@ const LoginForm = ({ handleSubmit, handleGoogleLogin, handleGoogleError }) => {
           }}
         >
           <form onSubmit={onSubmit} noValidate ref={formRef}>
-            <TextField margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
-            <TextField margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
             <FormControlLabel control={<Checkbox value="remember" color="primary" size="small" />} label="Remember me" />
             <Grid container spacing={2} sx={{ my: 3 }}>
               <Grid item xs={6}>

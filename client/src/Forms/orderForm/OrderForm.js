@@ -11,21 +11,16 @@ import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { useData } from "../../Context/ContextProvider";
 import "../../App.css";
+import { useData } from "../../hooks/useData";
 
 // const backEndUrl =
 //   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/coffee";
 const backEndUrl = "http://localhost:1969/api/coffee";
 
-const OrderForm = (props) => {
-  const { socket } = props;
-
-  const [userData, setUserData] = useState({
-    name: "",
-    email: "",
-    id: "",
-  });
+export const OrderForm = ({ socket }) => {
+  const { state } = useData();
+  const { user } = state;
 
   const [formData, setFormData] = useState({
     name: "",
@@ -44,9 +39,9 @@ const OrderForm = (props) => {
   const handleCoffeeSubmit = async (e) => {
     e.preventDefault();
     const newOrder = {
-      name: userData.name,
-      userId: userData.id,
-      email: userData.email,
+      name: user.name,
+      userId: user.id,
+      email: user.email,
       number: formData.number,
       coffeeName: formData.coffee,
       coffeeMilk: formData.coffeeMilk,
@@ -57,7 +52,6 @@ const OrderForm = (props) => {
     try {
       socket.emit("new order", newOrder);
       const result = await axios.post(backEndUrl, newOrder);
-      // .then(window.location.reload());
       // console.log(result)
       return result;
     } catch (error) {
@@ -66,20 +60,13 @@ const OrderForm = (props) => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const googleToken = localStorage.getItem("googleToken");
-    const user = jwt.decode(token);
-    // if (token) {
-    //   const user = jwt.decode(token);
-    //   setUserData(user);
-    // } else if (googleToken) {
-    //   const jsonGoogleToken = JSON.parse(googleToken);
-    //   setUserData(jsonGoogleToken);
-    // } else {
-    //   localStorage.removeItem("token");
-    //   console.log("cant find token");
-    // }
-  }, []);
+    if (user) {
+      setFormData((prevData) => ({
+        ...prevData,
+        name: user.name,
+      }));
+    }
+  }, [user]);
 
   return (
     <>
@@ -95,7 +82,18 @@ const OrderForm = (props) => {
           }}
         >
           <Box component={"form"} onSubmit={handleCoffeeSubmit} sx={{ mt: 0, width: "100%" }}>
-            <TextField margin="normal" required fullWidth id="name" label="Name" name="name" autoComplete="name" autoFocus onChange={handleChange} value={userData.name} />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="name"
+              label="Name"
+              name="name"
+              autoComplete="name"
+              autoFocus
+              onChange={handleChange}
+              value={user.name}
+            />
             <TextField
               margin="normal"
               required
@@ -155,7 +153,7 @@ const OrderForm = (props) => {
             </FormControl>
             <Grid container spacing={3}>
               <Grid item xs={6}>
-                <Link href="/">
+                <Link href="/display-user">
                   <Button fullWidth variant="contained" sx={{ my: 3, fontSize: 16 }}>
                     <ArrowBackIosIcon />
                     Runaway
@@ -175,5 +173,3 @@ const OrderForm = (props) => {
     </>
   );
 };
-
-export default OrderForm;

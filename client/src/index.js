@@ -3,10 +3,11 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Route, Routes } from "react-router";
-import Order from "./Pages/Order-Page";
+import OrderPage from "./Pages/order/OrderPage";
 import AdminSignUp from "./Admin/AdminSignUp";
 import AdminLogin from "./Admin/AdminLogin";
 import Dashboard from "./Pages/Dashboard";
+import LoginPage from "./Pages/login/LoginPage";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fontsource/roboto/300.css";
@@ -17,6 +18,8 @@ import * as io from "socket.io-client";
 // import LoginForm from "./LoginForm/LoginForm";
 import SignUpPage from "./Pages/SignUp_Page";
 import { ThemeProvider, createTheme } from "@mui/material";
+import { ContextProvider } from "./Context/ContextProvider";
+import { DisplayUserPage } from "./Pages/displayUser/DisplayUserPage";
 
 // const socket = io.connect(
 //   "https://ikhofiphezulu-server-19652a0dabe7.herokuapp.com",
@@ -60,24 +63,27 @@ document.head.appendChild(link);
 root.render(
   <GoogleOAuthProvider clientId={process.env.REACT_APP_GCLI_ID}>
     <React.StrictMode>
-      <BrowserRouter>
-        <ThemeProvider theme={theme}>
-          <Routes>
-            <Route
-              // @ts-ignore
-              exact
-              path="/"
-              element={<App />}
-            />
-            <Route path="/order-coffee" element={<Order socket={socket} />} />
-            <Route path="/register" element={<SignUpPage />} />
-            <Route path="/adminRegister" element={<AdminSignUp />} />
-            <Route path="/adminLogin" element={<AdminLogin />} />
-            <Route path="/dashboard" element={<Dashboard socket={socket} />} />
-            <Route path="/login" element={<App />} />
-          </Routes>
-        </ThemeProvider>
-      </BrowserRouter>
+      <ContextProvider>
+        <BrowserRouter>
+          <ThemeProvider theme={theme}>
+            <Routes>
+              <Route
+                // @ts-ignore
+                exact
+                path="/"
+                element={<App />}
+              />
+              <Route path="/display-user" element={<DisplayUserPage />} />
+              <Route path="/order-coffee" element={<OrderPage socket={socket} />} />
+              <Route path="/register" element={<SignUpPage />} />
+              <Route path="/adminRegister" element={<AdminSignUp />} />
+              <Route path="/adminLogin" element={<AdminLogin />} />
+              <Route path="/dashboard" element={<Dashboard socket={socket} />} />
+              <Route path="/login" element={<LoginPage />} />
+            </Routes>
+          </ThemeProvider>
+        </BrowserRouter>
+      </ContextProvider>
     </React.StrictMode>
-  </GoogleOAuthProvider>,
+  </GoogleOAuthProvider>
 );

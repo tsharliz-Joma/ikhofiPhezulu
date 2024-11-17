@@ -4,7 +4,7 @@ import character from "../../images/character.png";
 import Image from "../ImgComponent/ImageComponent";
 import "../../App.css";
 // Material UI
-import { Box, CssBaseline, Typography } from "@mui/material";
+import { CssBaseline, Typography } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Button from "@mui/material/Button";
@@ -22,21 +22,19 @@ export const LogoutUser = () => {
   }
 };
 
-const UserAuthenticatedComponent = ({ state }) => {
+const UserAuthenticatedComponent = ({ user }) => {
   const imgStyles = {
     maxWidth: "700px",
     maxHeight: "auto",
   };
 
-  console.log(state)
   return (
     <>
       <CssBaseline />
       <Container>
         <UserContainer>
           <Image style={imgStyles} imgSrc={character} alt="user-profile-pic" />
-        
-          <Typography sx={{ fontSize: "32px", textAlign: "center" }}>{state}</Typography>
+          <Typography sx={{ fontSize: "32px", textAlign: "center" }}>{user.user.name}</Typography>
         </UserContainer>
         <ButtonContainer>
           <Button fullWidth variant="contained" sx={{ fontSize: { xs: "20px", md: "32px", lg: "25px" } }}>

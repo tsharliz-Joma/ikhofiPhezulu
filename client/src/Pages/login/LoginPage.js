@@ -1,17 +1,15 @@
 import LoginForm from "../../Forms/loginForm/LoginForm";
-import UserAuthenticatedComponent from "../AuthenticatedUser/AuthenticatedUser";
 import { Container, Grid, GridItem } from "../../styles/globals";
 import axios from "axios";
-import { useState, useEffect } from "react";
-import { useData } from "../../Context/ContextProvider";
+import { useState } from "react";
 import { useNavigate } from "react-router";
+import { useData } from "../../hooks/useData";
 
 // const backEndUserLogin = "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/login";
 const backEndUserLogin = "http://localhost:1969/api/login";
 
-export const DisplayUser = ({ handleGoogleLogin, handleGoogleError }) => {
-  const { value, state, loading, error } = useData();
-  const [submitted, setSubmitted] = useState(false);
+const LoginPage = ({ handleGoogleLogin, handleGoogleError }) => {
+  const { state, dispatch } = useData();
   const [isLoading, setIsLoading] = useState(false);
   const [showError, setShowError] = useState(null);
   const [user, setUser] = useState(null);
@@ -23,44 +21,32 @@ export const DisplayUser = ({ handleGoogleLogin, handleGoogleError }) => {
       email: FormData.get("email"),
       password: FormData.get("password"),
     };
-    console.log(submitData);
-
     try {
       const response = await axios.post(backEndUserLogin, submitData);
-      // setLoading(true)
       if (response.status === 200) {
         const userData = response.data;
-        localStorage.setItem("token", userData);
-        setUser(userData);
-        // window.location.reload();
-        navigate("/");
+        localStorage.setItem("token", userData.user);
+        dispatch({ type: "LOGIN", payload: userData });
+        navigate("/order-coffee");
       } else {
         alert("Please Check your username and password");
-        // setLoading(false);
+        setShowError(true);
       }
     } catch (e) {
       console.log(e);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  if (value.loading) {
-    return <div>Loading...</div>;
-  }
-  if (value.error) {
-    return <div>Error: {error.message}</div>;
-  }
-
   return (
     <Container>
-      {state != null ? (
-        <UserAuthenticatedComponent userData={value.state.user} />
-      ) : (
-        <Grid>
-          <GridItem>
-            <LoginForm handleSubmit={handleSubmit} handleGoogleLogin={handleGoogleLogin} handleGoogleError={handleGoogleError} />
-          </GridItem>
-        </Grid>
-      )}
+      <Grid>
+        <GridItem>
+          <LoginForm handleSubmit={handleSubmit} handleGoogleLogin={handleGoogleLogin} handleGoogleError={handleGoogleError} />
+        </GridItem>
+      </Grid>
     </Container>
   );
 };
+export default LoginPage;
