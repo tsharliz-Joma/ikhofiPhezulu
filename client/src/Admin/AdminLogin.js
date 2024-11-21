@@ -32,7 +32,7 @@ const AdminLogin = () => {
     const data = response.data;
     
     if (data.user) {
-      localStorage.setItem("token", data.user);
+      sessionStorage.setItem("token", data.user);
       alert("Welcome");
       navigate("/dashboard");
     } else {

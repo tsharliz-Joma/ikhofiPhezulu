@@ -8,27 +8,15 @@ const Header = (props) => {
   const { title, theme, fontSize, color } = props;
 
   const waveCustomStyles = {
-    display: "flex",
-    top: "0px",
-    width: "100%",
-    height: "15%",
-    transform: "rotate(180deg)",
     position: "relative",
+    top: "0px",
+    display: "flex",
+    width: "100%",
+    transform: "rotate(180deg)",
   };
 
   return (
-    <Container
-      fontFamily={theme.typography.fontFamily}
-      xs={12}
-      sx={{
-        position: "absolute",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        textAlign: "center",
-        width: "100%",
-        padding: { xs: "0px 0px", md: "0px 0px" },
-      }}>
+    <Container fontFamily={theme.typography.fontFamily} xs={12} sx={{ width: "100%" }}>
       <Wave
         fill={color}
         paused={false}
@@ -43,16 +31,16 @@ const Header = (props) => {
       <Box
         sx={{
           position: "absolute",
-          display: "flex",
-          alignItems: "center",
-          height: "100%",
-        }}>
+          top: "0px",
+        }}
+      >
         <Typography
           sx={{
             color: "#000",
             fontWeight: "700",
             fontSize: { xs: fontSize, md: "3.5em", lg: "4em" },
-          }}>
+          }}
+        >
           {title}
         </Typography>
       </Box>

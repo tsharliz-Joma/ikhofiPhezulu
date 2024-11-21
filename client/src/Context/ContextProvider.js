@@ -1,8 +1,5 @@
-import React, { useState, useEffect, createContext, useContext, useMemo, useReducer } from "react";
+import React, { useEffect, createContext, useReducer } from "react";
 import jwt from "jsonwebtoken";
-import { useGoogleLogin } from "@react-oauth/google";
-import axios from "axios";
-import { json } from "react-router";
 
 // const getServerData = (url) => async () => {};
 
@@ -40,9 +37,9 @@ const reducer = (state, action) => {
 
 export const DataContext = createContext();
 
-export const getLocalStorageData = (primaryKey, secondaryKey) => {
-  const localToken = localStorage.getItem(primaryKey);
-  const googleToken = localStorage.getItem(secondaryKey);
+export const getSessionStorageData = (primaryKey, secondaryKey) => {
+  const sessionToken = sessionStorage.getItem(primaryKey);
+  const googleToken = sessionStorage.getItem(secondaryKey);
 
   if (googleToken) {
     try {
@@ -53,16 +50,16 @@ export const getLocalStorageData = (primaryKey, secondaryKey) => {
     }
   }
 
-  if (localToken) {
+  if (sessionToken) {
     try {
-      const user = jwt.decode(localToken);
+      const user = jwt.decode(sessionToken);
       if (user) {
         return { user };
       } else {
-        console.error("Failed to decode localToken: Token is invalid or expired");
+        console.error("Failed to decode sessionToken: Token is invalid or expired");
       }
     } catch (error) {
-      console.error("Failed to decode localToken:", error);
+      console.error("Failed to decode sessionToken:", error);
       return { user: "No user here" };
     }
   }
@@ -77,7 +74,7 @@ export function ContextProvider({ children }) {
     try {
       console.log("Fetching data");
       dispatch({ type: "SET_LOADING", payload: true });
-      const tokenData = getLocalStorageData("token", "googleToken");
+      const tokenData = getSessionStorageData("token", "googleToken");
       if (tokenData) {
         dispatch({ type: "LOGIN", payload: tokenData });
       }
@@ -88,41 +85,11 @@ export function ContextProvider({ children }) {
     }
   }
 
-  const handleGoogleLogin = useGoogleLogin({
-    onSuccess: (response) => {
-      axios
-        .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${response.access_token}`, {
-          headers: {
-            Authorization: `Bearer ${response.access_token}`,
-            Accept: "application/json",
-          },
-        })
-        .then((res) => {
-          localStorage.setItem("googleToken", JSON.stringify(res.data));
-          dispatch({ type: "LOGIN", payload: res.data });
-        })
-        .catch((err) => console.log(err));
-    },
-    onError: (error) => console.log("Login Failed", error),
-  });
-
-  const handleGoogleError = useMemo((response) => {
-    // console.log(response);
-  }, []);
-
   useEffect(() => {
     fetchData();
   }, []);
 
-  // useEffect(() => {
-  //   if (state.user) {
-  //     localStorage.setItem("token", JSON.stringify(state));
-  //   }
-  // }, [state]);
-
-  const value = { state, dispatch, handleGoogleLogin, handleGoogleError };
-
-  // console.log(value);
+  const value = { state, dispatch };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 }

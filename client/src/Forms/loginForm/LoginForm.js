@@ -1,6 +1,5 @@
 // @ts-nocheck
-import React, { useRef, useState } from "react";
-import axios from "axios";
+import React, { useRef } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
@@ -11,7 +10,7 @@ import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 
-const LoginForm = ({ handleSubmit, handleGoogleLogin, handleGoogleError }) => {
+const LoginForm = ({ handleSubmit, handleGoogleLogin, handleGoogleError, onSuccess, onError }) => {
   const formRef = useRef(null);
   const invalidClasses = ["!border-feedback-red", "!text-feedback-red", "placeholder:!text-feedback-red"];
 
@@ -101,9 +100,9 @@ const LoginForm = ({ handleSubmit, handleGoogleLogin, handleGoogleError }) => {
                   Sign In
                 </Button>
               </Grid>
-              {/* <Grid item xs={6}>
+              <Grid item xs={6}>
                 <GoogleLogin onSuccess={onSuccess} onError={onError} />
-              </Grid> */}
+              </Grid>
             </Grid>
             <Grid container>
               <Grid item xs>

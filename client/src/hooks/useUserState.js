@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { getLocalStorageData } from "../Context/ContextProvider";
+import { getSessionStorageData } from "../Context/ContextProvider";
 
 export const useUserState = () => {
   const [value, setValue] = useState(null);
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const googleToken = localStorage.getItem("googleToken");
+    const token = sessionStorage.getItem("token");
+    const googleToken = sessionStorage.getItem("googleToken");
     if (token) {
       setValue(token);
     } else if (googleToken) {

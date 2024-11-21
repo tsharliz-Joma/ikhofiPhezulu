@@ -4,16 +4,38 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useData } from "../../hooks/useData";
+import { useGoogleLogin } from "@react-oauth/google";
+import { useMemo } from "react";
+import jwt from "jsonwebtoken";
 
 // const backEndUserLogin = "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/login";
 const backEndUserLogin = "http://localhost:1969/api/login";
 
-const LoginPage = ({ handleGoogleLogin, handleGoogleError }) => {
+const LoginPage = () => {
   const { state, dispatch } = useData();
   const [isLoading, setIsLoading] = useState(false);
   const [showError, setShowError] = useState(null);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+
+  const onSuccess = (response) => {
+    const user_data = jwt.decode(response.credential);
+    sessionStorage.setItem("googleToken", JSON.stringify(user_data));
+    dispatch({ type: "LOGIN", payload: user_data });
+  };
+
+  const onError = (error) => {
+    console.log("Login Failed", error);
+  };
+
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess,
+    onError,
+  });
+
+  const handleGoogleError = (error) => {
+    console.log("Google Login Error", error);
+  };
 
   const handleSubmit = async (FormData) => {
     setIsLoading(true);
@@ -25,7 +47,7 @@ const LoginPage = ({ handleGoogleLogin, handleGoogleError }) => {
       const response = await axios.post(backEndUserLogin, submitData);
       if (response.status === 200) {
         const userData = response.data;
-        localStorage.setItem("token", userData.user);
+        sessionStorage.setItem("token", userData.user);
         dispatch({ type: "LOGIN", payload: userData });
         navigate("/order-coffee");
       } else {
@@ -41,11 +63,13 @@ const LoginPage = ({ handleGoogleLogin, handleGoogleError }) => {
 
   return (
     <Container>
-      <Grid>
-        <GridItem>
-          <LoginForm handleSubmit={handleSubmit} handleGoogleLogin={handleGoogleLogin} handleGoogleError={handleGoogleError} />
-        </GridItem>
-      </Grid>
+      <LoginForm
+        handleSubmit={handleSubmit}
+        handleGoogleLogin={handleGoogleLogin}
+        handleGoogleError={handleGoogleError}
+        onSuccess={onSuccess}
+        onError={onError}
+      />
     </Container>
   );
 };
