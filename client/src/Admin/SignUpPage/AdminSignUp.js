@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import axios from "axios";
-// import jwt from "jsonwebtoken";
-import './admin.css'
-// import FormPropsModel from "./AdministrationForm.model";
+import axios from "axios";
+import jwt from "jsonwebtoken";
 
-
-const registerAdminUrl =
-  "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/adminRegistration";
+const registerAdminUrl = "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/adminRegistration";
 
 const AdminSignUp = () => {
   const [name, setName] = useState("");
@@ -55,31 +51,17 @@ const AdminSignUp = () => {
           <div className="input-box">
             <label htmlFor="user">
               Name:
-              <input
-                onChange={handleName}
-                value={name}
-                id="user"
-                type={"text"}
-                placeholder="Enter the Users Name"
-              />
+              <input onChange={handleName} value={name} id="user" type={"text"} placeholder="Enter the Users Name" />
             </label>
           </div>
           <div className="input-box">
             <label htmlFor="pwd">
               Password:
-              <input
-                onChange={handlePassword}
-                value={pwd}
-                id="pwd"
-                type={"text"}
-                placeholder="Enter a secure Password"
-              />
+              <input onChange={handlePassword} value={pwd} id="pwd" type={"text"} placeholder="Enter a secure Password" />
             </label>
           </div>
         </div>
-        <button className="btn btn-outline-warning">
-          Register Adminstrator
-        </button>
+        <button className="btn btn-outline-warning">Register Adminstrator</button>
       </form>
     </div>
   );

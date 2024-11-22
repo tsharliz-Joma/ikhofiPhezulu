@@ -2,11 +2,8 @@
 import React from "react";
 import Wave from "react-wavify";
 import { Typography, Box, Container } from "@mui/material";
-import "./Header.component.css";
 
-const Header = (props) => {
-  const { title, theme, fontSize, color } = props;
-
+const Header = ({ title, theme, fontSize, color }) => {
   const waveCustomStyles = {
     position: "relative",
     top: "0px",
@@ -16,7 +13,7 @@ const Header = (props) => {
   };
 
   return (
-    <Container fontFamily={theme.typography.fontFamily} xs={12} sx={{ width: "100%" }}>
+    <Box fontFamily={theme.typography.fontFamily} xs={12}>
       <Wave
         fill={color}
         paused={false}
@@ -44,7 +41,7 @@ const Header = (props) => {
           {title}
         </Typography>
       </Box>
-    </Container>
+    </Box>
   );
 };
 

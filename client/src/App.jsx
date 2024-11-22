@@ -1,10 +1,12 @@
 import React from "react";
+import { DisplayUserPage } from "./Pages/displayUser/DisplayUserPage";
+import ThemeProvider from "@mui/material/styles/ThemeProvider";
+import useTheme from "@mui/material/styles/useTheme";
+
 import "./App.css";
-import { ThemeProvider, useTheme } from "@mui/material";
 import { useData } from "./hooks/useData";
 import LoginPage from "./Pages/login/LoginPage";
 import Header from "./components/Header/Header.component";
-import { DisplayUserPage } from "./Pages/displayUser/DisplayUserPage";
 import Container from "@mui/material/Container";
 
 const App = () => {
