@@ -70,7 +70,11 @@ root.render(
                 // @ts-ignore
                 exact
                 path="/"
-                element={<App />}
+                element={
+                  <ThemeProvider theme={theme}>
+                    <App />
+                  </ThemeProvider>
+                }
               />
               <Route path="/display-user" element={<DisplayUserPage />} />
               <Route path="/order-coffee" element={<OrderPage socket={socket} />} />

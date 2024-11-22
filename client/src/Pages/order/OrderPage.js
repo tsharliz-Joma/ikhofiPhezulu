@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { OrderForm } from "../../Forms/orderForm/OrderForm";
-import Header from "../../components/Header/Header.component";
+import Header from "../../components/header/Header.component";
 import { ThemeProvider, useTheme } from "@mui/material";
 import { useData } from "../../hooks/useData";
 import axios from "axios";
-import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import { SuccessModal } from "../../components/SuccessModal/SuccessModal";
+import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
+import { SuccessModal } from "../../components/successModal/SuccessModal";
 // const backEndUrl =
 //   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/coffee";
 const backEndUrl = "http://localhost:1969/api/coffee";

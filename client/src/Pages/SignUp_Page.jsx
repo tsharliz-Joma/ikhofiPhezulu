@@ -1,6 +1,6 @@
 import React from "react";
 import SignUpForm from "../Forms/SignUp_Form";
-import Header from "../components/Header/Header.component";
+import Header from "../components/header/Header.component";
 import { Box, CssBaseline, useTheme, Container } from "@mui/material";
 
 const SignUpPage = () => {
@@ -9,12 +9,7 @@ const SignUpPage = () => {
   return (
     <Box>
       <CssBaseline />
-      <Header
-        title="Late Registration"
-        theme={theme}
-        fontSize={36}
-        color={theme.palette.primary.main}
-      />
+      <Header title="Late Registration" theme={theme} fontSize={36} color={theme.palette.primary.main} />
       <Container>
         <Box
           sx={{
@@ -28,7 +23,8 @@ const SignUpPage = () => {
             typography: "h6",
             padding: "25px 0",
             fontFamily: "monospace",
-          }}></Box>
+          }}
+        ></Box>
       </Container>
       <SignUpForm />
     </Box>

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import jwt from "jsonwebtoken";
 
 const registerAdminUrl = "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/adminRegistration";
 

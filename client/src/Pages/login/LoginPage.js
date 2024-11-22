@@ -1,11 +1,10 @@
+import React, { useState } from "react";
+import { useGoogleLogin } from "@react-oauth/google";
 import LoginForm from "../../Forms/loginForm/LoginForm";
 import { Container, Grid, GridItem } from "../../styles/globals";
 import axios from "axios";
-import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useData } from "../../hooks/useData";
-import { useGoogleLogin } from "@react-oauth/google";
-import { useMemo } from "react";
 import jwt from "jsonwebtoken";
 
 // const backEndUserLogin = "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/login";

@@ -9,7 +9,13 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "incremental": true
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@/hooks/*": ["src/hooks/*"],
+      "@/components/*": ["src/components/*"]
+    }
   },
   "include": ["src", "**/*.ts", "**/*.jsx", "**/*.tsx"],
   "exclude": ["node_modules"]

@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
-import UserAuthenticatedComponent from "../../components/AuthenticatedUser/AuthenticatedUser";
-import character from "../../images/character.png";
-import { useData } from "../../hooks/useData";
-import { useUserState } from "../../hooks/useUserState";
-import { Container } from "./DisplayUser.styles";
-import { CssBaseline, Typography, Link, Button } from "@mui/material";
-import { UserContainer, ButtonContainer, Image } from "./DisplayUser.styles";
+import React from "react";
+import CssBaseline from "@mui/material/CssBaseline";
+import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
+import Button from "@mui/material/Button";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { Container, UserContainer, ButtonContainer, Image } from "./DisplayUser.styles";
+import { useData } from "../../hooks/useData";
 
 export const DisplayUserPage = () => {
   const { state } = useData();
@@ -17,7 +16,7 @@ export const DisplayUserPage = () => {
     <Container>
       <CssBaseline />
       <UserContainer>
-        <Image src={character} alt={"user-profile-pic"} />
+        {/* <Image src={character} alt={"user-profile-pic"} /> */}
         <Typography sx={{ fontSize: "32px", textAlign: "center" }}>{user.name}</Typography>
       </UserContainer>
       <ButtonContainer>

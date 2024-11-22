@@ -6,20 +6,19 @@ import useTheme from "@mui/material/styles/useTheme";
 import "./App.css";
 import { useData } from "./hooks/useData";
 import LoginPage from "./Pages/login/LoginPage";
-import Header from "./components/Header/Header.component";
+import Header from "./components/header/Header.component";
 import Container from "@mui/material/Container";
 
 const App = () => {
-  const theme = useTheme();
   const { state } = useData();
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Container maxWidth={"sm"}>
-        <Header title="Coffee up" theme={theme} color={theme.palette.primary.main} fontSize={42} />
+        <Header title="Coffee up" fontSize={42} />
         {state.user ? <DisplayUserPage {...state} /> : <LoginPage />}
       </Container>
-    </ThemeProvider>
+    </>
   );
 };
 

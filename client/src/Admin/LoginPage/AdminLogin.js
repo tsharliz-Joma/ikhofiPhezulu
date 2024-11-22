@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import jwt from "jsonwebtoken";
 import LoginForm from "../../Forms/loginForm/LoginForm";
-import Header from "../../components/Header/Header.component";
 
 // const loginAdminUrl =
 //   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/adminLogin";

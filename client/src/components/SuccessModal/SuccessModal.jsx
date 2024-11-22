@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@mui/material";
+import Box from "@mui/material/Box";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import styled from "styled-components";
 

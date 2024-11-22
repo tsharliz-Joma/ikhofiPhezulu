@@ -1,13 +1,12 @@
 import axios from "axios";
-import React, { useState, useEffect, useRef } from "react";
-import List from "../../components/List/List";
-import DialogueBox from "../../components/DialogueBox/DialogueBox";
-import Header from "../../components/Header/Header.component";
-// @ts-ignore
-import { Container, Box, useTheme, CssBaseline, Grid } from "@mui/material";
-import { useData } from "../../hooks/useData";
-import { useOrders } from "../../hooks/useOrders";
+import React, { useState } from "react";
+import List from "@/components/list/List";
+import DialogueBox from "@/components/dialogueBox/DialogueBox";
+import Header from "@/components/header/Header.component";
+import useTheme from "@mui/material/styles/useTheme";
+import CssBaseline from "@mui/material/CssBaseline";
 import styled from "styled-components";
+import { useOrders } from "@/hooks/useOrders";
 
 const GridContainer = styled.div`
   display: grid;
@@ -39,11 +38,11 @@ const Dashboard = ({ socket }) => {
   const handleOrder = (e) => {
     setSelected(false);
     setOpen(false);
-
     try {
       socket.emit("order complete", selectedCoffee);
       axios.post(deleteOrderUrl, selectedCoffee).then((res) => {
         refetch();
+        return res;
       });
     } catch (error) {
       console.log(error);
@@ -59,7 +58,7 @@ const Dashboard = ({ socket }) => {
   return (
     <>
       <CssBaseline />
-      <Header title="Dashboard" theme={theme} color={theme.palette.primary.white} fontSize={42} />
+      <Header title="Dashboard" />
       <GridContainer>
         {orders.length !== 0 && (
           <>
