@@ -1,4 +1,4 @@
-import { FormModel } from "../types/form"
+import { FormModel } from "@/types/form"
 
 export interface AdminPropsModel {
     title?: String,

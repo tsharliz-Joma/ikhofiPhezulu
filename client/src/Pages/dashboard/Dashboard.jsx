@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import List from "@/components/list/List";
 import DialogueBox from "@/components/dialogueBox/DialogueBox";
 import Header from "@/components/header/Header.component";
@@ -15,19 +15,36 @@ const GridContainer = styled.div`
 `;
 
 // const viewOrderUrl =
-// "https://ikhofiphezulu-server-19652a0dabe7.herokuapp.com/api/view-orders";
-const viewOrderUrl = "http://localhost:1969/api/view-orders";
+// "https://ikhofiphezulu-server-19652a0dabe7.herokuapp.com/api/orders";
+const viewOrderApi = "http://localhost:1969/api/orders";
 
 // const deleteOrderUrl =
 //   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/sendCoffee";
 const deleteOrderUrl = "http://localhost:1969/api/sendCoffee";
 
 const Dashboard = ({ socket }) => {
-  const { orders, loading, error, refetch } = useOrders(viewOrderUrl, socket);
+  const { orders, loading, error, refetch } = useOrders(viewOrderApi, socket);
+  const [test, setTest] = useState("");
   const [selected, setSelected] = useState(false);
   const [selectedCoffee, setSelectedCoffee] = useState("");
   const [open, setOpen] = useState(false);
   const theme = useTheme();
+
+  console.log(orders)
+
+  // useEffect(() => {
+  //   socket.on("order status update", (data) => {
+  //     setTest((prevOrders) =>
+  //       prevOrders.map((order) =>
+  //         order._id === data.orderId ? { ...order, status: data.status } : order
+  //       )
+  //     );
+  //   });
+
+  //   return () => {
+  //     socket.off("order status update");
+  //   };
+  // }, [socket]);
 
   const displayOptions = (coffee) => {
     setSelectedCoffee(coffee);
@@ -64,7 +81,12 @@ const Dashboard = ({ socket }) => {
           <>
             <List list={orders} onClick={displayOptions} theme={theme} />
             {selected && (
-              <DialogueBox handleOrder={handleOrder} open={open} onClose={handleClose} selectedCoffee={selectedCoffee} />
+              <DialogueBox
+                handleOrder={handleOrder}
+                open={open}
+                onClose={handleClose}
+                selectedCoffee={selectedCoffee}
+              />
             )}
           </>
         )}

@@ -1,30 +1,29 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Route, Routes } from "react-router";
-import OrderPage from "./Pages/order/OrderPage";
-import AdminSignUp from "./admin/SignUpPage/AdminSignUp";
-import AdminLogin from "./admin/LoginPage/AdminLogin";
-import Dashboard from "./Pages/dashboard/Dashboard";
-import LoginPage from "./Pages/login/LoginPage";
+import ReactDOM from "react-dom/client";
+import { io } from "socket.io-client";
+import App from "./App";
+import OrderPage from "./pages/order/OrderPage";
+import AdminSignUp from "./pages/admin/signUpPage/Page";
+import AdminLogin from "./pages/admin/loginPage/Page";
+import Dashboard from "./pages/dashboard/Dashboard";
+import LoginPage from "./pages/login/LoginPage";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import * as io from "socket.io-client";
-// import LoginForm from "./LoginForm/LoginForm";
-import SignUpPage from "./Pages/SignUp_Page";
-import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
-import { ContextProvider } from "./Context/ContextProvider";
-import { DisplayUserPage } from "./Pages/displayUser/DisplayUserPage";
+import SignUpPage from "./pages/signup/SignupPage";
+import { ThemeProvider, createTheme } from "@mui/material";
+import { ContextProvider } from "./context/ContextProvider";
+import { DisplayUserPage } from "./pages/displayUser/DisplayUserPage";
 
-// const socket = io.connect(
+// const socket = io(
 //   "https://ikhofiphezulu-server-19652a0dabe7.herokuapp.com",
 // );
-const socket = io.connect("http://localhost:1969");
+const socket = io("http://localhost:1969");
 
 const themeOptions = {
   palette: {
@@ -72,7 +71,7 @@ root.render(
                 path="/"
                 element={
                   <ThemeProvider theme={theme}>
-                    <App />
+                    <App socket={socket} />
                   </ThemeProvider>
                 }
               />

@@ -6,12 +6,17 @@ export const useOrders = (api, socket) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
+  for (let i = 0; i < 3; i++) {
+    console.log(socket);
+  }
+
   const fetchOrders = async () => {
     setLoading(true);
     setError(null);
     try {
       const response = await axios.get(api);
-      if (response.data.orders === "No Coffee Orders") {
+      console.log(response);
+      if (response.data.error === "No Coffee Orders") {
         setError("No Coffee Orders");
         setOrders([]);
       } else {
@@ -26,16 +31,22 @@ export const useOrders = (api, socket) => {
 
   useEffect(() => {
     fetchOrders();
+
+    const handleNewOrder = (order) => {
+      console.log("New order received:", order);
+      setOrders((prevOrders) => [...prevOrders, order]);
+    };
+
     if (socket) {
-      socket.on("new order", (order) => {
-        setOrders((orders) => [...orders, order]);
-      });
+      socket.on("new order", handleNewOrder);
     }
 
     return () => {
-      if (socket) socket.disconnect();
+      if (socket) {
+        socket.off("new order", handleNewOrder);
+      }
     };
-  }, [socket, api]);
+  }, [api, socket]);
 
   return { orders, loading, error, refetch: fetchOrders };
 };

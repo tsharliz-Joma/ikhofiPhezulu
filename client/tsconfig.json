@@ -14,7 +14,8 @@
     "paths": {
       "@/*": ["src/*"],
       "@/hooks/*": ["src/hooks/*"],
-      "@/components/*": ["src/components/*"]
+      "@/components/*": ["src/components/*"],
+      "@/forms/*": ["src/forms/*"]
     }
   },
   "include": ["src", "**/*.ts", "**/*.jsx", "**/*.tsx"],

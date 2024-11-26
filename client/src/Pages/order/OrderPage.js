@@ -1,26 +1,38 @@
 import React, { useEffect, useState } from "react";
-import { OrderForm } from "../../Forms/orderForm/OrderForm";
-import Header from "../../components/header/Header.component";
+import OrderForm from "@/forms/orderForm/OrderForm";
 import { ThemeProvider, useTheme } from "@mui/material";
-import { useData } from "../../hooks/useData";
+import { useData } from "@/hooks/useData";
 import axios from "axios";
-import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
-import { SuccessModal } from "../../components/successModal/SuccessModal";
+import LoadingSpinner from "@/components/loadingSpinner/LoadingSpinner";
+import { SuccessModal } from "@/components/successModal/SuccessModal";
+import OrderStatusTracker from "@/components/orderStatusTracker/OrderStatusTracker";
+
 // const backEndUrl =
 //   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/coffee";
 const backEndUrl = "http://localhost:1969/api/coffee";
 
 const OrderPage = ({ socket }) => {
+  const theme = useTheme();
+  const { state } = useData();
+  const { user } = state;
   const [isLoading, setIsLoading] = useState(null);
   const [showError, setShowError] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
   const [submitted, setSubmitted] = useState(null);
+  const [orderStatus, setOrderStatus] = useState("Order Placed");
 
-  const theme = useTheme();
-  const { state, dispatch } = useData();
-  const { user } = state;
+  // useEffect(() => {
+  //   socket.on("order status update", (data) => {
+  //     if (data.userId === user?.user?.jti) {
+  //       setOrderStatus(data.status);
+  //     }
+  //   });
 
-  console.log(submitted);
+  //   return () => {
+  //     socket.off("order status update");
+  //   };
+  // }, [socket, user]);
+  
 
   const handleSubmit = async (FormData) => {
     setIsLoading(true);
@@ -57,9 +69,9 @@ const OrderPage = ({ socket }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Header title="Order" theme={theme} color={theme.palette.primary.main} fontSize={"36px"} />
       {isLoading && <LoadingSpinner />}
       {showSuccess && <SuccessModal />}
+      {submitted && <OrderStatusTracker socket={socket} status={orderStatus} />}
       <OrderForm socket={socket} user={state.user} handleSubmit={handleSubmit} />
     </ThemeProvider>
   );

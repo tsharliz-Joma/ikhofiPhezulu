@@ -100,8 +100,8 @@ const LoginForm = ({ handleSubmit, handleGoogleLogin, handleGoogleError, onSucce
                   Sign In
                 </Button>
               </Grid>
-              <Grid item xs={6}>
-                <GoogleLogin onSuccess={onSuccess} onError={onError} />
+              <Grid item xs={3}>
+                <GoogleLogin size={"medium"} onSuccess={onSuccess} onError={onError} />
               </Grid>
             </Grid>
             <Grid container>

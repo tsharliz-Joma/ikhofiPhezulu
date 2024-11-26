@@ -12,7 +12,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import "../../App.css";
 import { useData } from "../../hooks/useData";
 
-export const OrderForm = forwardRef(({ socket, handleSubmit }, ref) => {
+const OrderForm = forwardRef(({ socket, handleSubmit }, ref) => {
   const formRef = useRef(null);
   const invalidClasses = ["!border-feedback-red", "!text-feedback-red", "placeholder:!text-feedback-red"];
   const { state } = useData();
@@ -140,3 +140,5 @@ export const OrderForm = forwardRef(({ socket, handleSubmit }, ref) => {
     </>
   );
 });
+
+export default OrderForm;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
-import LoginForm from "../../Forms/loginForm/LoginForm";
+import LoginForm from "../../forms/loginForm/LoginForm";
 import { Container, Grid, GridItem } from "../../styles/globals";
 import axios from "axios";
 import { useNavigate } from "react-router";
@@ -50,11 +50,10 @@ const LoginPage = () => {
         dispatch({ type: "LOGIN", payload: userData });
         navigate("/order-coffee");
       } else {
-        alert("Please Check your username and password");
         setShowError(true);
       }
     } catch (e) {
-      console.log(e);
+      console.error(e);
     } finally {
       setIsLoading(false);
     }

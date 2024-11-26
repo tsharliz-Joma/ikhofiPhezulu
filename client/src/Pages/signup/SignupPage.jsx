@@ -1,15 +1,15 @@
 import React from "react";
-import SignUpForm from "../Forms/SignUp_Form";
-import Header from "../components/header/Header.component";
-import { Box, CssBaseline, useTheme, Container } from "@mui/material";
+import SignUpForm from "../../forms/SignUp_Form";
+import Header from "../../components/header/Header.component";
+import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
+import Container from "@mui/material/Container";
 
 const SignUpPage = () => {
-  const theme = useTheme();
-
   return (
     <Box>
       <CssBaseline />
-      <Header title="Late Registration" theme={theme} fontSize={36} color={theme.palette.primary.main} />
+      <Header fontSize={36} />
       <Container>
         <Box
           sx={{
