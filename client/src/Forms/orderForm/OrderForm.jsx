@@ -16,7 +16,6 @@ const OrderForm = forwardRef(({ socket, handleSubmit }, ref) => {
   const formRef = useRef(null);
   const invalidClasses = ["!border-feedback-red", "!text-feedback-red", "placeholder:!text-feedback-red"];
   const { state } = useData();
-  const { user } = state;
 
   const onSubmit = (e) => {
     e.preventDefault();

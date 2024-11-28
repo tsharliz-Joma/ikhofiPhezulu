@@ -35,19 +35,18 @@ const OrderStatusTracker = ({ orderId, socket }) => {
   ]);
 
   useEffect(() => {
-    socket.onopen = () => {
-      socket.send(JSON.stringify({ action: "subscribe", orderId }));
-    };
-
-    socket.onmessage = (message) => {
-      const { type, data } = JSON.parse(message.data);
-      if (type === "order_update" && data.orderId === orderId) {
-        updateSteps(data.status);
-      }
-    };
+    if (socket) {
+      socket.on("orderStatusUpdate", (newStatus) => {
+        if (newStatus.orderId === orderId) {
+          updateSteps(newStatus.status);
+        }
+      });
+    }
 
     return () => {
-      socket.close();
+      if (socket) {
+        socket.off("orderStatusUpdate");
+      }
     };
   }, [orderId, socket]);
 

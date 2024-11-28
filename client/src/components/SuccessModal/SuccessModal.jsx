@@ -1,5 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import styled from "styled-components";
 
@@ -19,23 +20,30 @@ const Overlay = styled(Box)`
 const SuccessContainer = styled(Box)`
   background-color: green;
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   border: 2px solid white;
+  padding: 20px;
+  text-align: center;
 `;
 
 const SuccessIcon = styled(CheckCircleIcon)`
   color: white;
   font-size: 50px;
+  margin-bottom: 10px;
 `;
 
 export const SuccessModal = () => {
   return (
     <Overlay>
       <SuccessContainer>
+        <Typography variant="body1" sx={{ color: "white" }}>
+          Order Successfully Submitted. Look out for a text message soon!
+        </Typography>
         <SuccessIcon />
       </SuccessContainer>
     </Overlay>

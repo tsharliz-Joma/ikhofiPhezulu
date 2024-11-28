@@ -6,16 +6,11 @@ export const useOrders = (api, socket) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  for (let i = 0; i < 3; i++) {
-    console.log(socket);
-  }
-
   const fetchOrders = async () => {
     setLoading(true);
     setError(null);
     try {
       const response = await axios.get(api);
-      console.log(response);
       if (response.data.error === "No Coffee Orders") {
         setError("No Coffee Orders");
         setOrders([]);

@@ -21,17 +21,17 @@ const OrderPage = ({ socket }) => {
   const [submitted, setSubmitted] = useState(null);
   const [orderStatus, setOrderStatus] = useState("Order Placed");
 
-  // useEffect(() => {
-  //   socket.on("order status update", (data) => {
-  //     if (data.userId === user?.user?.jti) {
-  //       setOrderStatus(data.status);
-  //     }
-  //   });
+  useEffect(() => {
+    socket.on("order status update", (data) => {
+      if (data.userId === user?.user?.jti) {
+        setOrderStatus(data.status);
+      }
+    });
 
-  //   return () => {
-  //     socket.off("order status update");
-  //   };
-  // }, [socket, user]);
+    return () => {
+      socket.off("order status update");
+    };
+  }, [socket, user]);
   
 
   const handleSubmit = async (FormData) => {
@@ -54,7 +54,7 @@ const OrderPage = ({ socket }) => {
         setShowSuccess(true);
         setTimeout(() => {
           setShowSuccess(false);
-        }, 1500);
+        }, 1750);
         return response;
       } else {
         alert("Order Successfully Submitted");
@@ -71,7 +71,7 @@ const OrderPage = ({ socket }) => {
     <ThemeProvider theme={theme}>
       {isLoading && <LoadingSpinner />}
       {showSuccess && <SuccessModal />}
-      {submitted && <OrderStatusTracker socket={socket} status={orderStatus} />}
+      {/* {submitted && <OrderStatusTracker socket={socket} status={orderStatus} />} */}
       <OrderForm socket={socket} user={state.user} handleSubmit={handleSubmit} />
     </ThemeProvider>
   );

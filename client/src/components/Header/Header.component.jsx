@@ -3,6 +3,7 @@ import React from "react";
 import Wave from "react-wavify";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
 import useTheme from "@mui/material/styles/useTheme";
 
 const Header = ({ title, fontSize }) => {
@@ -28,21 +29,18 @@ const Header = ({ title, fontSize }) => {
           points: 4,
         }}
       />
-      <Box
-        sx={{
-          position: "absolute",
-          top: "0px",
-        }}
-      >
+      <Container maxWidth="sm">
         <Typography
           variant="h3"
           sx={{
             color: "#000",
+            position: "absolute",
+            top: "0px",
           }}
         >
           {title}
         </Typography>
-      </Box>
+      </Container>
     </Box>
   );
 };
