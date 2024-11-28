@@ -17,7 +17,11 @@ const Header = ({ title, fontSize }) => {
   };
 
   return (
-    <Box fontFamily={theme.typography.fontFamily} xs={12} sx={{ width: "100%" }}>
+    <Box
+      fontFamily={theme.typography.fontFamily}
+      xs={12}
+      sx={{ width: "100%", textAlign: "center" }}
+    >
       <Wave
         fill={theme.palette.primary.main}
         paused={false}
@@ -29,7 +33,7 @@ const Header = ({ title, fontSize }) => {
           points: 4,
         }}
       />
-      <Container maxWidth="sm">
+      <Container sx={{ display: "flex", justifyContent: "center" }}>
         <Typography
           variant="h3"
           sx={{

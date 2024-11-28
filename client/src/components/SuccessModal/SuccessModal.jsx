@@ -40,10 +40,10 @@ const SuccessIcon = styled(CheckCircleIcon)`
 export const SuccessModal = () => {
   return (
     <Overlay>
+      <Typography variant="body1" sx={{ color: "white" }}>
+        Order Successfully Submitted. Look out for a text message soon!
+      </Typography>
       <SuccessContainer>
-        <Typography variant="body1" sx={{ color: "white" }}>
-          Order Successfully Submitted. Look out for a text message soon!
-        </Typography>
         <SuccessIcon />
       </SuccessContainer>
     </Overlay>

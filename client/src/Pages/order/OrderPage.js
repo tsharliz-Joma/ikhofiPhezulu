@@ -38,8 +38,6 @@ const OrderPage = ({ socket }) => {
     setIsLoading(true);
     const submitData = {
       name: FormData.get("name"),
-      userId: user?.user?.jti,
-      email: user?.user?.email,
       number: FormData.get("number"),
       coffeeName: FormData.get("coffeeName"),
       coffeeMilk: FormData.get("coffeeMilk"),
