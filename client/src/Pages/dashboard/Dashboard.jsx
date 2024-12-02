@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import List from "@/components/list/List";
 import DialogueBox from "@/components/dialogueBox/DialogueBox";
 import Header from "@/components/header/Header.component";
@@ -16,18 +16,15 @@ const GridContainer = styled.div`
 
 // const viewOrderApi =
 // "https://ikhofiphezulu-server-19652a0dabe7.herokuapp.com/api/orders";
-const viewOrderApi = "http://localhost:1969/api/orders";
 
 // const deleteOrderApi =
 //   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/sendCoffee";
-const deleteOrderApi = "http://localhost:1969/api/sendCoffee";
 
 const Dashboard = ({ socket }) => {
-  const { orders, loading, error, refetch } = useOrders(
+  const { orders, refetch } = useOrders(
     process.env.REACT_APP_VIEW_ORDERS_API,
     socket
   );
-  const [test, setTest] = useState("");
   const [selected, setSelected] = useState(false);
   const [selectedCoffee, setSelectedCoffee] = useState("");
   const [open, setOpen] = useState(false);
@@ -77,7 +74,7 @@ const Dashboard = ({ socket }) => {
     <>
       <CssBaseline />
       <Header title="Dashboard" />
-      <Container maxWidth={"sm"}>
+      <Container maxWidth={"xs"}>
         <GridContainer>
           {orders.length !== 0 && (
             <>

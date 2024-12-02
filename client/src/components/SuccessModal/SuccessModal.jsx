@@ -12,6 +12,7 @@ const Overlay = styled(Box)`
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   z-index: 9999;
@@ -23,7 +24,6 @@ const SuccessContainer = styled(Box)`
   width: 150px;
   height: 150px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   border: 2px solid white;
@@ -34,18 +34,19 @@ const SuccessContainer = styled(Box)`
 const SuccessIcon = styled(CheckCircleIcon)`
   color: white;
   font-size: 50px;
-  margin-bottom: 10px;
 `;
 
 export const SuccessModal = () => {
   return (
     <Overlay>
-      <Typography variant="body1" sx={{ color: "white" }}>
-        Order Successfully Submitted. Look out for a text message soon!
-      </Typography>
       <SuccessContainer>
         <SuccessIcon />
       </SuccessContainer>
+      <Typography variant="h6" sx={{ color: "white", marginTop: 2, textAlign: "center" }}>
+        Order Successfully Submitted. Look out for a text message soon!
+      </Typography>
     </Overlay>
   );
 };
+
+export default SuccessModal;

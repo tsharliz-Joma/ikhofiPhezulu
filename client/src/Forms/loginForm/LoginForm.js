@@ -12,7 +12,11 @@ import Avatar from "@mui/material/Avatar";
 
 const LoginForm = ({ handleSubmit, handleGoogleLogin, handleGoogleError, onSuccess, onError }) => {
   const formRef = useRef(null);
-  const invalidClasses = ["!border-feedback-red", "!text-feedback-red", "placeholder:!text-feedback-red"];
+  const invalidClasses = [
+    "!border-feedback-red",
+    "!text-feedback-red",
+    "placeholder:!text-feedback-red",
+  ];
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -42,7 +46,7 @@ const LoginForm = ({ handleSubmit, handleGoogleLogin, handleGoogleError, onSucce
 
   return (
     <>
-      <Container maxWidth="sm" sx={{ margin: "0px 0px 10% 0px" }}>
+      <Container maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
@@ -93,7 +97,10 @@ const LoginForm = ({ handleSubmit, handleGoogleLogin, handleGoogleError, onSucce
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel control={<Checkbox value="remember" color="primary" size="small" />} label="Remember me" />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" size="small" />}
+              label="Remember me"
+            />
             <Grid container spacing={2} sx={{ my: 3 }}>
               <Grid item xs={6}>
                 <Button type="submit" fullWidth variant="contained" sx={{ fontSize: 16 }}>
@@ -114,18 +121,6 @@ const LoginForm = ({ handleSubmit, handleGoogleLogin, handleGoogleError, onSucce
                 >
                   <Link href="#" color="inherit" underline={"hover"}>
                     Forgot password?
-                  </Link>
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography
-                  sx={{
-                    color: "info.light",
-                    fontSize: { xs: "12px", md: "16px" },
-                  }}
-                >
-                  <Link href="/register" color={"inherit"} underline={"hover"}>
-                    {"Don't have an account? Sign Up"}
                   </Link>
                 </Typography>
               </Grid>

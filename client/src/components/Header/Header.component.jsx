@@ -1,51 +1,34 @@
 // @ts-nocheck
 import React from "react";
-import Wave from "react-wavify";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import useTheme from "@mui/material/styles/useTheme";
+import styled from "@emotion/styled";
+
+const StyledHeader = styled(Box)`
+  width: 100%;
+`;
 
 const Header = ({ title, fontSize }) => {
   const theme = useTheme();
-  const waveCustomStyles = {
-    position: "relative",
-    top: "0px",
-    display: "flex",
-    width: "100%",
-    transform: "rotate(180deg)",
-  };
-
   return (
-    <Box
-      fontFamily={theme.typography.fontFamily}
-      xs={12}
-      sx={{ width: "100%", textAlign: "center" }}
-    >
-      <Wave
-        fill={theme.palette.primary.main}
-        paused={false}
-        style={waveCustomStyles}
-        options={{
-          height: 15,
-          amplitude: 10,
-          speed: 0.2,
-          points: 4,
+    <StyledHeader fontFamily={theme.typography.fontFamily} xs={12}>
+      <Container
+        maxWidth="xs"
+        sx={{
+          backgroundColor: theme.palette.primary.main,
+          display: "flex",
+          justifyContent: "center",
+          padding: "40px 0px",
+          textTransform: "uppercase",
+          borderBottomLeftRadius: "10px",
+          borderBottomRightRadius: "10px",
         }}
-      />
-      <Container sx={{ display: "flex", justifyContent: "center" }}>
-        <Typography
-          variant="h3"
-          sx={{
-            color: "#000",
-            position: "absolute",
-            top: "0px",
-          }}
-        >
-          {title}
-        </Typography>
+      >
+        <Typography variant="h3">{title}</Typography>
       </Container>
-    </Box>
+    </StyledHeader>
   );
 };
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
 export const useOrders = (api, socket) => {
@@ -6,7 +6,7 @@ export const useOrders = (api, socket) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  const fetchOrders = async () => {
+  const fetchOrders = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
@@ -22,7 +22,7 @@ export const useOrders = (api, socket) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [api]);
 
   useEffect(() => {
     fetchOrders();
@@ -41,7 +41,7 @@ export const useOrders = (api, socket) => {
         socket.off("new order", handleNewOrder);
       }
     };
-  }, [api, socket]);
+  }, [api, socket, fetchOrders]);
 
   return { orders, loading, error, refetch: fetchOrders };
 };

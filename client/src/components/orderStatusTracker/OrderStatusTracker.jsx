@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -34,6 +34,19 @@ const OrderStatusTracker = ({ orderId, socket }) => {
     { label: "Picked Up", completed: false },
   ]);
 
+  const updateSteps = useCallback(
+    (newStatus) => {
+      const updatedSteps = steps.map((step) => ({
+        ...step,
+        completed: step.label === newStatus || step.completed,
+      }));
+
+      setSteps(updatedSteps);
+      setStatus(newStatus);
+    },
+    [steps]
+  );
+
   useEffect(() => {
     if (socket) {
       socket.on("orderStatusUpdate", (newStatus) => {
@@ -48,17 +61,7 @@ const OrderStatusTracker = ({ orderId, socket }) => {
         socket.off("orderStatusUpdate");
       }
     };
-  }, [orderId, socket]);
-
-  const updateSteps = (newStatus) => {
-    const updatedSteps = steps.map((step) => ({
-      ...step,
-      completed: step.label === newStatus || step.completed,
-    }));
-
-    setSteps(updatedSteps);
-    setStatus(newStatus);
-  };
+  }, [orderId, socket, updateSteps]);
 
   return (
     <Container>

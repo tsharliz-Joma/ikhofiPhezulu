@@ -1,4 +1,4 @@
-import React, { useRef, useImperativeHandle, forwardRef } from "react";
+import React, { useRef, forwardRef } from "react";
 // Material UI
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
@@ -10,12 +10,14 @@ import Box from "@mui/material/Box";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import "../../App.css";
-import { useData } from "../../hooks/useData";
 
 const OrderForm = forwardRef(({ socket, handleSubmit }, ref) => {
   const formRef = useRef(null);
-  const invalidClasses = ["!border-feedback-red", "!text-feedback-red", "placeholder:!text-feedback-red"];
-  const { state } = useData();
+  const invalidClasses = [
+    "!border-feedback-red",
+    "!text-feedback-red",
+    "placeholder:!text-feedback-red",
+  ];
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -49,19 +51,20 @@ const OrderForm = forwardRef(({ socket, handleSubmit }, ref) => {
 
   return (
     <>
-      <Container maxWidth="sm">
+      <Container maxWidth="xs">
         <CssBaseline />
-        <Box
-          sx={{
-            marginTop: "50px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            width: "100%",
-          }}
-        >
+        <Box>
           <form onSubmit={onSubmit} ref={formRef}>
-            <TextField margin="normal" required fullWidth id="name" label="Name" name="name" autoComplete="name" autoFocus />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="name"
+              label="Name"
+              name="name"
+              autoComplete="name"
+              autoFocus
+            />
             <TextField
               margin="normal"
               required

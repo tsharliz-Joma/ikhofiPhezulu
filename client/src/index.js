@@ -5,7 +5,6 @@ import ReactDOM from "react-dom/client";
 import { io } from "socket.io-client";
 import App from "./App";
 import OrderPage from "./pages/order/OrderPage";
-import AdminSignUp from "./pages/admin/signUpPage/Page";
 import AdminLogin from "./pages/admin/loginPage/Page";
 import Dashboard from "./pages/dashboard/Dashboard";
 import LoginPage from "./pages/login/LoginPage";
@@ -14,11 +13,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
-import SignUpPage from "./pages/signup/SignupPage";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { ContextProvider } from "./context/ContextProvider";
-import { DisplayUserPage } from "./pages/displayUser/DisplayUserPage";
+import PasswordProtection from "./components/passwordProtection/PasswordProtectoin";
 
 // const socket = io(
 //   "https://ikhofiphezulu-server-19652a0dabe7.herokuapp.com",
@@ -75,11 +72,15 @@ root.render(
                   </ThemeProvider>
                 }
               />
-              <Route path="/display-user" element={<DisplayUserPage />} />
               <Route path="/order-coffee" element={<OrderPage socket={socket} />} />
-              <Route path="/register" element={<SignUpPage />} />
-              <Route path="/adminRegister" element={<AdminSignUp />} />
-              <Route path="/adminLogin" element={<AdminLogin />} />
+              <Route
+                path="/admin"
+                element={
+                  <PasswordProtection>
+                    <AdminLogin />
+                  </PasswordProtection>
+                }
+              />
               <Route path="/dashboard" element={<Dashboard socket={socket} />} />
               <Route path="/login" element={<LoginPage />} />
             </Routes>

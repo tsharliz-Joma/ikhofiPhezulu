@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import LoginForm from "../../forms/loginForm/LoginForm";
-import { Container, Grid, GridItem } from "../../styles/globals";
+import { StyledContainer } from "../../styles/globals";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { useData } from "../../hooks/useData";
 import jwt from "jsonwebtoken";
+import LoadingSpinner from "@/components/loadingSpinner/LoadingSpinner";
+import ErrorDisplay from "@/components/error/ErrorDisplay";
 
 // const backEndUserLogin = "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/login";
 const backEndUserLogin = "http://localhost:1969/api/login";
 
 const LoginPage = () => {
-  const { state, dispatch } = useData();
+  const { dispatch } = useData();
   const [isLoading, setIsLoading] = useState(false);
   const [showError, setShowError] = useState(null);
-  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   const onSuccess = (response) => {
@@ -60,7 +61,9 @@ const LoginPage = () => {
   };
 
   return (
-    <Container>
+    <StyledContainer>
+      {isLoading && <LoadingSpinner />}
+      {showError && <ErrorDisplay />}
       <LoginForm
         handleSubmit={handleSubmit}
         handleGoogleLogin={handleGoogleLogin}
@@ -68,7 +71,7 @@ const LoginPage = () => {
         onSuccess={onSuccess}
         onError={onError}
       />
-    </Container>
+    </StyledContainer>
   );
 };
 export default LoginPage;

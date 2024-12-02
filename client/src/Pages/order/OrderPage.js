@@ -5,7 +5,7 @@ import { useData } from "@/hooks/useData";
 import axios from "axios";
 import LoadingSpinner from "@/components/loadingSpinner/LoadingSpinner";
 import { SuccessModal } from "@/components/successModal/SuccessModal";
-import OrderStatusTracker from "@/components/orderStatusTracker/OrderStatusTracker";
+import ErrorDisplay from "@/components/error/ErrorDisplay";
 
 // const backEndUrl =
 //   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/coffee";
@@ -69,6 +69,7 @@ const OrderPage = ({ socket }) => {
     <ThemeProvider theme={theme}>
       {isLoading && <LoadingSpinner />}
       {showSuccess && <SuccessModal />}
+      {showError && <ErrorDisplay />}
       {/* {submitted && <OrderStatusTracker socket={socket} status={orderStatus} />} */}
       <OrderForm socket={socket} user={state.user} handleSubmit={handleSubmit} />
     </ThemeProvider>

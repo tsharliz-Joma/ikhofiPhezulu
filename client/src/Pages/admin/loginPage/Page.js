@@ -3,6 +3,8 @@ import { useData } from "@/hooks/useData";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import LoginForm from "@/forms/loginForm/LoginForm";
+import { StyledContainer } from "@/styles/globals";
+import Header from "@/components/header/Header.component";
 
 // const loginAdminUrl =
 //   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/adminLogin";
@@ -14,14 +16,6 @@ const AdminLogin = () => {
   const [showError, setShowError] = useState(null);
   const navigate = useNavigate();
 
-  // const handleName = (e) => {
-  //   setName(e.target.value);
-  // };
-
-  // const handlePassword = (e) => {
-  //   setPassword(e.target.value);
-  // };
-
   const handleSubmit = async (FormData) => {
     setIsLoading(true);
     const submitData = {
@@ -31,7 +25,8 @@ const AdminLogin = () => {
 
     try {
       const response = await axios.post(adminApiRoute, submitData);
-      if (response.status === 200) {
+      const adminKey = localStorage.getItem("$admin");
+      if (response.status === 200 && adminKey === "true") {
         const adminData = response.data;
         sessionStorage.setItem("adminToken", adminData.user);
         dispatch({ type: "LOGIN", payload: adminData });
@@ -47,10 +42,12 @@ const AdminLogin = () => {
   };
 
   return (
-    <div>
-      <h1>Coffee up admin</h1>
-      <LoginForm handleSubmit={handleSubmit} />
-    </div>
+    <>
+      <StyledContainer>
+        <Header title="Admin Login" />
+        <LoginForm handleSubmit={handleSubmit} />
+      </StyledContainer>
+    </>
   );
 };
 
