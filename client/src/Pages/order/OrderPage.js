@@ -5,21 +5,16 @@ import { useData } from "@/hooks/useData";
 import axios from "axios";
 import LoadingSpinner from "@/components/loadingSpinner/LoadingSpinner";
 import { SuccessModal } from "@/components/successModal/SuccessModal";
-import ErrorDisplay from "@/components/error/ErrorDisplay";
-
-// const backEndUrl =
-//   "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/coffee";
-const backEndUrl = "http://localhost:1969/api/coffee";
 
 const OrderPage = ({ socket }) => {
   const theme = useTheme();
   const { state } = useData();
   const { user } = state;
   const [isLoading, setIsLoading] = useState(null);
-  const [showError, setShowError] = useState(null);
+  const [, setShowError] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [submitted, setSubmitted] = useState(null);
-  const [orderStatus, setOrderStatus] = useState("Order Placed");
+  const [, setSubmitted] = useState(null);
+  const [, setOrderStatus] = useState("Order Placed");
 
   useEffect(() => {
     socket.on("order status update", (data) => {
@@ -32,7 +27,6 @@ const OrderPage = ({ socket }) => {
       socket.off("order status update");
     };
   }, [socket, user]);
-  
 
   const handleSubmit = async (FormData) => {
     setIsLoading(true);
@@ -46,7 +40,7 @@ const OrderPage = ({ socket }) => {
     };
     try {
       socket.emit("new order", submitData);
-      const response = await axios.post(backEndUrl, submitData);
+      const response = await axios.post(process.env.REACT_APP_CREATE_ORDER_API, submitData);
       if (response.status === 200) {
         setSubmitted(response.data.coffee);
         setShowSuccess(true);
@@ -69,7 +63,6 @@ const OrderPage = ({ socket }) => {
     <ThemeProvider theme={theme}>
       {isLoading && <LoadingSpinner />}
       {showSuccess && <SuccessModal />}
-      {showError && <ErrorDisplay />}
       {/* {submitted && <OrderStatusTracker socket={socket} status={orderStatus} />} */}
       <OrderForm socket={socket} user={state.user} handleSubmit={handleSubmit} />
     </ThemeProvider>

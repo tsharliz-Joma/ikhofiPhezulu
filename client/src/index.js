@@ -25,6 +25,10 @@ const socket = io("http://localhost:1969");
 const themeOptions = {
   palette: {
     mode: "dark",
+    background: {
+      default: "#121212", // Change this to your desired background color
+      paper: "#1d1d1d", // Change this to your desired paper color
+    },
     primary: {
       main: "#f2e2c5",
       light: "rgb(242, 171, 96)",
@@ -81,7 +85,14 @@ root.render(
                   </PasswordProtection>
                 }
               />
-              <Route path="/dashboard" element={<Dashboard socket={socket} />} />
+              <Route
+                path="/dashboard"
+                element={
+                  <PasswordProtection>
+                    <Dashboard socket={socket} />
+                  </PasswordProtection>
+                }
+              />
               <Route path="/login" element={<LoginPage />} />
             </Routes>
           </ThemeProvider>

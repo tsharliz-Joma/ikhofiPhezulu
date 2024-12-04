@@ -1,9 +1,9 @@
 import styled from "styled-components";
+import Box from "@mui/material/Box";
 
-export const StyledContainer = styled.div`
+export const StyledContainer = styled(Box)`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   gap: 40px;
   @media (max-width: 600px) {
     gap: 150px;

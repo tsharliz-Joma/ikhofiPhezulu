@@ -5,7 +5,7 @@ import Link from "@mui/material/Link";
 import Button from "@mui/material/Button";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { Container, UserContainer, ButtonContainer, Image } from "./DisplayUser.styles";
+import { Container, UserContainer, ButtonContainer } from "./DisplayUser.styles";
 import { useData } from "../../hooks/useData";
 
 export const DisplayUserPage = () => {
@@ -16,7 +16,6 @@ export const DisplayUserPage = () => {
     <Container>
       <CssBaseline />
       <UserContainer>
-        {/* <Image src={character} alt={"user-profile-pic"} /> */}
         <Typography sx={{ fontSize: "32px", textAlign: "center" }}>{user.name}</Typography>
       </UserContainer>
       <ButtonContainer>

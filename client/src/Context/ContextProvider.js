@@ -3,10 +3,16 @@ import jwt from "jsonwebtoken";
 
 // const getServerData = (url) => async () => {};
 
-const initialState = { user: null, loading: false, error: null };
+const initialState = { admin: null, user: null, loading: false, error: null };
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case "SET_ADMIN":
+      return {
+        ...state,
+        admin: action.payload,
+        loading: false,
+      };
     case "LOGIN":
       return {
         ...state,
@@ -40,11 +46,12 @@ export const DataContext = createContext();
 export const getSessionStorageData = (primaryKey, secondaryKey) => {
   const sessionToken = sessionStorage.getItem(primaryKey);
   const googleToken = sessionStorage.getItem(secondaryKey);
+  const admin = sessionStorage.getItem("admin");
 
   if (googleToken) {
     try {
       const user = JSON.parse(googleToken);
-      return { user };
+      return { user, admin };
     } catch (error) {
       console.error("Failed to parse googleToken:", error);
     }
@@ -75,8 +82,14 @@ export function ContextProvider({ children }) {
       console.log("Fetching data");
       dispatch({ type: "SET_LOADING", payload: true });
       const tokenData = getSessionStorageData("token", "googleToken");
-      if (tokenData) {
-        dispatch({ type: "LOGIN", payload: tokenData });
+      const admin = sessionStorage.getItem(process.env.REACT_APP_ADMINKEY);
+      if (admin) {
+        dispatch({ type: "SET_ADMIN", payload: admin });
+        if (tokenData) {
+          dispatch({ type: "LOGIN", payload: tokenData });
+        }
+      } else {
+        dispatch({ type: "SET_ADMIN", payload: false });
       }
     } catch (err) {
       dispatch({ type: "SET_ERROR", payload: err });

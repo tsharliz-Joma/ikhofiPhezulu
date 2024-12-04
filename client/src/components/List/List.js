@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 
 const List = ({ list, onClick, theme }) => {
   return (
-    <MUIList>
+    <MUIList sx={{ gap: "0.5rem", display: "grid", py: "2rem" }}>
       {list.map((item) => (
         <ListItem
           key={item._id}

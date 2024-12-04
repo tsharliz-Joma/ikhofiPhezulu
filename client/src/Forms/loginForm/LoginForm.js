@@ -1,7 +1,6 @@
 // @ts-nocheck
 import React, { useRef } from "react";
 import { GoogleLogin } from "@react-oauth/google";
-import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Checkbox, FormControlLabel, Grid, TextField } from "@mui/material";
@@ -10,7 +9,14 @@ import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 
-const LoginForm = ({ handleSubmit, handleGoogleLogin, handleGoogleError, onSuccess, onError }) => {
+const LoginForm = ({
+  handleSubmit,
+  handleGoogleLogin,
+  handleGoogleError,
+  onSuccess,
+  onError,
+  error,
+}) => {
   const formRef = useRef(null);
   const invalidClasses = [
     "!border-feedback-red",
@@ -46,7 +52,7 @@ const LoginForm = ({ handleSubmit, handleGoogleLogin, handleGoogleError, onSucce
 
   return (
     <>
-      <Container maxWidth="xs">
+      <Box>
         <CssBaseline />
         <Box
           sx={{
@@ -54,6 +60,7 @@ const LoginForm = ({ handleSubmit, handleGoogleLogin, handleGoogleError, onSucce
             display: "flex",
             justifyContent: "flex-start",
             alignItems: "center",
+            py: '1rem'
           }}
         >
           <Avatar
@@ -101,6 +108,17 @@ const LoginForm = ({ handleSubmit, handleGoogleLogin, handleGoogleError, onSucce
               control={<Checkbox value="remember" color="primary" size="small" />}
               label="Remember me"
             />
+            {error ? (
+              <Typography
+                sx={{
+                  color: "error.main",
+                  fontSize: { xs: "12px", md: "16px" },
+                  textAlign: "center",
+                }}
+              >
+                Incorrect email or password
+              </Typography>
+            ) : null}
             <Grid container spacing={2} sx={{ my: 3 }}>
               <Grid item xs={6}>
                 <Button type="submit" fullWidth variant="contained" sx={{ fontSize: 16 }}>
@@ -127,7 +145,7 @@ const LoginForm = ({ handleSubmit, handleGoogleLogin, handleGoogleError, onSucce
             </Grid>
           </form>
         </Box>
-      </Container>
+      </Box>
     </>
   );
 };

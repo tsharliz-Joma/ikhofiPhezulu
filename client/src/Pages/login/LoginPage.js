@@ -9,9 +9,6 @@ import jwt from "jsonwebtoken";
 import LoadingSpinner from "@/components/loadingSpinner/LoadingSpinner";
 import ErrorDisplay from "@/components/error/ErrorDisplay";
 
-// const backEndUserLogin = "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/login";
-const backEndUserLogin = "http://localhost:1969/api/login";
-
 const LoginPage = () => {
   const { dispatch } = useData();
   const [isLoading, setIsLoading] = useState(false);
@@ -44,7 +41,7 @@ const LoginPage = () => {
       password: FormData.get("password"),
     };
     try {
-      const response = await axios.post(backEndUserLogin, submitData);
+      const response = await axios.post(process.env.REACT_APP_USER_LOGIN_API, submitData);
       if (response.status === 200) {
         const userData = response.data;
         sessionStorage.setItem("token", userData.user);
@@ -63,13 +60,13 @@ const LoginPage = () => {
   return (
     <StyledContainer>
       {isLoading && <LoadingSpinner />}
-      {showError && <ErrorDisplay />}
       <LoginForm
         handleSubmit={handleSubmit}
         handleGoogleLogin={handleGoogleLogin}
         handleGoogleError={handleGoogleError}
         onSuccess={onSuccess}
         onError={onError}
+        error={showError ? <ErrorDisplay /> : null}
       />
     </StyledContainer>
   );

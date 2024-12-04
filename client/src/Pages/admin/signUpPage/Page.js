@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const registerAdminUrl = "https://ikhkofiphezulu-server-411e98c28af0.herokuapp.com/api/adminRegistration";
-
 const AdminSignUp = () => {
   const [name, setName] = useState("");
   const [pwd, setPwd] = useState("");
@@ -21,7 +19,7 @@ const AdminSignUp = () => {
   const registerAdmin = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(registerAdminUrl, {
+    const response = await fetch(process.env.REACT_APP_ADMIN_REG_API, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -49,13 +47,25 @@ const AdminSignUp = () => {
           <div className="input-box">
             <label htmlFor="user">
               Name:
-              <input onChange={handleName} value={name} id="user" type={"text"} placeholder="Enter the Users Name" />
+              <input
+                onChange={handleName}
+                value={name}
+                id="user"
+                type={"text"}
+                placeholder="Enter the Users Name"
+              />
             </label>
           </div>
           <div className="input-box">
             <label htmlFor="pwd">
               Password:
-              <input onChange={handlePassword} value={pwd} id="pwd" type={"text"} placeholder="Enter a secure Password" />
+              <input
+                onChange={handlePassword}
+                value={pwd}
+                id="pwd"
+                type={"text"}
+                placeholder="Enter a secure Password"
+              />
             </label>
           </div>
         </div>

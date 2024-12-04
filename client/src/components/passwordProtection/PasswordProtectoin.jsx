@@ -4,25 +4,25 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
+import { useData } from "@/hooks/useData";
 
 const PasswordProtection = ({ children }) => {
   const theme = useTheme();
+  const { dispatch, state } = useData();
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-  const [accessGranted, setAccessGranted] = useState(false);
-  const adminPassword = process.env.REACT_APP_ADMIN_PASSWORD;
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (password === adminPassword) {
-      sessionStorage.setItem("$admin", "true");
-      setAccessGranted(true);
+    if (password === process.env.REACT_APP_ADMIN_PWD) {
+      sessionStorage.setItem(process.env.REACT_APP_ADMINKEY, "true");
+      dispatch({ type: "SET_ADMIN", payload: true });
     } else {
       setError(true);
     }
   };
 
-  if (accessGranted && sessionStorage.getItem("$admin") === "true") {
+  if (state.admin) {
     return children;
   }
 

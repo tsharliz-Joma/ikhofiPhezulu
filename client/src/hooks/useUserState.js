@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { getSessionStorageData } from "../context/ContextProvider";
 
 export const useUserState = () => {
   const [value, setValue] = useState(null);
