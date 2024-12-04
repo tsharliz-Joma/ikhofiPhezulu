@@ -10,7 +10,7 @@ import ErrorDisplay from "@/components/error/ErrorDisplay";
 import Container from "@mui/material/Container";
 
 const AdminLogin = () => {
-  const { dispatch, state } = useData();
+  const { dispatch } = useData();
   const [isLoading, setIsLoading] = useState(false);
   const [showError, setShowError] = useState(null);
   const [error, setError] = useState(null);
