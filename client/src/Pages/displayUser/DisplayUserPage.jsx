@@ -42,6 +42,5 @@ export const LogoutUser = () => {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("googleToken");
     window.location.reload();
-    console.log("Logged out");
   }
 };

@@ -28,7 +28,6 @@ export const useOrders = (api, socket) => {
     fetchOrders();
 
     const handleNewOrder = (order) => {
-      console.log("New order received:", order);
       setOrders((prevOrders) => [...prevOrders, order]);
     };
 

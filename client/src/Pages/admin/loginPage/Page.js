@@ -24,10 +24,8 @@ const AdminLogin = () => {
     };
     try {
       const response = await axios.post(process.env.REACT_APP_ADMIN_LOGIN_API, submitData);
-      console.log(response);
-      const adminKey = sessionStorage.getItem(process.env.REACT_APP_ADMIN_KEY);
+      const adminKey = sessionStorage.getItem(process.env.REACT_APP_ADMINKEY);
       if (response.status === 200 && adminKey === "true") {
-        console.log(response);
         const adminData = response.data;
         sessionStorage.setItem("adminToken", adminData.user);
         dispatch({ type: "LOGIN", payload: adminData });
@@ -42,7 +40,7 @@ const AdminLogin = () => {
       setIsLoading(false);
     }
   };
-  console.log(state);
+
   return (
     <StyledContainer>
       <Container maxWidth="xs" sx={{ display: "grid", gap: "4rem" }}>

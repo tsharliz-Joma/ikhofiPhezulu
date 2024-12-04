@@ -79,7 +79,6 @@ export function ContextProvider({ children }) {
 
   function fetchData() {
     try {
-      console.log("Fetching data");
       dispatch({ type: "SET_LOADING", payload: true });
       const tokenData = getSessionStorageData("token", "googleToken");
       const admin = sessionStorage.getItem(process.env.REACT_APP_ADMINKEY);

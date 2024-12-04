@@ -5,6 +5,7 @@ import DialogueBox from "@/components/dialogueBox/DialogueBox";
 import Header from "@/components/header/Header.component";
 import useTheme from "@mui/material/styles/useTheme";
 import CssBaseline from "@mui/material/CssBaseline";
+import Container from "@mui/material/Container";
 import { useOrders } from "@/hooks/useOrders";
 import { StyledContainer } from "@/styles/globals";
 
@@ -31,7 +32,7 @@ const Dashboard = ({ socket }) => {
         return res;
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
     }
   };
@@ -42,18 +43,20 @@ const Dashboard = ({ socket }) => {
   };
 
   return (
-    <StyledContainer maxWidth={"xs"}>
+    <StyledContainer>
       <CssBaseline />
-      <Header title="Dashboard" />
-      <List list={orders} onClick={displayOptions} theme={theme} />
-      {selected && (
-        <DialogueBox
-          handleOrder={handleOrder}
-          open={open}
-          onClose={handleClose}
-          selectedCoffee={selectedCoffee}
-        />
-      )}
+      <Container maxWidth={"xs"}>
+        <Header title="Dashboard" />
+        <List list={orders} onClick={displayOptions} theme={theme} />
+        {selected && (
+          <DialogueBox
+            handleOrder={handleOrder}
+            open={open}
+            onClose={handleClose}
+            selectedCoffee={selectedCoffee}
+          />
+        )}
+      </Container>
     </StyledContainer>
   );
 };

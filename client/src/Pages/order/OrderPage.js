@@ -52,8 +52,8 @@ const OrderPage = ({ socket }) => {
         alert("Order Successfully Submitted");
         setShowError(true);
       }
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.error(error);
     } finally {
       setIsLoading(false);
     }

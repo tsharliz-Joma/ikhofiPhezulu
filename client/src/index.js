@@ -16,11 +16,8 @@ import "@fontsource/roboto/500.css";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { ContextProvider } from "./context/ContextProvider";
 import PasswordProtection from "./components/passwordProtection/PasswordProtectoin";
-
-// const socket = io(
-//   "https://ikhofiphezulu-server-19652a0dabe7.herokuapp.com",
-// );
-const socket = io("http://localhost:1969");
+import ProtectedRoute from "./components/protectedRoute/ProtectedRoute";
+const socket = io(process.env.REACT_APP_SOCKET);
 
 const themeOptions = {
   palette: {
@@ -88,9 +85,9 @@ root.render(
               <Route
                 path="/dashboard"
                 element={
-                  <PasswordProtection>
+                  <ProtectedRoute>
                     <Dashboard socket={socket} />
-                  </PasswordProtection>
+                  </ProtectedRoute>
                 }
               />
               <Route path="/login" element={<LoginPage />} />

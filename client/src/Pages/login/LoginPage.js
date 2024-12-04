@@ -22,7 +22,7 @@ const LoginPage = () => {
   };
 
   const onError = (error) => {
-    console.log("Login Failed", error);
+    console.error("Login Failed", error);
   };
 
   const handleGoogleLogin = useGoogleLogin({
@@ -31,7 +31,7 @@ const LoginPage = () => {
   });
 
   const handleGoogleError = (error) => {
-    console.log("Google Login Error", error);
+    console.error("Google Login Error", error);
   };
 
   const handleSubmit = async (FormData) => {
