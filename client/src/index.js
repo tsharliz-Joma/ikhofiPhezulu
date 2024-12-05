@@ -7,7 +7,7 @@ import App from "./App";
 import OrderPage from "./pages/order/OrderPage";
 import AdminLogin from "./pages/admin/loginPage/Page";
 import Dashboard from "./pages/dashboard/Dashboard";
-import LoginPage from "./pages/login/LoginPage";
+import LoginPage from "./pages/user/loginPage/Page";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fontsource/roboto/300.css";
@@ -23,14 +23,15 @@ const themeOptions = {
   palette: {
     mode: "dark",
     background: {
-      default: "#121212", // Change this to your desired background color
-      paper: "#1d1d1d", // Change this to your desired paper color
+      default: "#121212",
+      paper: "#1d1d1d",
     },
     primary: {
       main: "#f2e2c5",
       light: "rgb(242, 171, 96)",
       dark: "rgb(167, 105, 39)",
       white: "#FFF",
+      black: "#000",
     },
     secondary: {
       main: "#ef9739",

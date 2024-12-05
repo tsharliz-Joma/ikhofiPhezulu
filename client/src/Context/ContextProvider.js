@@ -16,7 +16,7 @@ const reducer = (state, action) => {
     case "LOGIN":
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.user,
         loading: false,
       };
     case "LOGOUT":
@@ -80,12 +80,14 @@ export function ContextProvider({ children }) {
   function fetchData() {
     try {
       dispatch({ type: "SET_LOADING", payload: true });
-      const tokenData = getSessionStorageData("token", "googleToken");
+      const tokenData = getSessionStorageData("admin-access-token", "googleToken");
       const admin = sessionStorage.getItem(process.env.REACT_APP_ADMINKEY);
       if (admin) {
         dispatch({ type: "SET_ADMIN", payload: admin });
         if (tokenData) {
           dispatch({ type: "LOGIN", payload: tokenData });
+        } else {
+          console.log("No token data found");
         }
       } else {
         dispatch({ type: "SET_ADMIN", payload: false });

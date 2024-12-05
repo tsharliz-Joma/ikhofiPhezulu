@@ -1,10 +1,16 @@
 import React, { useRef, forwardRef } from "react";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Grid, TextField, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import Grid2 from "@mui/material/Unstable_Grid2";
 import CssBaseline from "@mui/material/CssBaseline";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
@@ -47,10 +53,13 @@ const OrderForm = forwardRef(({ socket, handleSubmit, error }, ref) => {
   };
 
   return (
-    <Box>
+    <Container>
       <CssBaseline />
       <Box>
         <form onSubmit={onSubmit} ref={formRef}>
+          <Typography textTransform={"uppercase"} fontWeight={600}>
+            Contact information
+          </Typography>
           <TextField
             margin="normal"
             required
@@ -71,11 +80,11 @@ const OrderForm = forwardRef(({ socket, handleSubmit, error }, ref) => {
             label="Mobile Number"
             autoComplete="number"
             autoFocus
-            sx={{ mb: 5 }}
+            sx={{ mb: 3 }}
           />
           <Box>
-            <Typography fontSize={20} textTransform={"uppercase"}>
-              Coffee order
+            <Typography textTransform={"uppercase"} fontWeight={600}>
+              build your coffee order
             </Typography>
             <FormControl fullWidth required sx={{ mt: 1 }}>
               <InputLabel>Coffee</InputLabel>
@@ -118,25 +127,17 @@ const OrderForm = forwardRef(({ socket, handleSubmit, error }, ref) => {
               <MenuItem value="4">4</MenuItem>
             </Select>
           </FormControl>
-          <Grid container spacing={3}>
-            <Grid item xs={6}>
-              <Link href="/">
-                <Button fullWidth variant="contained" sx={{ my: 3, fontSize: 16 }}>
-                  <ArrowBackIosIcon />
-                  Profile
-                </Button>
-              </Link>
-            </Grid>
-            <Grid item xs={6}>
+          <Grid2 container>
+            <Grid2 item size="grow" xs={12}>
               <Button fullWidth type="submit" variant="contained" sx={{ my: 3, fontSize: 16 }}>
                 Place order
                 <ArrowForwardIosIcon />
               </Button>
-            </Grid>
-          </Grid>
+            </Grid2>
+          </Grid2>
         </form>
       </Box>
-    </Box>
+    </Container>
   );
 });
 

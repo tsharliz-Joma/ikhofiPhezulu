@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useData } from "@/hooks/useData";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "@/utils/uitls";
 import { StyledContainer } from "@/styles/globals";
 import Header from "@/components/header/Header.component";
 import LoadingSpinner from "@/components/loadingSpinner/LoadingSpinner";
@@ -23,13 +23,15 @@ const AdminLogin = () => {
       password: FormData.get("password"),
     };
     try {
-      const response = await axios.post(process.env.REACT_APP_ADMIN_LOGIN_API, submitData);
-      const adminKey = sessionStorage.getItem(process.env.REACT_APP_ADMINKEY);
-      if (response.status === 200 && adminKey === "true") {
-        const adminData = response.data;
-        sessionStorage.setItem("adminToken", adminData.user);
-        dispatch({ type: "LOGIN", payload: adminData });
-        navigate("/dashboard");
+      const response = await api.post(process.env.REACT_APP_ADMIN_LOGIN_API, submitData);
+      if (response.status === 200) {
+        const adminKey = sessionStorage.getItem(process.env.REACT_APP_ADMINKEY);
+        if (adminKey) {
+          const adminData = response.data;
+          sessionStorage.setItem("admin-access-token", adminData.user);
+          dispatch({ type: "LOGIN", payload: adminData });
+          navigate("/dashboard");
+        }
       } else {
         setError(true);
         setShowError({ response });

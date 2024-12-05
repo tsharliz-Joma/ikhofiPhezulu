@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { useState } from "react";
+import api from "@/utils/uitls";
 import List from "@/components/list/List";
 import DialogueBox from "@/components/dialogueBox/DialogueBox";
 import Header from "@/components/header/Header.component";
@@ -27,7 +27,7 @@ const Dashboard = ({ socket }) => {
     setOpen(false);
     try {
       socket.emit("order complete", selectedCoffee);
-      axios.post(process.env.REACT_APP_DELETE_ORDER_API, selectedCoffee).then((res) => {
+      api.post(process.env.REACT_APP_DELETE_ORDER_API, selectedCoffee).then((res) => {
         refetch();
         return res;
       });

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
-import LoginForm from "../../forms/loginForm/LoginForm";
-import { StyledContainer } from "../../styles/globals";
+import LoginForm from "../../../forms/loginForm/LoginForm";
+import { StyledContainer } from "../../../styles/globals";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import { useData } from "../../hooks/useData";
+import { useData } from "../../../hooks/useData";
 import jwt from "jsonwebtoken";
 import LoadingSpinner from "@/components/loadingSpinner/LoadingSpinner";
 import ErrorDisplay from "@/components/error/ErrorDisplay";

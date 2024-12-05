@@ -14,15 +14,15 @@ const Header = ({ title, fontSize }) => {
   return (
     <StyledHeader fontFamily={theme.typography.fontFamily} xs={12}>
       <Box
-        
         sx={{
-          backgroundColor: theme.palette.primary.main,
           display: "flex",
           justifyContent: "center",
           padding: "10px 0px",
-          textTransform: "uppercase",
           borderBottomLeftRadius: "10px",
           borderBottomRightRadius: "10px",
+          backgroundColor: theme.palette.primary.main,
+          color: theme.palette.primary.contrastText,
+          textTransform: "uppercase",
         }}
       >
         <Typography variant="h3">{title}</Typography>
