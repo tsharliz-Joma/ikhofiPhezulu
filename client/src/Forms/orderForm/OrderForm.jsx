@@ -7,6 +7,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Grid2 from "@mui/material/Unstable_Grid2";
+
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -126,7 +127,7 @@ const OrderForm = forwardRef(({ socket, handleSubmit, error }, ref) => {
             </Select>
           </FormControl>
           <Grid2 container>
-            <Grid2 item size="grow" xs={12}>
+            <Grid2 size="grow" xs={12}>
               <Button fullWidth type="submit" variant="contained" sx={{ my: 3, fontSize: 16 }}>
                 Place order
                 <ArrowForwardIosIcon />
