@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useData } from "@/hooks/useData";
 import { useNavigate } from "react-router-dom";
-import api from "@/utils/uitls";
+import api, { sanitizeError } from "@/utils/uitls";
 import { StyledContainer } from "@/styles/globals";
 import Header from "@/components/header/Header.component";
 import LoadingSpinner from "@/components/loadingSpinner/LoadingSpinner";
@@ -37,7 +37,7 @@ const AdminLogin = () => {
         setShowError({ response });
       }
     } catch (e) {
-      console.error(e);
+      sanitizeError(e);
     } finally {
       setIsLoading(false);
     }
