@@ -3,9 +3,7 @@ import React from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import useTheme from "@mui/material/styles/useTheme";
-
 import styled from "@emotion/styled";
-import Link from "@mui/material/Link";
 
 const StyledHeader = styled(Box)`
   display: grid;
