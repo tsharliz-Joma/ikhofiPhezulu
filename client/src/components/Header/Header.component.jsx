@@ -22,11 +22,9 @@ const Header = ({ title, fontSize }) => {
   return (
     <StyledHeader fontFamily={theme.typography.fontFamily} xs={12}>
       <Box sx={{ gridColumnStart: "2" }}>
-        <Link href="/" sx={{ color: "#000" }}>
-          <Typography variant="h3" sx={{ textTransform: "uppercase" }}>
-            {title}
-          </Typography>
-        </Link>
+        <Typography variant="h3" sx={{ textTransform: "uppercase" }}>
+          {title}
+        </Typography>
       </Box>
     </StyledHeader>
   );
