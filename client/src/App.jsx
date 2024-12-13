@@ -10,6 +10,7 @@ const App = ({ socket }) => {
     <StyledContainer>
       <Container maxWidth="xs" sx={{ gap: "50px", display: "grid" }}>
         <Header title="Coffee up" fontSize={42} />
+
         <OrderPage socket={socket} />
       </Container>
     </StyledContainer>

@@ -5,6 +5,7 @@ import { useData } from "@/hooks/useData";
 import axios from "axios";
 import LoadingSpinner from "@/components/loadingSpinner/LoadingSpinner";
 import { SuccessModal } from "@/components/successModal/SuccessModal";
+import { sanitizeError } from "@/utils/uitls";
 
 const OrderPage = ({ socket }) => {
   const theme = useTheme();
@@ -53,7 +54,7 @@ const OrderPage = ({ socket }) => {
         setShowError(true);
       }
     } catch (error) {
-      console.error(error);
+      sanitizeError(error);
     } finally {
       setIsLoading(false);
     }
@@ -64,7 +65,7 @@ const OrderPage = ({ socket }) => {
       {isLoading && <LoadingSpinner />}
       {showSuccess && <SuccessModal />}
       {/* {submitted && <OrderStatusTracker socket={socket} status={orderStatus} />} */}
-      <OrderForm socket={socket} user={state.user} handleSubmit={handleSubmit} />
+      <OrderForm socket={socket} handleSubmit={handleSubmit} />
     </ThemeProvider>
   );
 };

@@ -27,7 +27,7 @@ const Dashboard = ({ socket }) => {
     setOpen(false);
     try {
       socket.emit("order complete", selectedCoffee);
-      api.post(process.env.REACT_APP_DELETE_ORDER_API, selectedCoffee).then((res) => {
+      api.post(process.env.REACT_APP_COMPLETE_ORDER_API, selectedCoffee).then((res) => {
         refetch();
         return res;
       });

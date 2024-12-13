@@ -23,12 +23,12 @@ const List = ({ list, onClick, theme }) => {
         >
           <Box>
             <Typography variant="h6">{item.name}</Typography>
-            <Typography variant="body2">Coffee: {item.coffeeName}</Typography>
-            <Typography variant="body2">Size: {item.coffeeSize}</Typography>
-            <Typography variant="body2">Milk: {item.coffeeMilk}</Typography>
-            <Typography variant="body2">Sugar: {item.coffeeSugar}</Typography>
-            <Typography variant="body2">Number: {item.number}</Typography>
-            <Typography variant="body2">Email: {item.email}</Typography>
+            <Typography variant="body2">{item.coffeeName}</Typography>
+            <Typography variant="body2">{item.coffeeSize}</Typography>
+            <Typography variant="body2">{item.coffeeMilk}</Typography>
+            <Typography variant="body2">{item.coffeeSugar}</Typography>
+            <Typography variant="body2">{item.number}</Typography>
+            <Typography variant="body2">{item.email}</Typography>
           </Box>
         </ListItem>
       ))}
