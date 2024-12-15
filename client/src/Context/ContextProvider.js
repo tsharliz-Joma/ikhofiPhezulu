@@ -87,7 +87,7 @@ export function ContextProvider({ children }) {
         if (tokenData) {
           dispatch({ type: "LOGIN", payload: tokenData });
         } else {
-          console.log('No token data found');
+          console.log("No token data found");
         }
       } else {
         dispatch({ type: "SET_ADMIN", payload: false });
