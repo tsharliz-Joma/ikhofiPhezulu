@@ -5,6 +5,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
 import { useData } from "@/hooks/useData";
+import api from "@/utils/uitls";
 
 const PasswordProtection = ({ children }) => {
   const theme = useTheme();
@@ -12,13 +13,18 @@ const PasswordProtection = ({ children }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (password === process.env.REACT_APP_ADMIN_PWD) {
-      sessionStorage.setItem(process.env.REACT_APP_ADMINKEY, "true");
-      dispatch({ type: "SET_ADMIN", payload: true });
-    } else {
-      setError(true);
+    try {
+      const response = await api.post(process.env.REACT_APP_ADMIN_PWD_API, { password: password });
+      if (response.status === 200) {
+        sessionStorage.setItem(process.env.REACT_APP_ADMINKEY, "true");
+        dispatch({ type: "SET_ADMIN", payload: true });
+      } else {
+        setError(true);
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 

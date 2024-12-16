@@ -15,7 +15,7 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { ContextProvider } from "./context/ContextProvider";
-import PasswordProtection from "./components/passwordProtection/PasswordProtectoin";
+import PasswordProtection from "./components/passwordProtection/PasswordProtection";
 import ProtectedRoute from "./components/protectedRoute/ProtectedRoute";
 const socket = io(process.env.REACT_APP_SOCKET);
 
