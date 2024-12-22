@@ -4,49 +4,103 @@ import { Route, Routes } from "react-router";
 import ReactDOM from "react-dom/client";
 import { io } from "socket.io-client";
 import App from "./App";
-import OrderPage from "./pages/order/OrderPage";
+import OrderPage from "./pages/order/Page";
 import AdminLogin from "./pages/admin/loginPage/Page";
-import Dashboard from "./pages/dashboard/Dashboard";
+import Dashboard from "./pages/dashboard/Page";
 import LoginPage from "./pages/user/loginPage/Page";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
+import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { ContextProvider } from "./context/ContextProvider";
-import PasswordProtection from "./components/passwordProtection/PasswordProtection";
-import ProtectedRoute from "./components/protectedRoute/ProtectedRoute";
+import PasswordProtection from "./modules/passwordProtection/PasswordProtection";
+import ProtectedRoute from "./modules/protectedRoute/ProtectedRoute";
 const socket = io(process.env.REACT_APP_SOCKET);
 
 const themeOptions = {
   palette: {
     mode: "dark",
-    background: {
-      default: "#121212",
-      paper: "#1d1d1d",
-    },
     primary: {
       main: "#f2e2c5",
       light: "rgb(242, 171, 96)",
       dark: "rgb(167, 105, 39)",
-      white: "#FFF",
+      contrastText: "#FFF",
       black: "#000",
     },
     secondary: {
       main: "#ef9739",
       light: "rgb(244, 231, 208)",
       dark: "rgb(169, 158, 137)",
+      contrastText: "#FFF",
+    },
+    background: {
+      default: "#121212",
+      paper: "#1d1d1d",
+    },
+    text: {
+      primary: "#FFFFFF",
+      secondary: "#B3B3B3",
     },
     info: {
       main: "#2196f3",
       dark: "#00473d",
       light: "#a9fbda",
     },
+    error: {
+      main: "#CF6679",
+    },
+    warning: {
+      main: "#FFC107",
+    },
+    success: {
+      main: "#4CAF50",
+    },
   },
   typography: {
-    fontsize: 14,
-    fontFamily: "IBM Plex Mono",
+    fontFamily: "IBM Plex Mono, sans-serif",
+    fontSize: 14,
+    h1: { fontSize: "2.25rem", fontWeight: 700 },
+    h2: { fontSize: "1.875rem", fontWeight: 600 },
+    h3: { fontSize: "1.5rem", fontWeight: 500 },
+    h4: { fontSize: "1.25rem", fontWeight: 500 },
+    h5: { fontSize: "1rem", fontWeight: 500 },
+    h6: { fontSize: "0.875rem", fontWeight: 500 },
+    button: { textTransform: "none", fontWeight: 600 },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+        },
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        colorPrimary: {
+          backgroundColor: "#1E1E1E",
+        },
+      },
+    },
+    MuiInputBase: {
+      styleOverrides: {
+        input: {
+          "&::placeholder": {
+            color: "#B3B3B3",
+          },
+        },
+      },
+    },
   },
 };
 
@@ -69,16 +123,26 @@ root.render(
                 exact
                 path="/"
                 element={
-                  <ThemeProvider theme={theme}>
+                  <>
+                    <CssBaseline />
                     <App socket={socket} />
-                  </ThemeProvider>
+                  </>
                 }
               />
-              <Route path="/order-coffee" element={<OrderPage socket={socket} />} />
+              <Route
+                path="/order"
+                element={
+                  <>
+                    <CssBaseline />
+                    <OrderPage socket={socket} />
+                  </>
+                }
+              />
               <Route
                 path="/admin"
                 element={
                   <PasswordProtection>
+                    <CssBaseline />
                     <AdminLogin />
                   </PasswordProtection>
                 }
@@ -87,11 +151,20 @@ root.render(
                 path="/dashboard"
                 element={
                   <ProtectedRoute>
+                    <CssBaseline />
                     <Dashboard socket={socket} />
                   </ProtectedRoute>
                 }
               />
-              <Route path="/login" element={<LoginPage />} />
+              <Route
+                path="/login"
+                element={
+                  <>
+                    <CssBaseline />
+                    <LoginPage />
+                  </>
+                }
+              />
             </Routes>
           </ThemeProvider>
         </BrowserRouter>

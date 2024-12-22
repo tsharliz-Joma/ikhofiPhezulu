@@ -7,7 +7,6 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import CssBaseline from "@mui/material/CssBaseline";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -56,7 +55,6 @@ const LoginForm = ({
 
   return (
     <Container maxWidth="xs">
-      <CssBaseline />
       <Box
         sx={{
           width: "100%",
