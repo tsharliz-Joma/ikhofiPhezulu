@@ -133,7 +133,7 @@ const OrderForm = forwardRef(({ socket, handleSubmit, error }, ref) => {
                 variant="contained"
                 sx={{ my: 3, fontSize: 16, color: "primary.black" }}
               >
-                Place order
+                Checkout
                 <ArrowForwardIosIcon />
               </Button>
             </Grid2>
