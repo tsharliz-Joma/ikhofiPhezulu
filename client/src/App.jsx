@@ -17,7 +17,7 @@ const App = ({ socket }) => {
         <Box sx={{ px: "2rem", py: "3rem" }}>
           <Button variant="contained" sx={{ borderRadius: "50px" }} fullWidth>
             <Link
-              href="/order"
+              href="/menu"
               variant="button"
               color={"primary.black"}
               underline="none"
