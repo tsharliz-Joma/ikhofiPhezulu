@@ -20,6 +20,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { AnimatePresence, motion } from "framer-motion";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { ContextProvider } from "./context/ContextProvider";
+import CartPage from "./pages/cart/Page";
 
 const socket = io(process.env.REACT_APP_SOCKET);
 
@@ -133,6 +134,7 @@ root.render(
                     </>
                   }
                 />
+                <Route path={"/cart"} element={<CartPage />} />
                 <Route
                   path="/menu"
                   element={

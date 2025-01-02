@@ -40,7 +40,9 @@ const MenuCard = ({ image, title, description, onClick, maxWidth = 345 }) => {
           width: "100%",
           background: "rgba(0, 0, 0, 0.5)",
           color: "white",
-          padding: "1rem",
+
+          borderTopLeftRadius: "8px",
+          borderTopRightRadius: "8px",
         }}
       >
         <Typography variant="h4">{title}</Typography>

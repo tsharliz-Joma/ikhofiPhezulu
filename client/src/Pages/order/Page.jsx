@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import LoadingSpinner from "@/modules/loadingSpinner/LoadingSpinner";
 import { SuccessModal } from "@/modules/successModal/SuccessModal";
 import { sanitizeError } from "@/utils/uitls";
-import Header from "@/modules/header/Header.component";
+import Header from "@/components/header/Header.component";
 import { Navigate } from "react-router";
 
 const OrderPage = ({ socket }) => {

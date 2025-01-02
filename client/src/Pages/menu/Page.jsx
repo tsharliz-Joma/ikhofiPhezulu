@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
-import { getAllMenuItems } from "@/api/helpers";
+import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import MenuCard from "@/components/card/MenuCard";
 import CategoryModal from "@/components/modals/CategoryModal";
+import Header from "@/components/header/Header.component";
+import { useData } from "@/hooks/useData";
 
 const MenuPage = () => {
+  const { state } = useData();
+  const { menu, loading, error } = state;
+
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [items, setItems] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [menu, setMenu] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category.name);
@@ -25,21 +24,6 @@ const MenuPage = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getAllMenuItems();
-        setMenu(data.data);
-      } catch (error) {
-        setError("Failed to fetch menu items");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   // 1. Show loading spinner while fetching
   if (loading) return <p>Loading...</p>;
@@ -54,6 +38,7 @@ const MenuPage = () => {
 
   return (
     <Box>
+      <Header title={"Coffee up"} />
       <Box>
         <Typography variant="h1">Menu</Typography>
       </Box>
@@ -74,7 +59,7 @@ const MenuPage = () => {
                 <MenuCard
                   title={category.name}
                   image={category.image}
-                  description={`Explore items in ${category.name}`}
+                  description={`Our ${category.name} range`}
                   onClick={() => handleCategoryClick(category)}
                 />
               </Grid>

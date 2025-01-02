@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import Header from "./modules/header/Header.component";
+import Header from "./components/header/Header.component";
 import HeroVideo from "./assets/hero.mp4";
 import HeroMedia from "./modules/heroMedia/HeroMedia";
 import Box from "@mui/material/Box";

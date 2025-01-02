@@ -1,9 +1,8 @@
 import React, { useEffect, createContext, useReducer } from "react";
 import jwt from "jsonwebtoken";
+import { getAllMenuItems } from "@/api/helpers";
 
-// const getServerData = (url) => async () => {};
-
-const initialState = { admin: null, user: null, loading: false, error: null };
+const initialState = { cart: [], menu: null, admin: null, user: null, loading: false, error: null };
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -36,6 +35,74 @@ const reducer = (state, action) => {
         error: action.payload,
         loading: false,
       };
+
+    case "FETCH_MENU_SUCCESS":
+      return {
+        ...state,
+        menu: action.payload,
+        loading: false,
+        error: null,
+      };
+
+    case "FETCH_MENU_ERROR":
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case "ADD_TO_CART":
+      const existingItemIndex = state.cart.findIndex(
+        (item) =>
+          item.id === action.payload.id &&
+          JSON.stringify(item.modifiers) === JSON.stringify(action.payload.modifiers)
+      );
+      if (existingItemIndex > -1) {
+        const udpatedCart = [...state.cart];
+        udpatedCart[existingItemIndex] = {
+          ...udpatedCart[existingItemIndex],
+          quantity: (udpatedCart[existingItemIndex].quantity || 0) + (action.payload.quantity || 1),
+        };
+        return {
+          ...state,
+          cart: udpatedCart,
+        };
+      } else {
+        return {
+          ...state,
+          cart: [...state.cart, { ...action.payload, quantity: action.payload.quantity || 1 }],
+        };
+      }
+
+    case "UPDATE_CART_QUANTITY":
+      return {
+        ...state,
+        cart: state.cart.map((item) =>
+          item.id === action.payload.id &&
+          JSON.stringify(item.modifiers) === JSON.stringify(action.payload.modifiers)
+            ? { ...item, quantity: action.payload.quantity }
+            : item
+        ),
+      };
+
+    case "REMOVE_FROM_CART":
+      return {
+        ...state,
+        cart: state.cart.filter(
+          (item, index) =>
+            !(
+              item.id === action.payload.id &&
+              JSON.stringify(item.modifiers) === JSON.stringify(action.payload.modifiers)
+            )
+        ),
+      };
+
+    case "CLEAR_CART":
+      return {
+        ...state,
+        cart: [],
+      };
+
     default:
       return state;
   }
@@ -77,7 +144,7 @@ export const getSessionStorageData = (primaryKey, secondaryKey) => {
 export function ContextProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  function fetchData() {
+  const fetchData = async () => {
     try {
       dispatch({ type: "SET_LOADING", payload: true });
       const tokenData = getSessionStorageData("admin-access-token", "googleToken");
@@ -87,7 +154,7 @@ export function ContextProvider({ children }) {
         if (tokenData) {
           dispatch({ type: "LOGIN", payload: tokenData });
         } else {
-          console.log('No token data found');
+          return "No token data";
         }
       } else {
         dispatch({ type: "SET_ADMIN", payload: false });
@@ -97,13 +164,23 @@ export function ContextProvider({ children }) {
     } finally {
       dispatch({ type: "SET_LOADING", payload: false });
     }
-  }
+  };
+
+  const fetchMenu = async () => {
+    dispatch({ type: "SET_LOADING", payload: true });
+    try {
+      const data = await getAllMenuItems();
+      dispatch({ type: "FETCH_MENU_SUCCESS", payload: data.data });
+    } catch (error) {
+      dispatch({ type: "FETCH_MENU_ERROR", payload: "Failed to fetch menu items" });
+    }
+  };
 
   useEffect(() => {
     fetchData();
+    fetchMenu();
   }, []);
 
   const value = { state, dispatch };
-
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 }

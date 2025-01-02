@@ -7,26 +7,22 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import Modifiers from "../chipGroup/ChipGroup";
+import Modifiers from "../modifiers/Modifiers";
+import { addToCart } from "@/context/actions";
+import { useData } from "@/hooks/useData";
 
 const ItemModal = ({ open, onClose, item }) => {
-  const [size, setSize] = useState("Regular");
-  const [milk, setMilk] = useState("Full cream");
-  const [sweetenerType, setSweetenerType] = useState("Sugar");
-  const [sweetenerQty, setSweetenerQty] = useState(1);
+  const { dispatch } = useData();
   const [notes, setNotes] = useState("");
   const [selectedModifiers, setSelectedModifiers] = useState({});
 
   const handleAddToCart = () => {
     const orderDetails = {
       ...item,
-      size,
-      milk,
-      sweetenerType,
-      sweetenerQty,
       notes,
+      modifiers: selectedModifiers,
     };
-
+    addToCart(dispatch, orderDetails, 1);
     onClose();
   };
 
@@ -68,9 +64,7 @@ const ItemModal = ({ open, onClose, item }) => {
             <Typography variant="h2">{item?.name}</Typography>
             <Box>
               <Typography variant="body2">Description</Typography>
-              <Typography variant="body2">
-
-              </Typography>
+              <Typography variant="body2"></Typography>
             </Box>
           </Box>
         </DialogTitle>

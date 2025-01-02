@@ -28,7 +28,32 @@ const CategoryModal = ({ onClose, open, items, categoryName }) => {
 
   return (
     <>
-      <Dialog open={open} TransitionComponent={Transition} onClose={onClose} fullScreen>
+      <Dialog
+        sx={{
+          "& .MuiDialog-container": {
+            backgroundColor: "black",
+          },
+          "& .MuiDialog-paper": {
+            backgroundColor: "black",
+            color: "white",
+          },
+          "& .MuiDialogTitle-root": {
+            backgroundColor: "black",
+            color: "white",
+          },
+          "& .MuiDialogContent-root": {
+            backgroundColor: "black",
+            color: "white",
+          },
+          "& .MuiDialogActions-root": {
+            backgroundColor: "black",
+          },
+        }}
+        open={open}
+        TransitionComponent={Transition}
+        onClose={onClose}
+        fullScreen
+      >
         <DialogTitle variant="h2">{categoryName}</DialogTitle>
         <DialogContent dividers>
           <Box sx={{ display: "grid", gap: "2rem" }}>
