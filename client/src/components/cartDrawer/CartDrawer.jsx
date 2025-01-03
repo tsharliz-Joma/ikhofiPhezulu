@@ -153,11 +153,13 @@ const CartDrawer = ({ open, onClose, cart, onRemove, onCheckout }) => {
           <Typography>No items in the cart.</Typography>
         )}
       </Box>
-      <Box sx={{ backgroundColor: "black", p: "1rem" }}>
-        <Button variant="outlined" sx={{}} onClick={() => onCheckout(cart)}>
-          Checkout
-        </Button>
-      </Box>
+      {cart.length !== 0 && (
+        <Box sx={{ backgroundColor: "black", p: "1rem" }}>
+          <Button variant="outlined" onClick={() => onCheckout(cart)}>
+            Checkout
+          </Button>
+        </Box>
+      )}
     </Drawer>
   );
 };

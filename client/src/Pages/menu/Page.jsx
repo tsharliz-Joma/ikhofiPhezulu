@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import MenuCard from "@/components/card/MenuCard";
 import CategoryModal from "@/components/modals/CategoryModal";
 import Header from "@/components/header/Header.component";
+import { motion } from "framer-motion";
 import { useData } from "@/hooks/useData";
 
 const MenuPage = () => {
@@ -39,43 +40,50 @@ const MenuPage = () => {
   return (
     <Box>
       <Header title={"Coffee up"} />
-      <Box>
-        <Typography variant="h1">Menu</Typography>
-      </Box>
-      <Box sx={{ display: "grid", gap: "2rem" }}>
-        <Box
-          sx={{
-            display: "flex", // Flexbox for inline layout
-            gap: "1.5rem", // Space between cards
-            overflowX: "auto", // Horizontal scrolling
-            padding: "1rem 0", // Padding for scroll area
-            scrollbarWidth: "none", // Hide scrollbar in Firefox
-            "&::-webkit-scrollbar": { display: "none" }, // Hide scrollbar in Chrome
-          }}
-        >
-          {Object.values(menu.categories).map((category) => (
-            <Box key={category.id} sx={{ flex: "0 0 auto" }}>
-              <Grid>
-                <MenuCard
-                  title={category.name}
-                  image={category.image}
-                  description={`Our ${category.name} range`}
-                  onClick={() => handleCategoryClick(category)}
-                />
-              </Grid>
-            </Box>
-          ))}
-        </Box>
+      <motion.div
+        initial={{ opacity: 0, x: 500 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -50 }}
+        transition={{ duration: 0.75 }}
+      >
         <Box>
-          <Typography variant="h2">Popular items</Typography>
+          <Typography variant="h1">Menu</Typography>
         </Box>
-      </Box>
-      <CategoryModal
-        open={isModalOpen}
-        onClose={handleCloseModal}
-        items={items}
-        categoryName={selectedCategory}
-      />
+        <Box sx={{ display: "grid", gap: "2rem" }}>
+          <Box
+            sx={{
+              display: "flex", // Flexbox for inline layout
+              gap: "1.5rem", // Space between cards
+              overflowX: "auto", // Horizontal scrolling
+              padding: "1rem 0", // Padding for scroll area
+              scrollbarWidth: "none", // Hide scrollbar in Firefox
+              "&::-webkit-scrollbar": { display: "none" }, // Hide scrollbar in Chrome
+            }}
+          >
+            {Object.values(menu.categories).map((category) => (
+              <Box key={category.id} sx={{ flex: "0 0 auto" }}>
+                <Grid>
+                  <MenuCard
+                    title={category.name}
+                    image={category.image}
+                    description={`Our ${category.name} range`}
+                    onClick={() => handleCategoryClick(category)}
+                  />
+                </Grid>
+              </Box>
+            ))}
+          </Box>
+          <Box>
+            <Typography variant="h2">Popular items</Typography>
+          </Box>
+        </Box>
+        <CategoryModal
+          open={isModalOpen}
+          onClose={handleCloseModal}
+          items={items}
+          categoryName={selectedCategory}
+        />
+      </motion.div>
     </Box>
   );
 };

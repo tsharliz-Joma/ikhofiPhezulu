@@ -19,7 +19,7 @@ const HeroMedia = ({ src, mediaType = "video" }) => {
       }}
     >
       <Box sx={{ width: "auto", height: "100%", overflow: "hidden" }}>
-        <Video component="video" src={src} autoPlay loop controls playsInline />
+        <Video component="video" src={src} autoPlay loop muted playsInline />
       </Box>
     </Container>
   );

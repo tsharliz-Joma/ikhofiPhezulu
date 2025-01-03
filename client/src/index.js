@@ -138,15 +138,10 @@ root.render(
                 <Route
                   path="/menu"
                   element={
-                    <motion.div
-                      initial={{ opacity: 0, x: 500 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -50 }}
-                      transition={{ duration: 0.75 }}
-                    >
+                    <>
                       <CssBaseline />
                       <MenuPage socket={socket} />
-                    </motion.div>
+                    </>
                   }
                 />
                 <Route
