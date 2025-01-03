@@ -9,6 +9,8 @@ import Badge from "@mui/material/Badge";
 import CartDrawer from "../cartDrawer/CartDrawer";
 import { useData } from "@/hooks/useData";
 import { removeFromCart } from "@/context/actions";
+import api from "@/utils/uitls";
+import { useNavigate } from "react-router-dom";
 
 const StyledHeader = styled(Box)`
   display: grid;
@@ -24,14 +26,39 @@ const Header = ({ title, fontSize }) => {
   const theme = useTheme();
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleCheckout = () => {};
+  const formatCartForSquare = (cart) => {
+    return cart.map((item) => ({
+      catalogObjectId: item.id, // Use item ID as catalogObjectId
+      name: item.name, // Include item name
+      quantity: item.quantity.toString(), // Convert quantity to string
+      basePriceMoney: { amount: Math.round(item.price * 100), currency: "USD" }, // Convert price to cents
+      modifiers: Object.values(item.modifiers).map((mod) => ({
+        catalogObjectId: mod.id, // Modifier ID
+        name: mod.name, // Modifier name
+        quantity: "1", // Default quantity for modifier (string)
+      })),
+    }));
+  };
+
+  const handleCheckout = async (cart) => {
+    try {
+      const response = await api.post("/api/square-pay", {
+        locationId: "LG9G879R8CFMH",
+        customerId: "charles",
+        lineItems: cart,
+      });
+      window.location.href = response.data.data.result.paymentLink.url;
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleRemoveFromCart = (event) => {
     const orderDetails = {
       id: event.id,
       modifiers: event.modifiers,
     };
-    removeFromCart(dispatch, event.id, event.modifiers);
+    removeFromCart(dispatch, orderDetails.id, orderDetails.modifiers);
   };
 
   const toggleDrawer = (open) => {
@@ -51,6 +78,8 @@ const Header = ({ title, fontSize }) => {
         </Badge>
       </Box>
       <CartDrawer
+        sx={{ border: "1px solid" }}
+        onCheckout={handleCheckout}
         onRemove={(event) => handleRemoveFromCart(event)}
         open={isOpen}
         onClose={() => toggleDrawer(false)}

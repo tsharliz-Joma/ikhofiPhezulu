@@ -38,7 +38,7 @@ const themeOptions = {
       main: "#ef9739",
       light: "rgb(244, 231, 208)",
       dark: "rgb(169, 158, 137)",
-      contrastText: "#FFF",
+      contrastText: "#000",
     },
     background: {
       default: "#121212",

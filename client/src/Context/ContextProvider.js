@@ -61,7 +61,9 @@ const reducer = (state, action) => {
         const udpatedCart = [...state.cart];
         udpatedCart[existingItemIndex] = {
           ...udpatedCart[existingItemIndex],
-          quantity: (udpatedCart[existingItemIndex].quantity || 0) + (action.payload.quantity || 1),
+          quantity: (
+            parseInt(udpatedCart[existingItemIndex].quantity) + parseInt(action.payload.quantity)
+          ).toString(),
         };
         return {
           ...state,
@@ -70,7 +72,10 @@ const reducer = (state, action) => {
       } else {
         return {
           ...state,
-          cart: [...state.cart, { ...action.payload, quantity: action.payload.quantity || 1 }],
+          cart: [
+            ...state.cart,
+            { ...action.payload, quantity: action.payload.quantity.toString() },
+          ],
         };
       }
 
@@ -80,7 +85,7 @@ const reducer = (state, action) => {
         cart: state.cart.map((item) =>
           item.id === action.payload.id &&
           JSON.stringify(item.modifiers) === JSON.stringify(action.payload.modifiers)
-            ? { ...item, quantity: action.payload.quantity }
+            ? { ...item, quantity: action.payload.quantity.toString() }
             : item
         ),
       };

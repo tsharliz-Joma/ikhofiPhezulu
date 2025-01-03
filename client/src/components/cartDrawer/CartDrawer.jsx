@@ -13,7 +13,6 @@ import { useData } from "@/hooks/useData";
 
 const CartDrawer = ({ open, onClose, cart, onRemove, onCheckout }) => {
   const { dispatch } = useData();
-
   const [anchorEl, setAnchorEl] = useState(null);
   const popoverOpen = Boolean(anchorEl);
   const id = popoverOpen ? "popover" : undefined;
@@ -113,7 +112,7 @@ const CartDrawer = ({ open, onClose, cart, onRemove, onCheckout }) => {
                               handleCartQuantity({
                                 id: item.id,
                                 modifiers: item.modifiers,
-                                quantity: item.quantity + 1,
+                                quantity: parseInt(item.quantity) + 1,
                               })
                             }
                           />
@@ -153,6 +152,11 @@ const CartDrawer = ({ open, onClose, cart, onRemove, onCheckout }) => {
         ) : (
           <Typography>No items in the cart.</Typography>
         )}
+      </Box>
+      <Box sx={{ backgroundColor: "black", p: "1rem" }}>
+        <Button variant="outlined" sx={{}} onClick={() => onCheckout(cart)}>
+          Checkout
+        </Button>
       </Box>
     </Drawer>
   );

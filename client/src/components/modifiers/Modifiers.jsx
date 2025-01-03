@@ -6,6 +6,12 @@ import { Chip, TextField } from "@mui/material";
 const Modifiers = ({ modifiers = [], selectedValues, setSelectedValues }) => {
   if (!modifiers || modifiers.length === 0) return null;
 
+  const isSelected = (modifierId, optionId) => {
+    return selectedValues.some(
+      (modifier) => modifier.catalogObjectId === optionId && modifier.id === modifierId
+    );
+  };
+
   return modifiers.map((modifier) => (
     <Box key={modifier.id}>
       <Typography variant="h4" sx={{ mb: 1 }}>
@@ -23,15 +29,32 @@ const Modifiers = ({ modifiers = [], selectedValues, setSelectedValues }) => {
             key={option.id}
             label={`${option.name}`} // Show price
             clickable
-            variant={selectedValues[modifier.id]?.name === option.name ? "filled" : "outlined"}
-            color={selectedValues[modifier.id]?.name === option.name ? "primary" : "default"}
-            onClick={() =>
-              setSelectedValues((prev) => ({
-                ...prev,
-                [modifier.id]: { id: modifier.name, name: option.name },
-                // Update selected value for this modifier group
-              }))
-            }
+            variant={isSelected(modifier.id, option.catalogObjectId) ? "filled" : "outlined"}
+            color={isSelected(modifier.id, option.catalogObjectId) ? "primary" : "default"}
+            onClick={() => {
+              setSelectedValues((prev) => {
+                const updatedModifiers = [...prev];
+                const existingIndex = updatedModifiers.findIndex((mod) => mod.id === modifier.id);
+
+                if (existingIndex > -1) {
+                  updatedModifiers[existingIndex] = {
+                    catalogObjectId: option.catalogObjectId,
+                    id: modifier.id,
+                    name: option.name,
+                    quantity: "1",
+                  };
+                } else {
+                  updatedModifiers.push({
+                    catalogObjectId: option.catalogObjectId,
+                    id: modifier.id,
+                    name: option.name,
+                    quantity: "1",
+                  });
+                }
+
+                return updatedModifiers;
+              });
+            }}
           />
         ))}
       </Box>

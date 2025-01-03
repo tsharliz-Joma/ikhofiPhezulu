@@ -14,7 +14,8 @@ import { useData } from "@/hooks/useData";
 const ItemModal = ({ open, onClose, item }) => {
   const { dispatch } = useData();
   const [notes, setNotes] = useState("");
-  const [selectedModifiers, setSelectedModifiers] = useState({});
+  const [selectedModifiers, setSelectedModifiers] = useState([]);
+
 
   const handleAddToCart = () => {
     const orderDetails = {
