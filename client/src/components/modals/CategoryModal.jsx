@@ -8,6 +8,7 @@ import Slide from "@mui/material/Slide";
 import { DialogActions, Typography } from "@mui/material";
 import ItemModal from "./ItemModal";
 import MenuCard from "../card/MenuCard";
+import Grid from "@mui/material/Grid";
 
 const Transition = forwardRef((props, ref) => {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -16,6 +17,8 @@ const Transition = forwardRef((props, ref) => {
 const CategoryModal = ({ onClose, open, items, categoryName }) => {
   const [selectedItem, setSelectedItem] = useState([]);
   const [isItemModalOpen, setisItemModalOpen] = useState(false);
+
+  console.log(items);
 
   const handleCategoryItemClick = (item) => {
     setSelectedItem(item);
@@ -29,47 +32,69 @@ const CategoryModal = ({ onClose, open, items, categoryName }) => {
   return (
     <>
       <Dialog
-        sx={{
-          "& .MuiDialog-container": {
-            backgroundColor: "black",
-          },
-          "& .MuiDialog-paper": {
-            backgroundColor: "black",
-            color: "white",
-          },
-          "& .MuiDialogTitle-root": {
-            backgroundColor: "black",
-            color: "white",
-          },
-          "& .MuiDialogContent-root": {
-            backgroundColor: "black",
-            color: "white",
-          },
-          "& .MuiDialogActions-root": {
-            backgroundColor: "black",
-          },
-        }}
         open={open}
         TransitionComponent={Transition}
         onClose={onClose}
         fullScreen
+        sx={{
+          "& .MuiDialog-paper": {
+            backgroundColor: "#1d1d1d",
+            color: "white",
+          },
+        }}
       >
-        <DialogTitle variant="h2">{categoryName}</DialogTitle>
+        <DialogTitle
+          variant="h2"
+          sx={{
+            textAlign: "center",
+            fontSize: "2rem",
+            fontWeight: "bold",
+            color: "primary.main",
+            padding: "1rem",
+            borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+          }}
+        >
+          {categoryName}
+        </DialogTitle>
         <DialogContent dividers>
-          <Box sx={{ display: "grid", gap: "2rem" }}>
-            {items?.map((item) => (
-              <MenuCard
-                maxWidth={500}
-                key={item?.id}
-                title={item?.name}
-                image={item?.image}
-                onClick={() => handleCategoryItemClick(item)}
-              />
-            ))}
+          <Box sx={{ display: "grid", gap: "3rem" }}>
+            <Typography variant="h5" color="text.secondary" align="center" gutterBottom>
+              Discover the best {categoryName} options we have for you.
+            </Typography>
+
+            <Grid container spacing={4}>
+              {items?.map((item) => (
+                <Grid item xs={12} md={2} key={item?.id}>
+                  <MenuCard
+                    key={item?.id}
+                    title={item?.name}
+                    image={item?.image}
+                    price={item.basePriceMoney.amount}
+                    description={item?.description}
+                    onClick={() => handleCategoryItemClick(item)}
+                  />
+                </Grid>
+              ))}
+            </Grid>
           </Box>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={onClose} variant="contained" sx={{ m: 2 }}>
+        <DialogActions
+          sx={{
+            justifyContent: "center",
+            padding: "1rem",
+            borderTop: "1px solid rgba(255, 255, 255, 0.1)",
+          }}
+        >
+          <Button
+            onClick={onClose}
+            variant="contained"
+            sx={{
+              borderRadius: "2rem",
+              padding: "0.75rem 2rem",
+              fontSize: "1.15rem",
+              backgroundColor: "primary.light",
+            }}
+          >
             Close
           </Button>
         </DialogActions>

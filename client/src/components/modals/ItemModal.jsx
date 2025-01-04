@@ -16,7 +16,6 @@ const ItemModal = ({ open, onClose, item }) => {
   const [notes, setNotes] = useState("");
   const [selectedModifiers, setSelectedModifiers] = useState([]);
 
-
   const handleAddToCart = () => {
     const orderDetails = {
       ...item,
@@ -28,13 +27,17 @@ const ItemModal = ({ open, onClose, item }) => {
   };
 
   return (
-    <Dialog fullScreen open={open} onClose={onClose} maxWidth="md">
-      <DialogContent sx={{ padding: "0", background: "black" }}>
-        <DialogActions sx={{ position: "absolute" }}>
-          <Button onClick={onClose} variant="outlined">
-            Close
-          </Button>
-        </DialogActions>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      sx={{
+        "& .MuiDialog-paper": {
+          borderRadius: "2rem",
+        },
+      }}
+    >
+      <DialogContent sx={{ backgroundColor: "black", borderRadius: "2rem" }}>
+        <DialogActions sx={{ position: "relative", right: "1rem" }}></DialogActions>
         <Box
           sx={{
             padding: "0",
@@ -46,8 +49,7 @@ const ItemModal = ({ open, onClose, item }) => {
           <Box
             sx={{
               width: "100%",
-              borderBottomLeftRadius: "4.5rem",
-              borderBottomRightRadius: "4.5rem",
+              borderRadius: "2rem",
             }}
             component="img"
             src={item?.image}
@@ -63,9 +65,11 @@ const ItemModal = ({ open, onClose, item }) => {
         >
           <Box>
             <Typography variant="h2">{item?.name}</Typography>
-            <Box>
-              <Typography variant="body2">Description</Typography>
-              <Typography variant="body2"></Typography>
+            <Box pt='0.5rem'>
+              <Typography variant="body2" fontWeight="bold">
+                Description
+              </Typography>
+              <Typography variant="body2">{item?.description}</Typography>
             </Box>
           </Box>
         </DialogTitle>
@@ -86,8 +90,29 @@ const ItemModal = ({ open, onClose, item }) => {
             fullWidth
           />
         </DialogContent>
-        <DialogActions sx={{ display: "flex", paddingX: "100px", justifyContent: " center" }}>
-          <Button fullWidth onClick={handleAddToCart} variant="contained">
+        <DialogActions sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Button
+            onClick={onClose}
+            variant="contained"
+            sx={{
+              borderRadius: "2rem",
+              padding: "0.5rem 2rem",
+              fontSize: "1rem",
+              backgroundColor: "primary.light",
+            }}
+          >
+            Close
+          </Button>
+          <Button
+            onClick={handleAddToCart}
+            sx={{
+              borderRadius: "2rem",
+              padding: "0.5rem 2rem",
+              fontSize: "1rem",
+              backgroundColor: "primary.light",
+            }}
+            variant="contained"
+          >
             Add to Cart
           </Button>
         </DialogActions>

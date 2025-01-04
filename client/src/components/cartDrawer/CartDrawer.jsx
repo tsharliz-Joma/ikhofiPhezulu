@@ -69,7 +69,7 @@ const CartDrawer = ({ open, onClose, cart, onRemove, onCheckout }) => {
                   >
                     <Box
                       onClick={(e) => handlePopover(e)}
-                      sx={{ borderRadius: "1rem", width: "25%" }}
+                      sx={{ borderRadius: "1rem", width: "25%", cursor: "pointer" }}
                       component={"img"}
                       src={item.image}
                     />
@@ -133,10 +133,7 @@ const CartDrawer = ({ open, onClose, cart, onRemove, onCheckout }) => {
                     <Box sx={{ padding: "0.5rem" }}>
                       {Object.values(item.modifiers).map((modifier, index) => (
                         <Box key={index} sx={{ display: "flex" }}>
-                          <Typography variant="body2" fontWeight="bold">
-                            {modifier.id}:
-                          </Typography>
-                          <Typography variant="body2">&nbsp;{modifier.name}</Typography>
+                          <Typography variant="body2">{modifier.name}</Typography>
                         </Box>
                       ))}
                     </Box>
