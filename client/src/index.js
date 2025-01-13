@@ -17,7 +17,7 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import CssBaseline from "@mui/material/CssBaseline";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { ContextProvider } from "./context/ContextProvider";
 import CartPage from "./pages/cart/Page";

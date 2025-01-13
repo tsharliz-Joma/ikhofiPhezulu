@@ -21,7 +21,7 @@ const Modifiers = ({ modifiers = [], selectedValues, setSelectedValues }) => {
       {/* Render Options for Each Modifier */}
       <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap", py: 3 }}>
         {modifier.options.map((option) => (
-          <Box sx={{ display: "grid", gap: "0.25rem" }}>
+          <Box key={`${option.name} - Box`} sx={{ display: "grid", gap: "0.25rem" }}>
             <Chip
               sx={{
                 fontSize: `1.25rem`,

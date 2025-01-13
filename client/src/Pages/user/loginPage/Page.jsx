@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
-import LoginForm from "../../../forms/loginForm/LoginForm";
-import { StyledContainer } from "../../../styles/globals";
-import axios from "axios";
 import { useNavigate } from "react-router";
 import { useData } from "../../../hooks/useData";
+import LoginForm from "../../../forms/loginForm/LoginForm";
+import api from "@/utils/uitls";
 import jwt from "jsonwebtoken";
 import LoadingSpinner from "@/modules/loadingSpinner/LoadingSpinner";
 import ErrorDisplay from "@/modules/error/ErrorDisplay";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import Snackbar from "@mui/material/Snackbar";
+import Header from "@/components/header/Header.component";
 
 const LoginPage = () => {
   const { dispatch } = useData();
@@ -41,12 +45,12 @@ const LoginPage = () => {
       password: FormData.get("password"),
     };
     try {
-      const response = await axios.post(process.env.REACT_APP_USER_LOGIN_API, submitData);
+      const response = await api.post(process.env.REACT_APP_USER_LOGIN_API, submitData);
       if (response.status === 200) {
         const userData = response.data;
         sessionStorage.setItem("token", userData.user);
         dispatch({ type: "LOGIN", payload: userData });
-        navigate("/order-coffee");
+        navigate("/menu");
       } else {
         setShowError(true);
       }
@@ -58,17 +62,47 @@ const LoginPage = () => {
   };
 
   return (
-    <StyledContainer>
-      {isLoading && <LoadingSpinner />}
-      <LoginForm
-        handleSubmit={handleSubmit}
-        handleGoogleLogin={handleGoogleLogin}
-        handleGoogleError={handleGoogleError}
-        onSuccess={onSuccess}
-        onError={onError}
-        error={showError ? <ErrorDisplay /> : null}
-      />
-    </StyledContainer>
+    <Box sx={{ height: "100vh", backgroundColor: "background.default" }}>
+      <Header title="coffee up" />
+      <Box
+        sx={{
+          height: "calc(100vh - 64px)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Paper
+          elevation={4}
+          sx={{
+            padding: "2rem",
+            borderRadius: "16px",
+            maxWidth: "400px",
+            width: "100%",
+            background: "#1d1d1d",
+            color: "white",
+          }}
+        >
+          <Typography
+            variant="h4"
+            align="center"
+            gutterBottom
+            sx={{ fontWeight: "bold", color: "primary.main" }}
+          >
+            Login
+          </Typography>
+          {isLoading && <LoadingSpinner />}
+          <LoginForm
+            handleSubmit={handleSubmit}
+            handleGoogleLogin={handleGoogleLogin}
+            handleGoogleError={handleGoogleError}
+            onSuccess={onSuccess}
+            onError={onError}
+            error={showError ? <ErrorDisplay /> : null}
+          />
+        </Paper>
+      </Box>
+    </Box>
   );
 };
 export default LoginPage;

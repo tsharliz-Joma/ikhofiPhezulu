@@ -2,10 +2,24 @@ import React, { useEffect, createContext, useReducer } from "react";
 import jwt from "jsonwebtoken";
 import { getAllMenuItems } from "@/api/helpers";
 
-const initialState = { cart: [], menu: null, admin: null, user: null, loading: false, error: null };
+const initialState = {
+  cart: JSON.parse(sessionStorage.getItem("cart")) || [],
+  menu: null,
+  admin: null,
+  user: null,
+  loading: false,
+  error: null,
+};
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case "SET_USER":
+      return {
+        ...state,
+        user: action.payload,
+        admin: false,
+        loading: false,
+      };
     case "SET_ADMIN":
       return {
         ...state,
@@ -65,6 +79,7 @@ const reducer = (state, action) => {
             parseInt(udpatedCart[existingItemIndex].quantity) + parseInt(action.payload.quantity)
           ).toString(),
         };
+        sessionStorage.setItem("cart", JSON.stringify(udpatedCart));
         return {
           ...state,
           cart: udpatedCart,
@@ -80,29 +95,34 @@ const reducer = (state, action) => {
       }
 
     case "UPDATE_CART_QUANTITY":
+      const updateCartQuantity = state.cart.map((item) =>
+        item.id === action.payload.id &&
+        JSON.stringify(item.modifiers) === JSON.stringify(action.payload.modifiers)
+          ? { ...item, quantity: action.payload.quantity.toString() }
+          : item
+      );
+      sessionStorage.setItem("cart", JSON.stringify(updateCartQuantity));
       return {
         ...state,
-        cart: state.cart.map((item) =>
-          item.id === action.payload.id &&
-          JSON.stringify(item.modifiers) === JSON.stringify(action.payload.modifiers)
-            ? { ...item, quantity: action.payload.quantity.toString() }
-            : item
-        ),
+        cart: updateCartQuantity,
       };
 
     case "REMOVE_FROM_CART":
+      const filteredCart = state.cart.filter(
+        (item, index) =>
+          !(
+            item.id === action.payload.id &&
+            JSON.stringify(item.modifiers) === JSON.stringify(action.payload.modifiers)
+          )
+      );
+      sessionStorage.setItem("cart", JSON.stringify(filteredCart));
       return {
         ...state,
-        cart: state.cart.filter(
-          (item, index) =>
-            !(
-              item.id === action.payload.id &&
-              JSON.stringify(item.modifiers) === JSON.stringify(action.payload.modifiers)
-            )
-        ),
+        cart: filteredCart,
       };
 
     case "CLEAR_CART":
+      sessionStorage.removeItem("carts");
       return {
         ...state,
         cart: [],
@@ -154,7 +174,13 @@ export function ContextProvider({ children }) {
       dispatch({ type: "SET_LOADING", payload: true });
       const tokenData = getSessionStorageData("admin-access-token", "googleToken");
       const admin = sessionStorage.getItem(process.env.REACT_APP_ADMINKEY);
-      if (admin) {
+      const user = sessionStorage.getItem(process.env.REACT_APP_USER_TOKEN);
+      if (!admin) {
+        if (user) {
+          dispatch({ type: "SET_USER", payload: user });
+        }
+        return "No admin or user";
+      } else if (admin) {
         dispatch({ type: "SET_ADMIN", payload: admin });
         if (tokenData) {
           dispatch({ type: "LOGIN", payload: tokenData });
@@ -182,8 +208,8 @@ export function ContextProvider({ children }) {
   };
 
   useEffect(() => {
-    fetchData();
     fetchMenu();
+    fetchData();
   }, []);
 
   const value = { state, dispatch };

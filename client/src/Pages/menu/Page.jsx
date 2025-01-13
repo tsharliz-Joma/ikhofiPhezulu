@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import MenuCard from "@/components/card/MenuCard";
 import CategoryModal from "@/components/modals/CategoryModal";
 import Header from "@/components/header/Header.component";
-import { motion } from "framer-motion";
 import { useData } from "@/hooks/useData";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
@@ -16,10 +13,11 @@ import SuspenseComponent from "@/components/suspense/Suspense";
 
 const MenuPage = () => {
   const { state } = useData();
-  const { menu, loading, error } = state;
+  const { menu, error } = state;
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [items, setItems] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category.name);
@@ -31,24 +29,20 @@ const MenuPage = () => {
     setIsModalOpen(false);
   };
 
-  if (loading)
+  // 2. Show error message if fetching failed
+  if (error) return <p>{error}</p>;
+
+  if (!menu || !menu.categories || Object.keys(menu.categories).length === 0) {
     return (
       <SuspenseComponent>
         <></>
       </SuspenseComponent>
     );
-
-  // 2. Show error message if fetching failed
-  if (error) return <p>{error}</p>;
-
-  // 3. Show fallback UI if no menu data
-  if (!menu || !menu.categories || Object.keys(menu.categories).length === 0) {
-    return <p>No menu data available.</p>;
   }
 
   return (
     <Box>
-      <Header title="Menu" />
+      <Header title="Coffee up" />
       <Box
         sx={{
           textAlign: "center",

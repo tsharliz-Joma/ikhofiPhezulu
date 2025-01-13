@@ -18,8 +18,6 @@ const CategoryModal = ({ onClose, open, items, categoryName }) => {
   const [selectedItem, setSelectedItem] = useState([]);
   const [isItemModalOpen, setisItemModalOpen] = useState(false);
 
-  console.log(items);
-
   const handleCategoryItemClick = (item) => {
     setSelectedItem(item);
     setisItemModalOpen(true);

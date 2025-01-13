@@ -1,5 +1,6 @@
 import "./App.css";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "./components/header/Header.component";
 import HeroVideo from "./assets/hero.mp4";
 import HeroMedia from "./modules/heroMedia/HeroMedia";
@@ -12,6 +13,7 @@ const App = ({ socket }) => {
   return (
     <Box>
       <Header title="coffee up" />
+
       <Box sx={{ height: "100%", textAlign: "center" }}>
         <HeroMedia src={HeroVideo} />
         <Box
