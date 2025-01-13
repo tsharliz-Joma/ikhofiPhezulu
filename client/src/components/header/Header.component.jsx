@@ -20,7 +20,7 @@ import { jwtDecode } from "jwt-decode";
 const Header = ({ title, fontSize }) => {
   const { state, dispatch } = useData();
   const { cart, user } = state;
-  const userProfile = user ? jwtDecode(user) : "";
+  // const userProfile = user ? jwtDecode(user) : "";
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [popOverAnchor, setPopoverAnchor] = useState(null);
