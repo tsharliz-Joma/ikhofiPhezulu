@@ -10,7 +10,6 @@ import ErrorDisplay from "@/modules/error/ErrorDisplay";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import Snackbar from "@mui/material/Snackbar";
 import Header from "@/components/header/Header.component";
 
 const LoginPage = () => {

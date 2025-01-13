@@ -4,7 +4,6 @@ import { Route, Routes } from "react-router";
 import ReactDOM from "react-dom/client";
 import { io } from "socket.io-client";
 import App from "./App";
-import OrderPage from "./pages/order/Page";
 import AdminLogin from "./pages/admin/loginPage/Page";
 import Dashboard from "./pages/dashboard/Page";
 import LoginPage from "./pages/user/loginPage/Page";

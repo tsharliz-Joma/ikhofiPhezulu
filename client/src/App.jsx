@@ -1,6 +1,5 @@
 import "./App.css";
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import Header from "./components/header/Header.component";
 import HeroVideo from "./assets/hero.mp4";
 import HeroMedia from "./modules/heroMedia/HeroMedia";

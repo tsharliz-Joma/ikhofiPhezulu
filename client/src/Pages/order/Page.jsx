@@ -2,21 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useData } from "@/hooks/useData";
 import api from "@/utils/uitls";
 import OrderForm from "@/forms/orderForm/OrderForm";
-import axios from "axios";
 import Box from "@mui/material/Box";
 import LoadingSpinner from "@/modules/loadingSpinner/LoadingSpinner";
 import { SuccessModal } from "@/modules/successModal/SuccessModal";
 import { sanitizeError } from "@/utils/uitls";
 import Header from "@/components/header/Header.component";
-import { Navigate } from "react-router";
 
 const OrderPage = ({ socket }) => {
   const { state } = useData();
   const { user } = state;
   const [isLoading, setIsLoading] = useState(null);
-  const [, setShowError] = useState(null);
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [, setSubmitted] = useState(null);
+  const [showSuccess, ] = useState(false);
   const [, setOrderStatus] = useState("Order Placed");
 
   useEffect(() => {
@@ -121,7 +117,6 @@ const OrderPage = ({ socket }) => {
       >
         {isLoading && <LoadingSpinner />}
         {showSuccess && <SuccessModal />}
-        {/* {submitted && <OrderStatusTracker socket={socket} status={orderStatus} />} */}
         <OrderForm socket={socket} handleSubmit={handleSubmit} />
       </Box>
     </Box>
