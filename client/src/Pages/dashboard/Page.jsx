@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import api from "@/utils/uitls";
 import List from "@/modules/list/List";
 import DialogueBox from "@/modules/dialogueBox/DialogueBox";
-import Header from "@/modules/header/Header.component";
+import Header from "@/components/header/Header.component";
 import useTheme from "@mui/material/styles/useTheme";
 import Container from "@mui/material/Container";
 import { useOrders } from "@/hooks/useOrders";

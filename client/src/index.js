@@ -4,20 +4,23 @@ import { Route, Routes } from "react-router";
 import ReactDOM from "react-dom/client";
 import { io } from "socket.io-client";
 import App from "./App";
-import OrderPage from "./pages/order/Page";
 import AdminLogin from "./pages/admin/loginPage/Page";
 import Dashboard from "./pages/dashboard/Page";
 import LoginPage from "./pages/user/loginPage/Page";
+import MenuPage from "./pages/menu/Page";
+import PasswordProtection from "./modules/passwordProtection/PasswordProtection";
+import ProtectedRoute from "./modules/protectedRoute/ProtectedRoute";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import CssBaseline from "@mui/material/CssBaseline";
+import { AnimatePresence } from "framer-motion";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { ContextProvider } from "./context/ContextProvider";
-import PasswordProtection from "./modules/passwordProtection/PasswordProtection";
-import ProtectedRoute from "./modules/protectedRoute/ProtectedRoute";
+import CartPage from "./pages/cart/Page";
+
 const socket = io(process.env.REACT_APP_SOCKET);
 
 const themeOptions = {
@@ -34,7 +37,7 @@ const themeOptions = {
       main: "#ef9739",
       light: "rgb(244, 231, 208)",
       dark: "rgb(169, 158, 137)",
-      contrastText: "#FFF",
+      contrastText: "#000",
     },
     background: {
       default: "#121212",
@@ -117,55 +120,58 @@ root.render(
       <ContextProvider>
         <BrowserRouter>
           <ThemeProvider theme={theme}>
-            <Routes>
-              <Route
-                // @ts-ignore
-                exact
-                path="/"
-                element={
-                  <>
-                    <CssBaseline />
-                    <App socket={socket} />
-                  </>
-                }
-              />
-              <Route
-                path="/order"
-                element={
-                  <>
-                    <CssBaseline />
-                    <OrderPage socket={socket} />
-                  </>
-                }
-              />
-              <Route
-                path="/admin"
-                element={
-                  <PasswordProtection>
-                    <CssBaseline />
-                    <AdminLogin />
-                  </PasswordProtection>
-                }
-              />
-              <Route
-                path="/dashboard"
-                element={
-                  <ProtectedRoute>
-                    <CssBaseline />
-                    <Dashboard socket={socket} />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/login"
-                element={
-                  <>
-                    <CssBaseline />
-                    <LoginPage />
-                  </>
-                }
-              />
-            </Routes>
+            <AnimatePresence mode="wait">
+              <Routes>
+                <Route
+                  // @ts-ignore
+                  exact
+                  path="/"
+                  element={
+                    <>
+                      <CssBaseline />
+                      <App socket={socket} />
+                    </>
+                  }
+                />
+                <Route path={"/cart"} element={<CartPage />} />
+                <Route
+                  path="/menu"
+                  element={
+                    <>
+                      <CssBaseline />
+                      <MenuPage socket={socket} />
+                    </>
+                  }
+                />
+                <Route
+                  path="/admin"
+                  element={
+                    <PasswordProtection>
+                      <CssBaseline />
+                      <AdminLogin />
+                    </PasswordProtection>
+                  }
+                />
+                <Route
+                  path="/dashboard"
+                  element={
+                    <ProtectedRoute>
+                      <CssBaseline />
+                      <Dashboard socket={socket} />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/login"
+                  element={
+                    <>
+                      <CssBaseline />
+                      <LoginPage />
+                    </>
+                  }
+                />
+              </Routes>
+            </AnimatePresence>
           </ThemeProvider>
         </BrowserRouter>
       </ContextProvider>
