@@ -4,12 +4,14 @@ const path = require("path");
 module.exports = function override(config) {
   const fallback = config.resolve.fallback || {};
   Object.assign(fallback, {
+    vm: require.resolve("vm-browserify"),
     crypto: require.resolve("crypto-browserify"),
     stream: require.resolve("stream-browserify"),
     assert: require.resolve("assert"),
     http: require.resolve("stream-http"),
     https: require.resolve("https-browserify"),
     timers: require.resolve("timers-browserify"),
+    process: require.resolve("process/browser"),
     os: require.resolve("os-browserify"),
     url: require.resolve("url"),
     path: require.resolve("path-browserify"),
