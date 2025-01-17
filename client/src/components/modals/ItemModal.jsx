@@ -65,7 +65,7 @@ const ItemModal = ({ open, onClose, item }) => {
         >
           <Box>
             <Typography variant="h2">{item?.name}</Typography>
-            <Box pt='0.5rem'>
+            <Box pt="0.5rem">
               <Typography variant="body2" fontWeight="bold">
                 Description
               </Typography>
@@ -97,7 +97,7 @@ const ItemModal = ({ open, onClose, item }) => {
             sx={{
               borderRadius: "2rem",
               padding: "0.5rem 2rem",
-              fontSize: "1rem",
+              fontSize: { xs: "0.75rem", md: "1rem" },
               backgroundColor: "primary.light",
             }}
           >
@@ -108,7 +108,7 @@ const ItemModal = ({ open, onClose, item }) => {
             sx={{
               borderRadius: "2rem",
               padding: "0.5rem 2rem",
-              fontSize: "1rem",
+              fontSize: { xs: "0.75rem", md: "1rem" },
               backgroundColor: "primary.light",
             }}
             variant="contained"

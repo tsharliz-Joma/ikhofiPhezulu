@@ -89,7 +89,7 @@ const CategoryModal = ({ onClose, open, items, categoryName }) => {
             sx={{
               borderRadius: "2rem",
               padding: "0.75rem 2rem",
-              fontSize: "1.15rem",
+              fontSize: { xs: "0.75rem", md: "1rem" },
               backgroundColor: "primary.light",
             }}
           >

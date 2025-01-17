@@ -15,12 +15,15 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import Popover from "@mui/material/Popover";
+import CardContent from "@mui/material/CardContent";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
 import { jwtDecode } from "jwt-decode";
 
 const Header = ({ title, fontSize }) => {
   const { state, dispatch } = useData();
   const { cart, user } = state;
-  // const userProfile = user ? jwtDecode(user) : "";
+  const userProfile = user ? jwtDecode(user) : "";
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [popOverAnchor, setPopoverAnchor] = useState(null);
@@ -115,16 +118,34 @@ const Header = ({ title, fontSize }) => {
         anchorEl={popOverAnchor}
         onClose={closePopover}
       >
-        <Box
+        <Card
           sx={{
-            display: "grid",
-            padding: 10,
+            minWidth: 300,
+            padding: 2,
+            boxShadow: 3,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
           }}
         >
-          <Button variant="contained" onClick={handleSignOut}>
-            Sign out
-          </Button>
-        </Box>
+          <CardContent>
+            <Typography variant="body1" color="text.secondary">
+              Name: {userProfile.name || "N/A"}
+            </Typography>
+            <Typography variant="body1" color="text.secondary">
+              Email: {userProfile.email}
+            </Typography>
+          </CardContent>
+          <CardActions sx={{ justifyContent: "flex-end", paddingTop: 0 }}>
+            <Button
+              sx={{ backgroundColor: "primary.light" }}
+              variant="contained"
+              onClick={handleSignOut}
+            >
+              Sign out
+            </Button>
+          </CardActions>
+        </Card>
       </Popover>
       <CartDrawer
         onCheckout={handleCheckout}
