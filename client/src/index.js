@@ -31,7 +31,8 @@ const themeOptions = {
       light: "rgb(242, 171, 96)",
       dark: "rgb(167, 105, 39)",
       contrastText: "#FFF",
-      black: "#000",
+      black: "#000000",
+      white: "#FFFFFF"
     },
     secondary: {
       main: "#ef9739",
