@@ -13,8 +13,8 @@ import { useTheme } from "@mui/material";
 
 const MenuCard = ({ image, title, description, price, onClick, maxWidth = "auto" }) => {
   const theme = useTheme();
-  const { state, dispatch } = useData();
-  const { cart, user } = state;
+  const { state } = useData();
+  const { user } = state;
   const [active, setActive] = useState(false);
   const [isFavorited, setIsFavorited] = useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
