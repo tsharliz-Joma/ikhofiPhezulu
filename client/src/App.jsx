@@ -29,7 +29,21 @@ const App = ({ socket }) => {
             alignItems: "center",
           }}
         >
-          <Typography variant="h1" color="primary.main" gutterBottom sx={{ mt: 4 }}>
+          <Typography
+            // variant="h1"
+            color="primary.main"
+            gutterBottom
+            sx={{
+              mt: 4,
+              fontSize: {
+                xs: "1.825rem",
+                md: "2.125rem",
+                fontWeight: "bold",
+                lineHeight: "110%",
+                letterSpacing: "0.1rem",
+              },
+            }}
+          >
             Fresh Coffee, Delivered Fast!
           </Typography>
           <Typography variant="h5" color="text.secondary" sx={{ mb: 4 }}>
