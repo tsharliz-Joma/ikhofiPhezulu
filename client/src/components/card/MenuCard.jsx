@@ -42,7 +42,7 @@ const MenuCard = ({ image, title, description, price, onClick, maxWidth = "auto"
     <Card
       sx={{
         maxWidth: maxWidth,
-        height: { xs: "350px", md: "500px" }, // Larger size for better visuals
+        height: { xs: "350px", md: "500px" },
         borderRadius: "16px",
         boxShadow: 4,
         cursor: "pointer",

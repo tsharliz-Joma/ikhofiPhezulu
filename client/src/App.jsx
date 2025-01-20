@@ -41,8 +41,8 @@ const App = ({ socket }) => {
             href="/menu"
             sx={{
               borderRadius: "50px",
-              padding: { xs: "1rem 3rem", md: "0.75rem 2rem" },
-              fontSize: "1.15rem",
+              padding: { xs: "0.5rem 2rem", md: "0.75rem 2rem" },
+              fontSize: { xs: "1rem", md: "1.15rem" },
               backgroundColor: "primary.light",
             }}
           >
