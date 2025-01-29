@@ -69,7 +69,7 @@ const CategoryModal = ({ onClose, open, items, categoryName }) => {
                     image={item?.image}
                     price={item.basePriceMoney.amount}
                     description={item?.description}
-                    onClick={() => handleCategoryItemClick(item)}
+                    // onClick={() => handleCategoryItemClick(item)}
                   />
                 </Grid>
               ))}
