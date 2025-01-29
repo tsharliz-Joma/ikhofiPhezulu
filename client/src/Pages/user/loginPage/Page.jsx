@@ -5,7 +5,7 @@ import { useData } from "../../../hooks/useData";
 import LoginForm from "../../../forms/loginForm/LoginForm";
 import api from "@/utils/uitls";
 import jwt from "jsonwebtoken";
-import LoadingSpinner from "@/modules/loadingSpinner/LoadingSpinner";
+import LoadingSpinner from "@/components/loadingSpinner/LoadingSpinner";
 import ErrorDisplay from "@/modules/error/ErrorDisplay";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";

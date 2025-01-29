@@ -30,7 +30,6 @@ const App = ({ socket }) => {
           }}
         >
           <Typography
-            // variant="h1"
             color="primary.main"
             gutterBottom
             sx={{

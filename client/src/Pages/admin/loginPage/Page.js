@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import api, { sanitizeError } from "@/utils/uitls";
 import { StyledContainer } from "@/styles/globals";
 import Header from "@/components/header/Header.component";
-import LoadingSpinner from "@/modules/loadingSpinner/LoadingSpinner";
+import LoadingSpinner from "@/components/loadingSpinner/LoadingSpinner";
 import LoginForm from "@/forms/loginForm/LoginForm";
 import ErrorDisplay from "@/modules/error/ErrorDisplay";
 import Container from "@mui/material/Container";
