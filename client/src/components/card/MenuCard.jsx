@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -24,17 +23,7 @@ const MenuCard = ({ image, title, description, price, onClick, maxWidth = "auto"
     setIsFavorited(!isFavorited);
   };
 
-  const handleTap = (e) => {
-    if (isMobile) {
-      e.stopPropagation();
-      setActive((prev) => !prev);
-    }
-  };
-
-  const handleCardClick = () => {
-    if (isMobile && active) {
-      return;
-    }
+  const handleClick = () => {
     onClick();
   };
 
@@ -51,9 +40,9 @@ const MenuCard = ({ image, title, description, price, onClick, maxWidth = "auto"
         overflow: "hidden",
         "&:hover .overlay": { boxShadow: 8, transform: { xs: "none", md: "scale(1.05)" } },
       }}
-      onClick={handleCardClick}
-      onMouseEnter={() => setActive(true)}
-      onMouseLeave={() => setActive(false)}
+      onClick={handleClick}
+      onMouseEnter={() => !isMobile && setActive(true)}
+      onMouseLeave={() => !isMobile && setActive(false)}
     >
       {image && (
         <CardMedia
@@ -69,6 +58,7 @@ const MenuCard = ({ image, title, description, price, onClick, maxWidth = "auto"
           }}
         />
       )}
+
       <Box
         className="overlay"
         sx={{
@@ -77,7 +67,7 @@ const MenuCard = ({ image, title, description, price, onClick, maxWidth = "auto"
           left: 0,
           height: "100%",
           width: "100%",
-          backgroundColor: active ? `rgba(0, 0, 0, 0.6)` : "transparent",
+          backgroundColor: isMobile || active ? `rgba(0, 0, 0, 0.6)` : "transparent",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -85,86 +75,85 @@ const MenuCard = ({ image, title, description, price, onClick, maxWidth = "auto"
           transition: "background-color 0.3s",
           padding: { xs: 1, sm: 2 },
           textAlign: "center",
+          opacity: isMobile || active ? 1 : 0,
+          visibility: isMobile || active ? "visible" : "hidden",
         }}
-        onClick={handleTap}
       >
-        {active && (
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            height: "45%",
+            color: "white",
+            padding: "0px 0px 0.5rem 0px",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              width: "100%",
+            }}
+          >
+            <Typography variant="h6" sx={{ fontWeight: "bold", color: "primary.white" }}>
+              {title}
+            </Typography>
+            {user && (
+              <IconButton
+                size="small"
+                onClick={handleFavoriteClick}
+                sx={{ color: "secondary.main" }}
+              >
+                {isFavorited ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+              </IconButton>
+            )}
+          </Box>
+
           <Box
             sx={{
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
-              height: "45%",
-              color: "white",
-              padding: "0px 0px 0.5rem 0px",
+              height: "100%",
             }}
           >
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                width: "100%",
-              }}
-            >
-              <Typography variant="h6" sx={{ fontWeight: "bold", color: "primary.white" }}>
-                {title}
+            {description && (
+              <Typography
+                variant="body2"
+                color="primary.white"
+                sx={{
+                  fontSize: "0.75rem",
+                  textAlign: "center",
+                  lineHeight: 1.4,
+                  maxHeight: "3.5em",
+                  textOverflow: "ellipsis",
+                  display: "-webkit-box",
+                  WebkitLineClamp: 3,
+                  WebkitBoxOrient: "vertical",
+                }}
+              >
+                {description}
               </Typography>
-              {user && (
-                <IconButton
-                  size="small"
-                  onClick={handleFavoriteClick}
-                  sx={{ color: "secondary.main" }}
-                >
-                  {isFavorited ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-                </IconButton>
-              )}
-            </Box>
-
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                height: "100%",
-              }}
-            >
-              {description && (
-                <Typography
-                  variant="body2"
-                  color="primary.white"
-                  sx={{
-                    fontSize: "0.75rem",
-                    textAlign: "center",
-                    lineHeight: 1.4,
-                    maxHeight: "3.5em",
-                    textOverflow: "ellipsis",
-                    display: "-webkit-box",
-                    WebkitLineClamp: 3,
-                    WebkitBoxOrient: "vertical",
-                  }}
-                >
-                  {description}
-                </Typography>
-              )}
-            </Box>
-            <Box>
-              {price && (
-                <Box
-                  sx={{
-                    // mt: 2,
-                    height: "100%",
-                    fontWeight: "bold",
-                    fontSize: "1.1rem",
-                    color: "secondary.main",
-                  }}
-                >
-                  {`$${parseFloat(price / 100).toFixed(2)}`}
-                </Box>
-              )}
-            </Box>
+            )}
           </Box>
-        )}
+          <Box>
+            {price && (
+              <Box
+                sx={{
+                  // mt: 2,
+                  height: "100%",
+                  fontWeight: "bold",
+                  fontSize: "1.1rem",
+                  color: "secondary.main",
+                }}
+              >
+                {`$${parseFloat(price / 100).toFixed(2)}`}
+              </Box>
+            )}
+          </Box>
+        </Box>
       </Box>
     </Card>
   );
