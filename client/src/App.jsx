@@ -12,8 +12,7 @@ const App = ({ socket }) => {
   return (
     <Box>
       <Header title="coffee up" />
-
-      <Box sx={{ height: "100%", textAlign: "center" }}>
+      <Box sx={{ textAlign: "center" }}>
         <HeroMedia src={HeroVideo} />
         <Box
           sx={{

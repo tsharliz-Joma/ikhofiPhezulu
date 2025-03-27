@@ -4,7 +4,6 @@ import Typography from "@mui/material/Typography";
 import CategoryModal from "@/components/modals/CategoryModal";
 import Header from "@/components/header/Header.component";
 import { useData } from "@/hooks/useData";
-import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
@@ -17,7 +16,9 @@ const MenuPage = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [items, setItems] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const filteredMenu = Object.values(menu?.categories || {}).filter(
+    (category) => category.items?.length > 0
+  );
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category.name);
@@ -45,28 +46,35 @@ const MenuPage = () => {
       <Header title="Coffee up" />
       <Box
         sx={{
-          textAlign: "center",
-          py: 5,
-          backgroundColor: "background.paper",
+          display: "grid",
+          gap: "5rem",
         }}
       >
-        <Typography variant="h1" color="primary.main" gutterBottom>
-          Explore Our Menu
-        </Typography>
-        <Typography variant="h5" color="text.secondary">
-          Handcrafted coffee brewed to perfection
-        </Typography>
-      </Box>
-
-      <Container sx={{ py: 4 }}>
         <Box
           sx={{
+            width: "100%",
+            textAlign: "center",
+            backgroundColor: "background.paper",
+            py: 5,
+          }}
+        >
+          <Typography variant="h1" color="primary.main" gutterBottom>
+            Explore Our Menu
+          </Typography>
+          <Typography variant="h5" color="text.secondary">
+            Handcrafted coffee brewed to perfection
+          </Typography>
+        </Box>
+
+        <Box
+          sx={{
+            padding: "2rem",
+            width: "100%",
             display: "flex",
-            justifyContent: { xs: "start", md: "center" },
+            justifyContent: { xs: "start", md: "left" },
             flexWrap: { xs: "nowrap", md: "nowrap" },
-            overflowX: { xs: "auto", md: "visible" },
+            overflowX: { xs: "auto", md: "scroll" },
             gap: 2,
-            paddingBottom: 2,
             "&::-webkit-scrollbar": {
               xs: { display: "none" },
               md: {},
@@ -75,7 +83,7 @@ const MenuPage = () => {
             msOverflowStyle: { xs: "none", md: "auto" }, // Hide scrollbar for IE/Edge
           }}
         >
-          {Object.values(menu.categories).map((category) => (
+          {filteredMenu.map((category) => (
             <Box
               key={category.id}
               sx={{
@@ -112,7 +120,8 @@ const MenuPage = () => {
             </Box>
           ))}
         </Box>
-      </Container>
+      </Box>
+
       <Footer />
       <CategoryModal
         open={isModalOpen}
