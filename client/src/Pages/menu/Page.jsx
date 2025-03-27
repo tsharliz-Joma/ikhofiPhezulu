@@ -47,7 +47,7 @@ const MenuPage = () => {
       <Box
         sx={{
           display: "grid",
-          gap: "5rem",
+          gap: { sm: "2.5rem", md: "5rem" },
         }}
       >
         <Box
