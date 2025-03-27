@@ -86,7 +86,9 @@ const Header = ({ title, fontSize }) => {
       >
         <Box sx={{ display: "flex", alignItems: "center", gap: "1rem" }}>
           <Typography variant="h3" sx={{ textTransform: "uppercase" }}>
-            {title}
+            <a href="/" style={{ color: "white", textDecoration: "none" }}>
+              {title}
+            </a>
           </Typography>
           {user && (
             <Box onClick={(event) => openPopover(event)}>
