@@ -2,7 +2,7 @@ import api from "@/utils/utils";
 
 export const getAllMenuItems = async () => {
   try {
-    const response = await api.post("/api/catalog/search", {});
+    const response = await api.post("/api/catalog", {});
     return response.data;
   } catch (error) {
     console.error(error);
