@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import api from "@/utils/uitls";
+import api from "@/utils/utils";
 
 export const useOrders = (apiRoute, socket) => {
   const [orders, setOrders] = useState([]);

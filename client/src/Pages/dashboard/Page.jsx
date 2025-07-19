@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import api from "@/utils/uitls";
+import api from "@/utils/utils";
 import List from "@/modules/list/List";
 import DialogueBox from "@/modules/dialogueBox/DialogueBox";
 import Header from "@/components/header/Header.component";

@@ -7,7 +7,7 @@ import Badge from "@mui/material/Badge";
 import CartDrawer from "../cartDrawer/CartDrawer";
 import { useData } from "@/hooks/useData";
 import { removeFromCart } from "@/context/actions";
-import api from "@/utils/uitls";
+import api from "@/utils/utils";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";

@@ -72,17 +72,17 @@ const reducer = (state, action) => {
           JSON.stringify(item.modifiers) === JSON.stringify(action.payload.modifiers)
       );
       if (existingItemIndex > -1) {
-        const udpatedCart = [...state.cart];
-        udpatedCart[existingItemIndex] = {
-          ...udpatedCart[existingItemIndex],
+        const updatedCart = [...state.cart];
+        updatedCart[existingItemIndex] = {
+          ...updatedCart[existingItemIndex],
           quantity: (
-            parseInt(udpatedCart[existingItemIndex].quantity) + parseInt(action.payload.quantity)
+            parseInt(updatedCart[existingItemIndex].quantity) + parseInt(action.payload.quantity)
           ).toString(),
         };
-        sessionStorage.setItem("cart", JSON.stringify(udpatedCart));
+        sessionStorage.setItem("cart", JSON.stringify(updatedCart));
         return {
           ...state,
-          cart: udpatedCart,
+          cart: updatedCart,
         };
       } else {
         return {

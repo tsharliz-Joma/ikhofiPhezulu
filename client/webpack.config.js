@@ -3,10 +3,30 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const webpack = require("webpack");
 
 module.exports = (env, argv) => {
   const isProduction = argv.mode === "production";
   const envFileName = `.env.${isProduction ? "production" : "development"}`;
+
+  const plugins = [
+    new webpack.ProvidePlugin({
+      process: "process/browser.js",
+      Buffer: ["buffer", "Buffer"],
+    }),
+    new HtmlWebpackPlugin({
+      template: "./public/index.html",
+      favicon: "./public/favicon.ico",
+    }),
+    new Dotenv({
+      path: path.resolve(__dirname, envFileName), // Loads environment-specific .env file
+    }),
+  ];
+
+  if (!isProduction) {
+    plugins.push(new ReactRefreshWebpackPlugin());
+  }
 
   return {
     entry: "./src/index.js",
@@ -17,6 +37,9 @@ module.exports = (env, argv) => {
     },
     resolve: {
       extensions: [".js", ".jsx"], // Support JSX and JS files
+      alias: {
+        "@": path.resolve(__dirname, "src"),
+      },
       fallback: {
         vm: require.resolve("vm-browserify"),
         crypto: require.resolve("crypto-browserify"),
@@ -26,10 +49,16 @@ module.exports = (env, argv) => {
         https: require.resolve("https-browserify"),
         os: require.resolve("os-browserify"),
         url: require.resolve("url"),
+        buffer: require.resolve("buffer/"),
+        process: require.resolve("process/browser.js"),
       },
     },
     module: {
       rules: [
+        {
+          test: /\.(mp4|webm|ogg)$/,
+          type: "asset/resource",
+        },
         {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
@@ -37,6 +66,7 @@ module.exports = (env, argv) => {
             loader: "babel-loader",
             options: {
               presets: ["@babel/preset-env", "@babel/preset-react"],
+              plugins: isProduction ? [] : ["react-refresh/babel"],
             },
           },
         },
@@ -50,15 +80,8 @@ module.exports = (env, argv) => {
         },
       ],
     },
-    plugins: [
-      new HtmlWebpackPlugin({
-        template: "./public/index.html",
-        favicon: "./public/favicon.ico",
-      }),
-      new Dotenv({
-        path: path.resolve(__dirname, envFileName), // Loads environment-specific .env file
-      }),
-    ],
+    plugins: plugins,
+
     devServer: {
       static: {
         directory: path.resolve(__dirname, "public"),

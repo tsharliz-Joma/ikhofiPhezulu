@@ -3,7 +3,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router";
 import { useData } from "../../../hooks/useData";
 import LoginForm from "../../../forms/loginForm/LoginForm";
-import api from "@/utils/uitls";
+import api from "@/utils/utils";
 import jwt from "jsonwebtoken";
 import LoadingSpinner from "@/components/loadingSpinner/LoadingSpinner";
 import ErrorDisplay from "@/modules/error/ErrorDisplay";

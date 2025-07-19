@@ -1,4 +1,4 @@
-import api from "@/utils/uitls";
+import api from "@/utils/utils";
 
 export const getAllMenuItems = async () => {
   try {

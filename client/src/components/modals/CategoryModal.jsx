@@ -16,15 +16,15 @@ const Transition = forwardRef((props, ref) => {
 
 const CategoryModal = ({ onClose, open, items, categoryName }) => {
   const [selectedItem, setSelectedItem] = useState([]);
-  const [isItemModalOpen, setisItemModalOpen] = useState(false);
+  const [isItemModalOpen, setIsItemModalOpen] = useState(false);
 
   const handleCategoryItemClick = (item) => {
     setSelectedItem(item);
-    setisItemModalOpen(true);
+    setIsItemModalOpen(true);
   };
 
   const handleItemModalClose = () => {
-    setisItemModalOpen(false);
+    setIsItemModalOpen(false);
   };
 
   return (

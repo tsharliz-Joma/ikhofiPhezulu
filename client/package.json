@@ -9,11 +9,12 @@
     "@mui/icons-material": "^5.14.14",
     "@mui/material": "^5.14.9",
     "@mui/styled-engine-sc": "^5.14.9",
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
     "@react-oauth/google": "^0.11.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "ajv": "^6.12.6",
+    "ajv-keywords": "^3.5.2",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.1",
     "caniuse-lite": "^1.0.30001685",
@@ -27,7 +28,6 @@
     "react-bootstrap": "^2.8.0",
     "react-dom": "^18.3.1",
     "react-icons": "^5.4.0",
-    "react-refresh": "^0.16.0",
     "react-router": "^6.4.3",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
@@ -40,8 +40,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "dev": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "dev": "webpack server --mode development",
+    "build": "webpack server --mode production",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
@@ -64,7 +64,7 @@
     ]
   },
   "devDependencies": {
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.17",
     "assert": "^2.1.0",
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.1",
@@ -73,10 +73,13 @@
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",
     "react-app-rewired": "^2.2.1",
+    "react-refresh": "^0.17.0",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "url": "^0.11.4",
-    "vm-browserify": "^1.1.2"
+    "vm-browserify": "^1.1.2",
+    "webpack": "^5.100.2",
+    "webpack-cli": "^6.0.1"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "config-overrides.js",
