@@ -1,7 +1,7 @@
 {
   "hosting": {
-    "public": "build",
-    "site": "coffeeup",
+    "public": "dist",
+    "site": "Coffee Up",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
