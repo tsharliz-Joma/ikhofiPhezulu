@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const webpack = require("webpack");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = (env, argv) => {
   const isProduction = argv.mode === "production";
@@ -22,6 +23,9 @@ module.exports = (env, argv) => {
     new Dotenv({
       path: path.resolve(__dirname, envFileName), // Loads environment-specific .env file
     }),
+    new CopyPlugin({
+      patterns: [{from: "public/404.html", to: "404.html"}],
+    }),
   ];
 
   if (!isProduction) {
@@ -31,7 +35,7 @@ module.exports = (env, argv) => {
   return {
     entry: "./src/index.js",
     output: {
-      path: path.resolve(__dirname, "dist"),
+      path: path.resolve(__dirname, "build"),
       filename: "bundle.[contenthash].js",
       clean: true, // Cleans the output directory before every build
     },
@@ -84,7 +88,7 @@ module.exports = (env, argv) => {
 
     devServer: {
       static: {
-        directory: path.resolve(__dirname, "dist"),
+        directory: path.resolve(__dirname, "build"),
       },
       historyApiFallback: true, // Support React Router
       open: true,
