@@ -84,7 +84,7 @@ module.exports = (env, argv) => {
 
     devServer: {
       static: {
-        directory: path.resolve(__dirname, "public"),
+        directory: path.resolve(__dirname, "dist"),
       },
       historyApiFallback: true, // Support React Router
       open: true,
