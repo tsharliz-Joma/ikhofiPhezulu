@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_BASEURL,
+  baseURL: process.env.REACT_APP_BASEURL || "/",
 });
 
 api.interceptors.request.use((config) => {
@@ -17,22 +17,23 @@ api.interceptors.response.use(
   (error) => {
     console.error("API Error:", error.response?.data || error.message);
 
-    if (error.response.status === 401) {
+    if (error.response?.status === 401) {
       alert("Session Expired. Please log in again.");
       window.location.href = "/admin";
     } else if (error.response?.status === 500) {
       alert("A server error occurred. Please try again later.");
     }
-  }
+    return Promise.reject(error);
+  },
 );
 
 export const sanitizeError = (error) => {
   if (error.message) {
     return {
-      message: error.response.data.message || "An error occured",
+      message: error.response.data?.message || "An error occurred",
       status: error.response.status,
     };
   }
-  return { message: error.message };
+  return {message: error.message};
 };
 export default api;

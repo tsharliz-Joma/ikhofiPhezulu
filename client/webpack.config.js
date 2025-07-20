@@ -90,6 +90,12 @@ module.exports = (env, argv) => {
       open: true,
       hot: true,
       port: 3000,
+      proxy: {
+        "/api": {
+          target: "http://localhost:1969",
+          changeOrigin: true,
+        },
+      },
     },
     devtool: isProduction ? "source-map" : "eval-source-map", // Source maps for development
   };
