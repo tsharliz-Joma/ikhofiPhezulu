@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Coffee Up",
+  "name": "Coffee Up - Order Your Coffee Online",
+  "description": "Order your favorite coffee online and enjoy it at home or on the go.",
   "icons": [
     {
       "src": "favicon.ico",
