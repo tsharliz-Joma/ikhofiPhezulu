@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useData } from "@/hooks/useData";
-import api from "@/utils/uitls";
-import OrderForm from "@/forms/orderForm/OrderForm";
+import {useData} from "hooks/useData";
+import api from "utils/utils";
+import OrderForm from "form/orderForm/OrderForm";
 import Box from "@mui/material/Box";
-import LoadingSpinner from "@/components/loadingSpinner/LoadingSpinner";
-import { SuccessModal } from "@/components/successModal/SuccessModal";
-import { sanitizeError } from "@/utils/uitls";
-import Header from "@/components/header/Header.component";
+import LoadingSpinner from "components/loadingSpinner/LoadingSpinner";
+import { SuccessModal } from "components/successModal/SuccessModal";
+import { sanitizeError } from "utils/utils";
+import Header from "components/header/Header.component";
 
 const OrderPage = ({ socket }) => {
   const { state } = useData();

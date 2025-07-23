@@ -1,13 +1,13 @@
 // @ts-nocheck
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Typography from "@mui/material/Typography";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material/Badge";
-import CartDrawer from "../cartDrawer/CartDrawer";
-import { useData } from "@/hooks/useData";
-import { removeFromCart } from "@/context/actions";
-import api from "@/utils/utils";
+import CartDrawer from "components/cartDrawer/CartDrawer";
+import {useData} from "hooks/useData";
+import {removeFromCart} from "src/context/actions";
+import api from "src/utils/utils";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -18,11 +18,11 @@ import Popover from "@mui/material/Popover";
 import CardContent from "@mui/material/CardContent";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
 
-const Header = ({ title, fontSize }) => {
-  const { state, dispatch } = useData();
-  const { cart, user } = state;
+const Header = ({title, fontSize}) => {
+  const {state, dispatch} = useData();
+  const {cart, user} = state;
   const userProfile = user ? jwtDecode(user) : "";
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +40,7 @@ const Header = ({ title, fontSize }) => {
 
   const handleSignOut = () => {
     sessionStorage.clear();
-    dispatch({ type: "LOGOUT" });
+    dispatch({type: "LOGOUT"});
     setPopoverAnchor(null);
     navigate("/");
   };
@@ -76,17 +76,15 @@ const Header = ({ title, fontSize }) => {
       color="primary"
       sx={{
         zIndex: (theme) => theme.zIndex.drawer + 1,
-      }}
-    >
+      }}>
       <Toolbar
         sx={{
           display: "flex",
           justifyContent: "space-between",
-        }}
-      >
-        <Box sx={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <Typography variant="h3" sx={{ textTransform: "uppercase" }}>
-            <a href="/" style={{ color: "white", textDecoration: "none" }}>
+        }}>
+        <Box sx={{display: "flex", alignItems: "center", gap: "1rem"}}>
+          <Typography variant="h3" sx={{textTransform: "uppercase"}}>
+            <a href="/" style={{color: "white", textDecoration: "none"}}>
               {title}
             </a>
           </Typography>
@@ -118,8 +116,7 @@ const Header = ({ title, fontSize }) => {
         id={id}
         open={popOverOpen}
         anchorEl={popOverAnchor}
-        onClose={closePopover}
-      >
+        onClose={closePopover}>
         <Card
           sx={{
             minWidth: 300,
@@ -128,8 +125,7 @@ const Header = ({ title, fontSize }) => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-          }}
-        >
+          }}>
           <CardContent>
             <Typography variant="body1" color="text.secondary">
               Name: {userProfile.name || "N/A"}
@@ -138,12 +134,11 @@ const Header = ({ title, fontSize }) => {
               Email: {userProfile.email}
             </Typography>
           </CardContent>
-          <CardActions sx={{ justifyContent: "flex-end", paddingTop: 0 }}>
+          <CardActions sx={{justifyContent: "flex-end", paddingTop: 0}}>
             <Button
-              sx={{ backgroundColor: "primary.light" }}
+              sx={{backgroundColor: "primary.light"}}
               variant="contained"
-              onClick={handleSignOut}
-            >
+              onClick={handleSignOut}>
               Sign out
             </Button>
           </CardActions>

@@ -8,8 +8,8 @@ import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Modifiers from "../modifiers/Modifiers";
-import { addToCart } from "@/context/actions";
-import { useData } from "@/hooks/useData";
+import { addToCart } from "src/context/actions";
+import { useData } from "hooks/useData";
 
 const ItemModal = ({ open, onClose, item }) => {
   const { dispatch } = useData();

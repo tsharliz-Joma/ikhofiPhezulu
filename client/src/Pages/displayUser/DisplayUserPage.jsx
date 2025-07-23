@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Container, UserContainer, ButtonContainer } from "./DisplayUser.styles";
-import { useData } from "../../hooks/useData";
+import { useData } from "hooks/useData";
 
 export const DisplayUserPage = () => {
   const { state } = useData();

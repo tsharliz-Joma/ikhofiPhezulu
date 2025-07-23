@@ -1,6 +1,7 @@
 import React, { useEffect, createContext, useReducer } from "react";
 import jwt from "jsonwebtoken";
-import { getAllMenuItems } from "@/api/helpers";
+// import { getAllMenuItems } from "@/api/helpers";
+import { getAllMenuItems } from "../api/helpers";
 
 const initialState = {
   cart: JSON.parse(sessionStorage.getItem("cart")) || [],

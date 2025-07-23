@@ -35,14 +35,20 @@ module.exports = (env, argv) => {
   return {
     entry: "./src/index.js",
     output: {
-      path: path.resolve(__dirname, "build"),
+      path: path.resolve(__dirname, "dist"),
       filename: "bundle.[contenthash].js",
       clean: true, // Cleans the output directory before every build
     },
     resolve: {
       extensions: [".js", ".jsx"], // Support JSX and JS files
       alias: {
-        "@": path.resolve(__dirname, "src"),
+        src: path.resolve(__dirname, "src/"),
+        hooks: path.resolve(__dirname, "src/hooks/"),
+        components: path.resolve(__dirname, "src/components/"),
+        form: path.resolve(__dirname, "src/forms/"),
+        utils: path.resolve(__dirname, "src/utils/"),
+        modules: path.resolve(__dirname, "src/modules/"),
+        context: path.resolve(__dirname, "src/context/")
       },
       fallback: {
         vm: require.resolve("vm-browserify"),
@@ -88,7 +94,7 @@ module.exports = (env, argv) => {
 
     devServer: {
       static: {
-        directory: path.resolve(__dirname, "build"),
+        directory: path.resolve(__dirname, "dist"),
       },
       historyApiFallback: true, // Support React Router
       open: true,

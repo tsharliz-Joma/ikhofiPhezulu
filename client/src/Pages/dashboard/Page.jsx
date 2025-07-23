@@ -1,15 +1,19 @@
-import React, { useState } from "react";
-import api from "@/utils/utils";
-import List from "@/modules/list/List";
-import DialogueBox from "@/modules/dialogueBox/DialogueBox";
-import Header from "@/components/header/Header.component";
+import React, {useState} from "react";
+import api from "utils/utils";
+// import List from "..//modules/list/List";
+import List from "modules/list/List";
+import DialogueBox from "src/modules/dialogueBox/DialogueBox";
+import Header from "components/header/Header.component";
 import useTheme from "@mui/material/styles/useTheme";
 import Container from "@mui/material/Container";
-import { useOrders } from "@/hooks/useOrders";
-import { StyledContainer } from "@/styles/globals";
+import {useOrders} from "hooks/useOrders";
+import {StyledContainer} from "src/styles/globals";
 
-const Dashboard = ({ socket }) => {
-  const { orders, refetch } = useOrders(process.env.REACT_APP_VIEW_ORDERS_API, socket);
+const Dashboard = ({socket}) => {
+  const {orders, refetch} = useOrders(
+    process.env.REACT_APP_VIEW_ORDERS_API,
+    socket,
+  );
   const [selected, setSelected] = useState(false);
   const [selectedCoffee, setSelectedCoffee] = useState("");
   const [open, setOpen] = useState(false);
@@ -26,10 +30,12 @@ const Dashboard = ({ socket }) => {
     setOpen(false);
     try {
       socket.emit("order complete", selectedCoffee);
-      api.post(process.env.REACT_APP_COMPLETE_ORDER_API, selectedCoffee).then((res) => {
-        refetch();
-        return res;
-      });
+      api
+        .post(process.env.REACT_APP_COMPLETE_ORDER_API, selectedCoffee)
+        .then((res) => {
+          refetch();
+          return res;
+        });
     } catch (error) {
       console.error(error);
     } finally {

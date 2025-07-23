@@ -7,7 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useData } from "@/hooks/useData";
+import { useData } from "hooks/useData";
 import { useTheme } from "@mui/material";
 
 const MenuCard = ({ image, title, description, price, onClick, maxWidth = "auto" }) => {

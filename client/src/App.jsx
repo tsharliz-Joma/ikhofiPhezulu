@@ -1,12 +1,12 @@
 import "./App.css";
 import React from "react";
-import Header from "./components/header/Header.component";
+import Header from "components/header/Header.component";
 import HeroVideo from "./assets/hero.mp4";
 import HeroMedia from "./modules/heroMedia/HeroMedia";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Footer from "./components/footer/Footer";
+import Footer from "components/footer/Footer";
 
 const App = ({ socket }) => {
   return (

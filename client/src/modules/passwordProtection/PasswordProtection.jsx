@@ -4,8 +4,8 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
-import { useData } from "@/hooks/useData";
-import api from "@/utils/utils";
+import { useData } from "hooks/useData";
+import api from "utils/utils";
 
 const PasswordProtection = ({ children }) => {
   const theme = useTheme();

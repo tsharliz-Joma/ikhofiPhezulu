@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -8,11 +8,11 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import Popover from "@mui/material/Popover";
 import CloseIcon from "@mui/icons-material/Close";
-import { updateCartQuantity } from "@/context/actions";
-import { useData } from "@/hooks/useData";
+import {updateCartQuantity} from "src/context/actions";
+import {useData} from "hooks/useData";
 
-const CartDrawer = ({ open, onClose, cart, onRemove, onCheckout }) => {
-  const { dispatch } = useData();
+const CartDrawer = ({open, onClose, cart, onRemove, onCheckout}) => {
+  const {dispatch} = useData();
   const [anchorEl, setAnchorEl] = useState(null);
   const popoverOpen = Boolean(anchorEl);
   const id = popoverOpen ? "popover" : undefined;
@@ -41,35 +41,46 @@ const CartDrawer = ({ open, onClose, cart, onRemove, onCheckout }) => {
           padding: 2,
           backgroundColor: "black",
           color: "white",
-        }}
-      >
-        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}>
           <Typography variant="h6">Your Cart</Typography>
-          <IconButton onClick={onClose} sx={{ color: "white" }}>
+          <IconButton onClick={onClose} sx={{color: "white"}}>
             <CloseIcon />
           </IconButton>
         </Box>
         {cart.length > 0 ? (
           cart.map((item, index) => {
             const milkModifier = item.modifiers
-              ? Object.values(item.modifiers).find((modifier) => modifier.id === "Milk")
+              ? Object.values(item.modifiers).find(
+                  (modifier) => modifier.id === "Milk",
+                )
               : null;
 
-            const displayName = milkModifier ? `${milkModifier.name} ${item.name}` : item.name;
+            const displayName = milkModifier
+              ? `${milkModifier.name} ${item.name}`
+              : item.name;
 
             return (
               <Box key={index}>
-                <Box sx={{ width: "100%" }}>
+                <Box sx={{width: "100%"}}>
                   <Box
                     sx={{
                       display: "flex",
                       alignItems: "center",
                       columnGap: "1rem",
-                    }}
-                  >
+                    }}>
                     <Box
                       onClick={(e) => handlePopover(e)}
-                      sx={{ borderRadius: "1rem", width: "25%", cursor: "pointer" }}
+                      sx={{
+                        borderRadius: "1rem",
+                        width: "25%",
+                        cursor: "pointer",
+                      }}
                       component={"img"}
                       src={item.image}
                     />
@@ -79,24 +90,30 @@ const CartDrawer = ({ open, onClose, cart, onRemove, onCheckout }) => {
                         gap: "0.75rem",
                         width: "100%",
                         height: "100%",
-                      }}
-                    >
+                      }}>
                       <Box>
                         <Typography variant="body2" fontWeight="bold">
                           {displayName}
                         </Typography>
                       </Box>
-                      <Box sx={{ display: "flex", alignItems: "center", columnGap: "0.75rem" }}>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          columnGap: "0.75rem",
+                        }}>
                         <Typography variant="body1">Quantity:</Typography>
                         <Box
                           sx={{
-                            border: { xs: "0.5px solid white", md: "1px solid white" },
+                            border: {
+                              xs: "0.5px solid white",
+                              md: "1px solid white",
+                            },
                             borderRadius: "0.5rem",
                             padding: "0.25rem",
                             display: "flex",
                             columnGap: "0.5rem",
-                          }}
-                        >
+                          }}>
                           <RemoveIcon
                             onClick={() =>
                               handleCartQuantity({
@@ -123,24 +140,28 @@ const CartDrawer = ({ open, onClose, cart, onRemove, onCheckout }) => {
                 </Box>
 
                 <Popover
-                  anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+                  anchorOrigin={{vertical: "bottom", horizontal: "left"}}
                   id={id}
                   open={popoverOpen}
                   anchorEl={anchorEl}
-                  onClose={closePopover}
-                >
+                  onClose={closePopover}>
                   {item.modifiers && (
-                    <Box sx={{ padding: "0.5rem" }}>
+                    <Box sx={{padding: "0.5rem"}}>
                       {Object.values(item.modifiers).map((modifier, index) => (
-                        <Box key={index} sx={{ display: "flex" }}>
-                          <Typography variant="body2">{modifier.name}</Typography>
+                        <Box key={index} sx={{display: "flex"}}>
+                          <Typography variant="body2">
+                            {modifier.name}
+                          </Typography>
                         </Box>
                       ))}
                     </Box>
                   )}
                 </Popover>
 
-                <Button onClick={() => onRemove({ id: item.id, modifiers: item.modifiers })}>
+                <Button
+                  onClick={() =>
+                    onRemove({id: item.id, modifiers: item.modifiers})
+                  }>
                   Remove Item
                 </Button>
               </Box>
@@ -151,7 +172,7 @@ const CartDrawer = ({ open, onClose, cart, onRemove, onCheckout }) => {
         )}
       </Box>
       {cart.length !== 0 && (
-        <Box sx={{ backgroundColor: "black", p: "1rem" }}>
+        <Box sx={{backgroundColor: "black", p: "1rem"}}>
           <Button variant="outlined" onClick={() => onCheckout(cart)}>
             Checkout
           </Button>
